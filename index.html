@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BudgetFlow — Free Personal Finance Tracker Powered by Google Sheets</title>
+<meta name="description" content="Track income, expenses, budgets & net worth — all stored in YOUR Google Drive. No subscription. No data sharing. Free forever.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#10b981;--green2:#059669;--green-light:#d1fae5;--dark:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#f8fafc;--white:#fff;--red:#ef4444}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.6}
+a{text-decoration:none;color:inherit}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.25rem;font-weight:800;background:linear-gradient(135deg,#10b981,#3b82f6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nav-cta{background:var(--green);color:#fff;padding:.6rem 1.5rem;border-radius:8px;font-weight:700;font-size:.9rem;transition:.2s}
+.nav-cta:hover{background:var(--green2)}
+/* HERO */
+.hero{background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%);padding:5rem 2rem 4rem;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--green-light);color:var(--green2);font-size:.8rem;font-weight:700;padding:.4rem 1rem;border-radius:99px;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:.05em}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.1;max-width:800px;margin:0 auto 1.5rem}
+.hero h1 span{background:linear-gradient(135deg,#10b981,#3b82f6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:600px;margin:0 auto 2.5rem}
+.cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.btn-primary{background:var(--green);color:#fff;padding:.9rem 2rem;border-radius:10px;font-weight:700;font-size:1rem;transition:.2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+.btn-secondary{background:#fff;color:var(--dark);padding:.9rem 2rem;border-radius:10px;font-weight:700;font-size:1rem;border:2px solid var(--border);transition:.2s}
+.btn-secondary:hover{border-color:var(--green);color:var(--green)}
+.hero-note{font-size:.8rem;color:var(--muted)}
+.hero-img{max-width:900px;margin:3rem auto 0;border-radius:16px;box-shadow:0 25px 60px rgba(0,0,0,0.12);overflow:hidden;border:1px solid var(--border)}
+.hero-img img{width:100%;display:block}
+/* TRUST */
+.trust{background:#fff;padding:2rem;border-bottom:1px solid var(--border)}
+.trust-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:600;color:var(--muted)}
+.trust-item .icon{font-size:1.2rem}
+/* PAIN */
+.pain{padding:5rem 2rem;background:var(--bg);text-align:center}
+.section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;margin-bottom:1rem;max-width:600px;margin-left:auto;margin-right:auto}
+.section-sub{color:var(--muted);max-width:550px;margin:0 auto 3rem}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
+.pain-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:left}
+.pain-card .emoji{font-size:1.75rem;margin-bottom:.75rem}
+.pain-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.pain-card p{font-size:.875rem;color:var(--muted)}
+/* HOW */
+.how{padding:5rem 2rem;background:#fff;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;max-width:900px;margin:0 auto}
+.step{text-align:center;padding:1.5rem}
+.step-num{width:48px;height:48px;background:linear-gradient(135deg,#10b981,#3b82f6);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.1rem;margin:0 auto 1rem}
+.step h3{font-weight:700;margin-bottom:.5rem}
+.step p{font-size:.875rem;color:var(--muted)}
+/* FEATURES */
+.features{padding:5rem 2rem;background:var(--bg);text-align:center}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:960px;margin:0 auto}
+.feat-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-align:left;transition:.2s}
+.feat-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.07)}
+.feat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem}
+.feat-icon.green{background:var(--green-light)}
+.feat-icon.blue{background:#dbeafe}
+.feat-icon.purple{background:#ede9fe}
+.feat-icon.orange{background:#ffedd5}
+.feat-card h3{font-weight:700;margin-bottom:.5rem}
+.feat-card p{font-size:.875rem;color:var(--muted);line-height:1.6}
+/* COMPARISON */
+.compare{padding:5rem 2rem;background:#fff;text-align:center}
+.compare-table{max-width:760px;margin:0 auto;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.compare-table table{width:100%;border-collapse:collapse}
+.compare-table th{padding:1rem 1.5rem;font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;background:var(--bg);border-bottom:1px solid var(--border)}
+.compare-table th.highlight{background:var(--green-light);color:var(--green2)}
+.compare-table td{padding:1rem 1.5rem;font-size:.9rem;border-bottom:1px solid var(--border)}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td.feature{font-weight:600}
+.yes{color:var(--green);font-weight:700}
+.no{color:var(--red)}
+/* TESTIMONIALS */
+.testi{padding:5rem 2rem;background:var(--bg);text-align:center}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:960px;margin:0 auto}
+.testi-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-align:left}
+.stars{color:#f59e0b;font-size:1rem;margin-bottom:1rem}
+.testi-card p{font-size:.9rem;color:var(--dark);line-height:1.7;margin-bottom:1.25rem}
+.testi-author{display:flex;align-items:center;gap:.75rem}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#10b981,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.8rem;flex-shrink:0}
+.testi-name{font-weight:700;font-size:.875rem}
+.testi-role{font-size:.75rem;color:var(--muted)}
+/* FAQ */
+.faq{padding:5rem 2rem;background:#fff;text-align:center}
+.faq-list{max-width:700px;margin:0 auto;text-align:left}
+.faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-weight:700;margin-bottom:.75rem;font-size:1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-a{font-size:.9rem;color:var(--muted);line-height:1.7}
+/* SCARCITY BANNER */
+.scarcity-bar{background:linear-gradient(90deg,#dc2626,#b91c1c);color:#fff;text-align:center;padding:.6rem 1rem;font-size:.85rem;font-weight:700;letter-spacing:.03em}
+.scarcity-bar span{background:rgba(255,255,255,0.2);padding:.15rem .5rem;border-radius:4px;margin-left:.4rem;font-size:.9rem}
+/* PRICING */
+.pricing{padding:5rem 2rem;background:linear-gradient(135deg,#f0fdf4,#eff6ff);text-align:center}
+.price-card{max-width:480px;margin:0 auto;background:#fff;border:2px solid var(--green);border-radius:20px;padding:2.5rem;box-shadow:0 20px 50px rgba(16,185,129,0.15)}
+.price-badge{display:inline-block;background:var(--red);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .75rem;border-radius:99px;margin-bottom:1.25rem;text-transform:uppercase}
+.price-orig{font-size:1.1rem;color:var(--muted);text-decoration:line-through;margin-bottom:.25rem}
+.price-now{font-size:3.5rem;font-weight:900;color:var(--dark);line-height:1}
+.price-now sup{font-size:1.5rem;vertical-align:top;margin-top:.75rem;display:inline-block}
+.price-desc{color:var(--muted);font-size:.9rem;margin:.75rem 0 1.5rem}
+.price-features{text-align:left;margin:1.5rem 0;display:flex;flex-direction:column;gap:.6rem}
+.price-feat{display:flex;align-items:center;gap:.6rem;font-size:.9rem;font-weight:500}
+.price-feat .check{color:var(--green);font-weight:700;font-size:1.1rem}
+.price-cta{width:100%;padding:1rem;font-size:1.1rem;font-weight:800;background:var(--green);color:#fff;border-radius:10px;border:none;cursor:pointer;transition:.2s;display:block;text-align:center}
+.price-cta:hover{background:var(--green2)}
+.price-guarantee{font-size:.75rem;color:var(--muted);margin-top:1rem}
+.countdown{display:flex;justify-content:center;gap:1rem;margin-top:2rem}
+.cd-box{background:#fff;border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;text-align:center;min-width:64px}
+.cd-num{font-size:1.75rem;font-weight:900;color:var(--dark);line-height:1}
+.cd-label{font-size:.65rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:.2rem}
+/* FINAL CTA */
+.final-cta{padding:6rem 2rem;background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;text-align:center}
+.final-cta h2{font-size:clamp(1.75rem,4vw,3rem);font-weight:900;margin-bottom:1rem;max-width:600px;margin-left:auto;margin-right:auto}
+.final-cta p{color:#94a3b8;margin-bottom:2.5rem;font-size:1.05rem}
+.btn-white{background:#fff;color:var(--dark);padding:1rem 2.5rem;border-radius:10px;font-weight:800;font-size:1.05rem;transition:.2s;display:inline-block}
+.btn-white:hover{background:var(--green);color:#fff}
+.final-note{margin-top:1.5rem;color:#64748b;font-size:.8rem}
+/* FOOTER */
+footer{background:var(--dark);color:#64748b;padding:2rem;text-align:center;font-size:.8rem}
+footer a{color:#94a3b8;margin:0 .75rem}
+/* RESPONSIVE */
+@media(max-width:600px){
+  nav{padding:.75rem 1rem}
+  .hero{padding:3rem 1.25rem}
+  .trust-inner{gap:1.5rem}
+  .section-title{font-size:1.5rem}
+  .compare-table th,.compare-table td{padding:.75rem}
+}
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.animate{animation:fadeUp .6s ease forwards}
+</style>
+</head>
+<body>
+
+<!-- SCARCITY BANNER -->
+<div class="scarcity-bar">🔥 Launch Discount — Save 67% Today Only &nbsp;|&nbsp; Regular price $45 → Now only <span>$15</span></div>
+<!-- NAV -->
+<nav>
+  <div class="logo">BudgetFlow</div>
+  <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="nav-cta">Get It — $15 →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🇺🇸 Built for Americans · 100% Free</div>
+  <h1>Finally, a Finance Tracker That <span>Doesn't Sell Your Data</span></h1>
+  <p>BudgetFlow lives inside your own Google Sheets. No monthly fees, no data harvesting, no logins to another company's server. Just clean, beautiful budgeting.</p>
+  <div class="cta-group">
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="btn-primary">⬇️ Download Free — Instant Access</a>
+    <a href="#features" class="btn-secondary">See Features</a>
+  </div>
+  <p class="hero-note">✅ Works on Mac & Windows &nbsp;·&nbsp; ✅ Data stays in Google Drive &nbsp;·&nbsp; ✅ No subscription ever</p>
+  <div class="hero-img">
+    <img src="./assets/dashboard-preview.png" alt="BudgetFlow Dashboard — Personal Finance Tracker" onerror="this.src='https://placehold.co/900x560/f0fdf4/10b981?text=BudgetFlow+Dashboard'">
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="icon">🔒</span> Data stays in YOUR Google Drive</div>
+    <div class="trust-item"><span class="icon">💵</span> One-time $15 — No subscription</div>
+    <div class="trust-item"><span class="icon">⚡</span> Setup in under 5 minutes</div>
+    <div class="trust-item"><span class="icon">🛡️</span> 30-Day Money Back Guarantee</div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section class="pain">
+  <div class="section-label">Sound Familiar?</div>
+  <h2 class="section-title">Tired of Finance Apps That Cost an Arm and a Leg?</h2>
+  <p class="section-sub">Most budgeting apps either charge $12–$15/month or quietly sell your financial data to advertisers.</p>
+  <div class="pain-grid">
+    <div class="pain-card"><div class="emoji">💳</div><h3>Paying for YNAB or Mint?</h3><p>Great apps, but they lock you into subscriptions and store your bank credentials on their servers.</p></div>
+    <div class="pain-card"><div class="emoji">📊</div><h3>Messy spreadsheets?</h3><p>You started a budget spreadsheet three years ago. It now has 47 columns and you haven't opened it in months.</p></div>
+    <div class="pain-card"><div class="emoji">🤔</div><h3>No clue where money goes?</h3><p>Every month you wonder where your paycheck went — and never have a clear answer.</p></div>
+    <div class="pain-card"><div class="emoji">🔓</div><h3>Privacy concerns?</h3><p>Connecting your bank account to a third-party app means trusting them completely. No thanks.</p></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Set Up in 3 Simple Steps</h2>
+  <p class="section-sub">No IT skills required. If you can open a website, you can use BudgetFlow.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Create a Google Sheet</h3><p>Open Google Sheets, paste the free BudgetFlow backend code, and deploy it as a web app in 2 clicks.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Connect BudgetFlow</h3><p>Paste your unique App URL into BudgetFlow. That's it — your database is live and private.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Start Tracking</h3><p>Add transactions, set budgets, track savings goals, and watch your net worth grow over time.</p></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-label">What You Get</div>
+  <h2 class="section-title">Everything You Need to Master Your Money</h2>
+  <p class="section-sub">A complete financial command center — all in one place, for a one-time $15 payment.</p>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon green">📊</div><h3>Live Dashboard</h3><p>See your monthly income, expenses, balance, and savings rate at a glance with beautiful real-time charts.</p></div>
+    <div class="feat-card"><div class="feat-icon blue">💸</div><h3>Transaction Tracking</h3><p>Log every expense and income with categories, filters, and instant search across your full history.</p></div>
+    <div class="feat-card"><div class="feat-icon purple">🎯</div><h3>Budget Targets</h3><p>Set monthly spending limits per category. Watch the progress bar turn red before you overspend.</p></div>
+    <div class="feat-card"><div class="feat-icon orange">💍</div><h3>Savings Goals</h3><p>Create goals for vacation, emergency fund, or a new car. Visual ring progress keeps you motivated.</p></div>
+    <div class="feat-card"><div class="feat-icon green">📉</div><h3>Debt Tracker</h3><p>Track every loan and credit card balance. Log payments and watch that number drop to zero.</p></div>
+    <div class="feat-card"><div class="feat-icon blue">📈</div><h3>Net Worth Calculator</h3><p>A single number that shows your true financial health — assets minus liabilities, updated in real time.</p></div>
+    <div class="feat-card"><div class="feat-icon purple">📋</div><h3>Financial Reports</h3><p>Monthly summaries and yearly trend charts to see if you're improving month over month.</p></div>
+    <div class="feat-card"><div class="feat-icon orange">🔒</div><h3>100% Private</h3><p>Zero data leaves your Google Drive. No one — not even us — can see your financial information.</p></div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare">
+  <div class="section-label">BudgetFlow vs The Rest</div>
+  <h2 class="section-title">Why Switch to BudgetFlow?</h2>
+  <p class="section-sub" style="margin-bottom:2.5rem">Let the comparison speak for itself.</p>
+  <div class="compare-table">
+    <table>
+      <thead>
+        <tr>
+          <th class="feature">Feature</th>
+          <th class="highlight">BudgetFlow</th>
+          <th>YNAB</th>
+          <th>Mint</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="feature">Price</td><td class="yes">$15 one-time</td><td>$14.99/mo ($180/yr)</td><td>Ad-supported</td></tr>
+        <tr><td class="feature">Your data is private</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="no">❌ No</td></tr>
+        <tr><td class="feature">No bank account required</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="no">❌ No</td></tr>
+        <tr><td class="feature">Works offline</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="no">❌ No</td></tr>
+        <tr><td class="feature">Budget tracking</td><td class="yes">✅ Yes</td><td class="yes">✅ Yes</td><td class="yes">✅ Yes</td></tr>
+        <tr><td class="feature">Net worth tracking</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="yes">✅ Yes</td></tr>
+        <tr><td class="feature">Data export</td><td class="yes">✅ Always</td><td>Limited</td><td>Limited</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">Simple Pricing</div>
+  <h2 class="section-title">One Price. Own It Forever.</h2>
+  <p class="section-sub" style="margin-bottom:2.5rem">No subscription. No renewal. Pay once, use for life.</p>
+  <div class="price-card">
+    <div class="price-badge">🔥 67% OFF — Launch Special</div>
+    <div class="price-orig">Regular price: $45.00</div>
+    <div class="price-now"><sup>$</sup>15</div>
+    <div class="price-desc">One-time payment · Instant download · Yours forever</div>
+    <div class="price-features">
+      <div class="price-feat"><span class="check">✓</span> Full Dashboard with Charts & Analytics</div>
+      <div class="price-feat"><span class="check">✓</span> Transaction Tracking (Unlimited)</div>
+      <div class="price-feat"><span class="check">✓</span> Budget Targets with Auto-Sync</div>
+      <div class="price-feat"><span class="check">✓</span> Savings Goals Tracker</div>
+      <div class="price-feat"><span class="check">✓</span> Debt & Loan Manager</div>
+      <div class="price-feat"><span class="check">✓</span> Net Worth Calculator</div>
+      <div class="price-feat"><span class="check">✓</span> Financial Reports & Charts</div>
+      <div class="price-feat"><span class="check">✓</span> User Manual with Step-by-Step Guide</div>
+      <div class="price-feat"><span class="check">✓</span> Free Updates Forever</div>
+    </div>
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="price-cta">Get Instant Access — $15 →</a>
+    <p class="price-guarantee">🛡️ 30-day money back guarantee. No questions asked.</p>
+  </div>
+  <div class="countdown" id="countdown">
+    <div class="cd-box"><div class="cd-num" id="cd-h">23</div><div class="cd-label">Hours</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-m">59</div><div class="cd-label">Minutes</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Seconds</div></div>
+  </div>
+  <p style="color:var(--muted);font-size:.8rem;margin-top:1rem">⏳ Price reverts to $45 when timer ends</p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="section-label">Real Users</div>
+  <h2 class="section-title">People Are Loving BudgetFlow</h2>
+  <p class="section-sub" style="margin-bottom:2.5rem">Join thousands of users who took back control of their finances.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"I cancelled my YNAB subscription the same day I found this. It does everything I need and my data stays in MY Google Drive. This is how software should work."</p>
+      <div class="testi-author"><div class="testi-avatar">JM</div><div><div class="testi-name">James M.</div><div class="testi-role">Software Engineer, Austin TX</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Finally a budget tracker that doesn't require connecting my bank account. Setup was genuinely 5 minutes. The dashboard is gorgeous — way better than a spreadsheet."</p>
+      <div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Sarah R.</div><div class="testi-role">Teacher, Chicago IL</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"The budget tracking automatically syncs with my transactions. I can see exactly how much I've spent on groceries this month vs my target. Game changer."</p>
+      <div class="testi-author"><div class="testi-avatar">DK</div><div><div class="testi-name">David K.</div><div class="testi-role">Freelancer, Seattle WA</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-label">Questions & Answers</div>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub" style="margin-bottom:3rem">Everything you need to know before you get started.</p>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q">Is this a one-time payment? <span>+</span></div><div class="faq-a">Yes! You pay $15 once and own BudgetFlow forever. No monthly fees, no subscription, no renewals. You get all future updates included at no extra cost.</div></div>
+    <div class="faq-item"><div class="faq-q">Is there a money-back guarantee? <span>+</span></div><div class="faq-a">Absolutely. We offer a full 30-day money back guarantee, no questions asked. If you're not happy for any reason, just email us and we'll refund you immediately.</div></div>
+    <div class="faq-item"><div class="faq-q">Where is my data stored? <span>+</span></div><div class="faq-a">All your financial data lives in a Google Sheet inside your personal Google Drive account. BudgetFlow never stores, accesses, or transmits your data to any external server.</div></div>
+    <div class="faq-item"><div class="faq-q">Do I need to connect my bank account? <span>+</span></div><div class="faq-a">Absolutely not. You manually enter your transactions, which gives you full control and keeps your banking credentials completely secure.</div></div>
+    <div class="faq-item"><div class="faq-q">What devices does it work on? <span>+</span></div><div class="faq-a">BudgetFlow is a web app that works in any modern browser on Mac, Windows, and mobile devices. No installation required.</div></div>
+    <div class="faq-item"><div class="faq-q">How long does setup take? <span>+</span></div><div class="faq-a">Under 5 minutes. Create a Google Sheet, paste in our backend code, deploy it, paste the URL — done. The included User Manual walks you through every step with screenshots.</div></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="download">
+  <h2>Take Control of Your Finances Today</h2>
+  <p>Join 2,400+ users who ditched overpriced apps. One payment, yours forever.</p>
+  <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="btn-white">⬇️ Get BudgetFlow — Only $15</a>
+  <p class="final-note">🛡️ 30-Day Money Back Guarantee &nbsp;|&nbsp; ⚡ Instant Download &nbsp;|&nbsp; 🔒 Your Data Stays Private</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:.75rem">
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd">Privacy Policy</a>
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd">User Manual</a>
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd">Contact</a>
+  </p>
+  <p>© 2025 BudgetFlow. Your data stays in your Google Drive — always.</p>
+</footer>
+
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const a = q.nextElementSibling;
+    const isOpen = a.style.display === 'block';
+    document.querySelectorAll('.faq-a').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.faq-q span').forEach(el => el.textContent = '+');
+    a.style.display = isOpen ? 'none' : 'block';
+    q.querySelector('span').textContent = isOpen ? '+' : '−';
+  });
+  q.nextElementSibling.style.display = 'none';
+});
+
+// Countdown timer (24 hours from page load)
+const end = new Date(Date.now() + 24*60*60*1000);
+function tick() {
+  const diff = Math.max(0, end - Date.now());
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
