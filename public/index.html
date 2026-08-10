@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BudgetFlow — Free Personal Finance Tracker Powered by Google Sheets</title>
+<meta name="description" content="Track income, expenses, budgets & net worth — all stored in YOUR Google Drive. No subscription. No data sharing. Free forever.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#10b981;--green2:#059669;--green-light:#d1fae5;--dark:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#f8fafc;--white:#fff;--red:#ef4444}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.25rem;font-weight:800;background:linear-gradient(135deg,#10b981,#3b82f6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;align-items:center;gap:1rem}
+.nav-cta{background:var(--green);color:#fff;padding:.6rem 1.5rem;border-radius:8px;font-weight:700;font-size:.9rem;transition:.2s}
+.nav-cta:hover{background:var(--green2)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%);padding:5rem 2rem 4rem;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--green-light);color:var(--green2);font-size:.8rem;font-weight:700;padding:.4rem 1rem;border-radius:99px;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:.05em}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.1;max-width:800px;margin:0 auto 1.5rem}
+.hero h1 span{background:linear-gradient(135deg,#10b981,#3b82f6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:600px;margin:0 auto 2.5rem}
+.cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.btn-primary{background:var(--green);color:#fff;padding:.9rem 2rem;border-radius:10px;font-weight:700;font-size:1rem;transition:.2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+.btn-secondary{background:#fff;color:var(--dark);padding:.9rem 2rem;border-radius:10px;font-weight:700;font-size:1rem;border:2px solid var(--border);transition:.2s}
+.btn-secondary:hover{border-color:var(--green);color:var(--green)}
+.hero-note{font-size:.8rem;color:var(--muted)}
+
+/* INTERACTIVE DEMO STYLING IN LANDING PAGE */
+.demo-section {
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  text-align: left;
+}
+
+.demo-title-box {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.demo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green2);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.demo-wrapper {
+  background: #090d16;
+  color: #f9fafb;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.demo-header {
+  background: rgba(15, 23, 42, 0.95);
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.window-dots { display: flex; align-items: center; gap: 8px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.demo-badge {
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a5b4fc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.live-pulse {
+  width: 8px; height: 8px; background: #10b981; border-radius: 50%;
+  box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.controls-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.demo-btn {
+  padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s ease; border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(31, 41, 55, 0.7); color: #f9fafb; display: inline-flex;
+  align-items: center; gap: 6px;
+}
+.demo-btn:hover { background: rgba(55, 65, 81, 0.9); transform: translateY(-1px); }
+.demo-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5); border: none; color: #fff;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+}
+.demo-btn-emerald {
+  background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+select.demo-btn {
+  appearance: none; padding-right: 26px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca3af' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center;
+}
+
+.tour-banner {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), rgba(16, 185, 129, 0.15));
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2); padding: 10px 20px;
+  display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+}
+.tour-step-badge { background: #6366f1; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+
+.demo-content { padding: 20px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+
+.stat-card {
+  background: rgba(17, 24, 39, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
+  padding: 16px; position: relative; overflow: hidden; transition: all 0.3s ease;
+}
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--card-accent, #6366f1); }
+.stat-label { font-size: 12px; color: #9ca3af; font-weight: 500; margin-bottom: 4px; }
+.stat-val { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.stat-sub { font-size: 11px; color: #10b981; margin-top: 4px; }
+
+.dash-main { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 20px; }
+@media (max-width: 900px) { .dash-main { grid-template-columns: 1fr; } }
+
+.panel { background: rgba(17, 24, 39, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 18px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.panel-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+.add-form {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr auto; gap: 8px; margin-bottom: 16px;
+  background: rgba(15, 23, 42, 0.6); padding: 10px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08);
+}
+@media (max-width: 768px) { .add-form { grid-template-columns: 1fr 1fr; } }
+
+.form-input {
+  background: rgba(31, 41, 55, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px;
+  padding: 8px 10px; color: #f9fafb; font-size: 12px; outline: none; width: 100%; transition: border 0.2s ease;
+}
+.form-input:focus { border-color: #6366f1; }
+
+.tx-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.tx-table th { text-align: left; color: #9ca3af; font-weight: 600; padding: 8px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.tx-table td { padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+
+.badge { padding: 3px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+.badge-income { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.badge-expense { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
+
+.budget-list { display: flex; flex-direction: column; gap: 12px; }
+.budget-item { background: rgba(15, 23, 42, 0.5); padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08); }
+.budget-info { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px; }
+.progress-bg { width: 100%; height: 7px; background: rgba(31, 41, 55, 0.8); border-radius: 8px; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 8px; transition: width 0.5s ease; }
+
+.savings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.savings-card { background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px; text-align: center; }
+.ring-box { position: relative; width: 76px; height: 76px; margin: 0 auto 10px auto; }
+.ring-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+.ring-circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 7; }
+.ring-circle { fill: none; stroke: #06b6d4; stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset 0.8s ease; }
+.ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 13px; font-weight: 700; }
+
+.sheets-sync-box {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(15, 23, 42, 0.8));
+  border: 1px dashed rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 14px; margin-top: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.sheets-icon {
+  width: 38px; height: 38px; background: #0f9d58; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; font-weight: 800;
+}
+.sheets-info { flex: 1; }
+.sheets-title { font-size: 13px; font-weight: 700; color: #6ee7b7; margin-bottom: 1px; }
+.sheets-desc { font-size: 11px; color: #9ca3af; }
+.sync-status-pill { font-size: 10px; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 3px 8px; border-radius: 16px; font-weight: 600; }
+
+/* TRUST BAR */
+.trust{background:#fff;padding:2rem;border-bottom:1px solid var(--border)}
+.trust-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:600;color:var(--muted)}
+.trust-item .icon{font-size:1.2rem}
+
+/* PAIN */
+.pain{padding:5rem 2rem;background:var(--bg);text-align:center}
+.section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;margin-bottom:1rem;max-width:600px;margin-left:auto;margin-right:auto}
+.section-sub{color:var(--muted);max-width:550px;margin:0 auto 3rem}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
+.pain-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:left}
+.pain-card .emoji{font-size:1.75rem;margin-bottom:.75rem}
+.pain-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.pain-card p{font-size:.875rem;color:var(--muted)}
+
+/* HOW */
+.how{padding:5rem 2rem;background:#fff;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;max-width:900px;margin:0 auto}
+.step{text-align:center;padding:1.5rem}
+.step-num{width:48px;height:48px;background:linear-gradient(135deg,#10b981,#3b82f6);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.1rem;margin:0 auto 1rem}
+.step h3{font-weight:700;margin-bottom:.5rem}
+.step p{font-size:.875rem;color:var(--muted)}
+
+/* FEATURES */
+.features{padding:5rem 2rem;background:var(--bg);text-align:center}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:960px;margin:0 auto}
+.feat-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-align:left;transition:.2s}
+.feat-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.07)}
+.feat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem}
+.feat-icon.green{background:var(--green-light)}
+.feat-icon.blue{background:#dbeafe}
+.feat-icon.purple{background:#ede9fe}
+.feat-icon.orange{background:#ffedd5}
+.feat-card h3{font-weight:700;margin-bottom:.5rem}
+.feat-card p{font-size:.875rem;color:var(--muted);line-height:1.6}
+
+/* COMPARISON */
+.compare{padding:5rem 2rem;background:#fff;text-align:center}
+.compare-table{max-width:760px;margin:0 auto;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.compare-table table{width:100%;border-collapse:collapse}
+.compare-table th{padding:1rem 1.5rem;font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;background:var(--bg);border-bottom:1px solid var(--border)}
+.compare-table th.highlight{background:var(--green-light);color:var(--green2)}
+.compare-table td{padding:1rem 1.5rem;font-size:.9rem;border-bottom:1px solid var(--border)}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td.feature{font-weight:600}
+.yes{color:var(--green);font-weight:700}
+.no{color:var(--red)}
+
+/* PRICING */
+.pricing{padding:5rem 2rem;background:linear-gradient(135deg,#f0fdf4,#eff6ff);text-align:center}
+.price-card{max-width:480px;margin:0 auto;background:#fff;border:2px solid var(--green);border-radius:20px;padding:2.5rem;box-shadow:0 20px 50px rgba(16,185,129,0.15)}
+.price-badge{display:inline-block;background:var(--red);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .75rem;border-radius:99px;margin-bottom:1.25rem;text-transform:uppercase}
+.price-orig{font-size:1.1rem;color:var(--muted);text-decoration:line-through;margin-bottom:.25rem}
+.price-now{font-size:3.5rem;font-weight:900;color:var(--dark);line-height:1}
+.price-now sup{font-size:1.5rem;vertical-align:top;margin-top:.75rem;display:inline-block}
+.price-desc{color:var(--muted);font-size:.9rem;margin:.75rem 0 1.5rem}
+.price-features{text-align:left;margin:1.5rem 0;display:flex;flex-direction:column;gap:.6rem}
+.price-feat{display:flex;align-items:center;gap:.6rem;font-size:.9rem;font-weight:500}
+.price-feat .check{color:var(--green);font-weight:700;font-size:1.1rem}
+.price-cta{width:100%;padding:1rem;font-size:1.1rem;font-weight:800;background:var(--green);color:#fff;border-radius:10px;border:none;cursor:pointer;transition:.2s;display:block;text-align:center}
+.price-cta:hover{background:var(--green2)}
+.price-guarantee{font-size:.75rem;color:var(--muted);margin-top:1rem}
+
+/* TESTIMONIALS & FAQ */
+.testi{padding:5rem 2rem;background:var(--bg);text-align:center}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:960px;margin:0 auto}
+.testi-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-align:left}
+.stars{color:#f59e0b;font-size:1rem;margin-bottom:1rem}
+.testi-card p{font-size:.9rem;color:var(--dark);line-height:1.7;margin-bottom:1.25rem}
+.testi-author{display:flex;align-items:center;gap:.75rem}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#10b981,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.8rem;flex-shrink:0}
+
+.faq{padding:5rem 2rem;background:#fff;text-align:center}
+.faq-list{max-width:700px;margin:0 auto;text-align:left}
+.faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0}
+.faq-q{font-weight:700;margin-bottom:.75rem;font-size:1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-a{font-size:.9rem;color:var(--muted);line-height:1.7}
+
+.scarcity-bar{background:linear-gradient(90deg,#dc2626,#b91c1c);color:#fff;text-align:center;padding:.6rem 1rem;font-size:.85rem;font-weight:700;letter-spacing:.03em}
+.scarcity-bar span{background:rgba(255,255,255,0.2);padding:.15rem .5rem;border-radius:4px;margin-left:.4rem;font-size:.9rem}
+
+.final-cta{padding:6rem 2rem;background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;text-align:center}
+.final-cta h2{font-size:clamp(1.75rem,4vw,3rem);font-weight:900;margin-bottom:1rem;max-width:600px;margin-left:auto;margin-right:auto}
+.final-cta p{color:#94a3b8;margin-bottom:2.5rem;font-size:1.05rem}
+.btn-white{background:#fff;color:var(--dark);padding:1rem 2.5rem;border-radius:10px;font-weight:800;font-size:1.05rem;transition:.2s;display:inline-block}
+.btn-white:hover{background:var(--green);color:#fff}
+
+footer{background:var(--dark);color:#64748b;padding:2rem;text-align:center;font-size:.8rem}
+footer a{color:#94a3b8;margin:0 .75rem}
+
+@media(max-width:600px){
+  nav{padding:.75rem 1rem}
+  .hero{padding:3rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<div class="scarcity-bar">🔥 Launch Discount — Save 67% Today Only &nbsp;|&nbsp; Regular price  → Now only <span></span></div>
+
+<nav>
+  <div class="logo">BudgetFlow</div>
+  <div class="nav-links">
+    <a href="#interactive-demo" class="btn-secondary" style="padding:.4rem 1rem; font-size:.85rem;">🎮 Try Live Demo</a>
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="nav-cta">Get It —  →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">One-Time Payment · Yours Forever</div>
+  <h1>Finally, a Finance Tracker That <span>Doesn't Sell Your Data</span></h1>
+  <p>BudgetFlow lives inside your own Google Sheets. No monthly fees, no data harvesting, no logins to another company's server. Just clean, beautiful budgeting.</p>
+  <div class="cta-group">
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="btn-primary">⬇️ Download Free — Instant Access</a>
+    <a href="#interactive-demo" class="btn-secondary">🎮 Test Live Sandbox</a>
+  </div>
+  <p class="hero-note">✅ Works on Mac & Windows &nbsp;·&nbsp; ✅ Data stays in Google Drive &nbsp;·&nbsp; ✅ No subscription ever</p>
+
+  <!-- INTERACTIVE DEMO CONTAINER IN HERO -->
+  <div class="demo-section" id="interactive-demo">
+    <div class="demo-title-box">
+      <div class="demo-pill">🎮 Live Sandbox Demo</div>
+      <h2 style="font-size:1.5rem; font-weight:800; color:var(--dark);">Try BudgetFlow Live Below!</h2>
+      <p style="font-size:0.9rem; color:var(--muted);">Add entries, switch currencies, or top-up savings to test the live calculator.</p>
+    </div>
+
+    <div class="demo-wrapper">
+      <div class="demo-header">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="demo-badge">
+            <span class="live-pulse"></span>
+            BudgetFlow Interactive Demo
+          </div>
+        </div>
+
+        <div class="controls-bar">
+          <select id="currency-select" class="demo-btn" onchange="changeCurrency(this.value)">
+            <option value="USD">💵 USD ($)</option>
+            <option value="IDR" selected>🇮🇩 IDR (Rp)</option>
+            <option value="EUR">💶 EUR (€)</option>
+          </select>
+
+          <select id="preset-select" class="demo-btn" onchange="loadPreset(this.value)">
+            <option value="standard">📊 Preset: Monthly Personal</option>
+            <option value="freelance">💻 Preset: Tech Freelancer</option>
+            <option value="student">🎓 Preset: College Student</option>
+          </select>
+
+          <button class="demo-btn demo-btn-primary" onclick="startTour()">🚀 Guided Tour</button>
+        </div>
+      </div>
+
+      <div id="tour-banner" class="tour-banner">
+        <div>
+          <span class="tour-step-badge" id="tour-step-tag">STEP 1 / 4</span>
+          <span id="tour-step-msg" style="margin-left:6px;">✨ Welcome! Click buttons or add transactions below to see real-time chart updates.</span>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button class="demo-btn" onclick="prevTourStep()" style="padding: 3px 8px; font-size: 11px;">Prev</button>
+          <button class="demo-btn demo-btn-primary" onclick="nextTourStep()" style="padding: 3px 8px; font-size: 11px;">Next Step →</button>
+        </div>
+      </div>
+
+      <div class="demo-content">
+        <div class="stats-grid">
+          <div class="stat-card" style="--card-accent: #6366f1;" id="step-card-balance">
+            <div class="stat-label">Total Net Worth</div>
+            <div class="stat-val" id="val-networth">Rp 45.500.000</div>
+            <div class="stat-sub">▲ +12.4% vs last month</div>
+          </div>
+
+          <div class="stat-card" style="--card-accent: #10b981;" id="step-card-income">
+            <div class="stat-label">Monthly Income</div>
+            <div class="stat-val" id="val-income">Rp 15.000.000</div>
+            <div class="stat-sub">↑ 2 transactions</div>
+          </div>
+
+          <div class="stat-card" style="--card-accent: #f43f5e;" id="step-card-expense">
+            <div class="stat-label">Monthly Expenses</div>
+            <div class="stat-val" id="val-expense">Rp 6.250.000</div>
+            <div class="stat-sub" style="color: #f43f5e;">↓ 42% of monthly cap</div>
+          </div>
+
+          <div class="stat-card" style="--card-accent: #06b6d4;" id="step-card-savings">
+            <div class="stat-label">Total Savings Saved</div>
+            <div class="stat-val" id="val-savings">Rp 12.800.000</div>
+            <div class="stat-sub" style="color: #06b6d4;">🎯 68% towards target</div>
+          </div>
+        </div>
+
+        <div class="dash-main">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="panel" id="step-panel-add">
+              <div class="panel-head">
+                <div class="panel-title">⚡ Add Live Entry</div>
+                <span style="font-size: 11px; color: #9ca3af;">Try adding a transaction!</span>
+              </div>
+
+              <form class="add-form" onsubmit="handleAddTx(event)">
+                <input type="text" id="in-desc" class="form-input" placeholder="Description (e.g. Coffee)" required>
+                <select id="in-cat" class="form-input">
+                  <option value="Food & Dining">🍔 Food & Dining</option>
+                  <option value="Transport">🚗 Transport</option>
+                  <option value="Shopping">🛍️ Shopping</option>
+                  <option value="Salary">💰 Salary</option>
+                </select>
+                <select id="in-type" class="form-input">
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                </select>
+                <input type="number" id="in-amount" class="form-input" placeholder="Amount" required>
+                <button type="submit" class="demo-btn demo-btn-primary">+ Add</button>
+              </form>
+
+              <table class="tx-table">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th style="text-align: right;">Amount</th>
+                    <th style="text-align: center;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tx-rows"></tbody>
+              </table>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <div class="panel-title">📈 Cash Flow Trend</div>
+              </div>
+              <div style="height: 200px; position: relative;">
+                <canvas id="demoChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="panel" id="step-panel-budgets">
+              <div class="panel-head">
+                <div class="panel-title">🎯 Spending Budget Caps</div>
+              </div>
+              <div class="budget-list" id="budget-list"></div>
+            </div>
+
+            <div class="panel" id="step-panel-savings">
+              <div class="panel-head">
+                <div class="panel-title">🏆 Savings Goals Top-Up</div>
+              </div>
+              <div class="savings-grid" id="savings-list"></div>
+            </div>
+
+            <div class="sheets-sync-box">
+              <div class="sheets-icon">📊</div>
+              <div class="sheets-info">
+                <div class="sheets-title">Google Sheets Live Sync</div>
+                <div class="sheets-desc" id="sync-desc">Connected to Apps Script backend</div>
+              </div>
+              <div class="sync-status-pill" id="sync-pill">● SYNCED</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="icon">🔒</span> Data stays in YOUR Google Drive</div>
+    <div class="trust-item"><span class="icon">💵</span> One-time  — No subscription</div>
+    <div class="trust-item"><span class="icon">⚡</span> Setup in under 5 minutes</div>
+    <div class="trust-item"><span class="icon">🛡️</span> 30-Day Money Back Guarantee</div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section class="pain">
+  <div class="section-label">Sound Familiar?</div>
+  <h2 class="section-title">Tired of Finance Apps That Cost an Arm and a Leg?</h2>
+  <p class="section-sub">Most budgeting apps either charge –/month or quietly sell your financial data to advertisers.</p>
+  <div class="pain-grid">
+    <div class="pain-card"><div class="emoji">💳</div><h3>Paying for YNAB or Mint?</h3><p>Great apps, but they lock you into subscriptions and store your bank credentials on their servers.</p></div>
+    <div class="pain-card"><div class="emoji">📊</div><h3>Messy spreadsheets?</h3><p>You started a budget spreadsheet three years ago. It now has 47 columns and you haven't opened it in months.</p></div>
+    <div class="pain-card"><div class="emoji">🤔</div><h3>No clue where money goes?</h3><p>Every month you wonder where your paycheck went — and never have a clear answer.</p></div>
+    <div class="pain-card"><div class="emoji">🔓</div><h3>Privacy concerns?</h3><p>Connecting your bank account to a third-party app means trusting them completely. No thanks.</p></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Set Up in 3 Simple Steps</h2>
+  <p class="section-sub">No IT skills required. If you can open a website, you can use BudgetFlow.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Create a Google Sheet</h3><p>Open Google Sheets, paste the free BudgetFlow backend code, and deploy it as a web app in 2 clicks.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Connect BudgetFlow</h3><p>Paste your unique App URL into BudgetFlow. That's it — your database is live and private.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Start Tracking</h3><p>Add transactions, set budgets, track savings goals, and watch your net worth grow over time.</p></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-label">What You Get</div>
+  <h2 class="section-title">Everything You Need to Master Your Money</h2>
+  <p class="section-sub">A complete financial command center — all in one place, for a one-time  payment.</p>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon green">📊</div><h3>Live Dashboard</h3><p>See your monthly income, expenses, balance, and savings rate at a glance with beautiful real-time charts.</p></div>
+    <div class="feat-card"><div class="feat-icon blue">💸</div><h3>Transaction Tracking</h3><p>Log every expense and income with categories, filters, and instant search across your full history.</p></div>
+    <div class="feat-card"><div class="feat-icon purple">🎯</div><h3>Budget Targets</h3><p>Set monthly spending limits per category. Watch the progress bar turn red before you overspend.</p></div>
+    <div class="feat-card"><div class="feat-icon orange">💍</div><h3>Savings Goals</h3><p>Create goals for vacation, emergency fund, or a new car. Visual ring progress keeps you motivated.</p></div>
+    <div class="feat-card"><div class="feat-icon green">📉</div><h3>Debt Tracker</h3><p>Track every loan and credit card balance. Log payments and watch that number drop to zero.</p></div>
+    <div class="feat-card"><div class="feat-icon blue">📈</div><h3>Net Worth Calculator</h3><p>A single number that shows your true financial health — assets minus liabilities, updated in real time.</p></div>
+    <div class="feat-card"><div class="feat-icon purple">📋</div><h3>Financial Reports</h3><p>Monthly summaries and yearly trend charts to see if you're improving month over month.</p></div>
+    <div class="feat-card"><div class="feat-icon orange">🔒</div><h3>100% Private</h3><p>Zero data leaves your Google Drive. No one — not even us — can see your financial information.</p></div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare">
+  <div class="section-label">BudgetFlow vs The Rest</div>
+  <h2 class="section-title">Why Switch to BudgetFlow?</h2>
+  <p class="section-sub" style="margin-bottom:2.5rem">Let the comparison speak for itself.</p>
+  <div class="compare-table">
+    <table>
+      <thead>
+        <tr>
+          <th class="feature">Feature</th>
+          <th class="highlight">BudgetFlow</th>
+          <th>YNAB</th>
+          <th>Mint</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="feature">Price</td><td class="yes"> one-time</td><td>.99/mo (/yr)</td><td>Ad-supported</td></tr>
+        <tr><td class="feature">Your data is private</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="no">❌ No</td></tr>
+        <tr><td class="feature">No bank account required</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="no">❌ No</td></tr>
+        <tr><td class="feature">Works offline</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="no">❌ No</td></tr>
+        <tr><td class="feature">Budget tracking</td><td class="yes">✅ Yes</td><td class="yes">✅ Yes</td><td class="yes">✅ Yes</td></tr>
+        <tr><td class="feature">Net worth tracking</td><td class="yes">✅ Yes</td><td class="no">❌ No</td><td class="yes">✅ Yes</td></tr>
+        <tr><td class="feature">Data export</td><td class="yes">✅ Always</td><td>Limited</td><td>Limited</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">Simple Pricing</div>
+  <h2 class="section-title">One Price. Own It Forever.</h2>
+  <p class="section-sub" style="margin-bottom:2.5rem">No subscription. No renewal. Pay once, use for life.</p>
+  <div class="price-card">
+    <div class="price-badge">🔥 67% OFF — Launch Special</div>
+    <div class="price-orig">Regular price: .00</div>
+    <div class="price-now"><sup>$</sup>15</div>
+    <div class="price-desc">One-time payment · Instant download · Yours forever</div>
+    <div class="price-features">
+      <div class="price-feat"><span class="check">✓</span> Full Dashboard with Charts & Analytics</div>
+      <div class="price-feat"><span class="check">✓</span> Transaction Tracking (Unlimited)</div>
+      <div class="price-feat"><span class="check">✓</span> Budget Targets with Auto-Sync</div>
+      <div class="price-feat"><span class="check">✓</span> Savings Goals Tracker</div>
+      <div class="price-feat"><span class="check">✓</span> Debt & Loan Manager</div>
+      <div class="price-feat"><span class="check">✓</span> Net Worth Calculator</div>
+      <div class="price-feat"><span class="check">✓</span> Financial Reports & Charts</div>
+      <div class="price-feat"><span class="check">✓</span> User Manual with Step-by-Step Guide</div>
+      <div class="price-feat"><span class="check">✓</span> Free Updates Forever</div>
+    </div>
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="price-cta">Get Instant Access —  →</a>
+    <p class="price-guarantee">🛡️ 30-day money back guarantee. No questions asked.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="section-label">Real Users</div>
+  <h2 class="section-title">People Are Loving BudgetFlow</h2>
+  <p class="section-sub" style="margin-bottom:2.5rem">Join thousands of users who took back control of their finances.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"I cancelled my YNAB subscription the same day I found this. It does everything I need and my data stays in MY Google Drive. This is how software should work."</p>
+      <div class="testi-author"><div class="testi-avatar">JM</div><div><div class="testi-name">James M.</div><div class="testi-role">Software Engineer, Austin TX</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Finally a budget tracker that doesn't require connecting my bank account. Setup was genuinely 5 minutes. The dashboard is gorgeous — way better than a spreadsheet."</p>
+      <div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Sarah R.</div><div class="testi-role">Teacher, Chicago IL</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"The budget tracking automatically syncs with my transactions. I can see exactly how much I've spent on groceries this month vs my target. Game changer."</p>
+      <div class="testi-author"><div class="testi-avatar">DK</div><div><div class="testi-name">David K.</div><div class="testi-role">Freelancer, Seattle WA</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-label">Questions & Answers</div>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub" style="margin-bottom:3rem">Everything you need to know before you get started.</p>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q">Is this a one-time payment? <span>+</span></div><div class="faq-a">Yes! You pay  once and own BudgetFlow forever. No monthly fees, no subscription, no renewals. You get all future updates included at no extra cost.</div></div>
+    <div class="faq-item"><div class="faq-q">Is there a money-back guarantee? <span>+</span></div><div class="faq-a">Absolutely. We offer a full 30-day money back guarantee, no questions asked. If you're not happy for any reason, just email us and we'll refund you immediately.</div></div>
+    <div class="faq-item"><div class="faq-q">Where is my data stored? <span>+</span></div><div class="faq-a">All your financial data lives in a Google Sheet inside your personal Google Drive account. BudgetFlow never stores, accesses, or transmits your data to any external server.</div></div>
+    <div class="faq-item"><div class="faq-q">Do I need to connect my bank account? <span>+</span></div><div class="faq-a">Absolutely not. You manually enter your transactions, which gives you full control and keeps your banking credentials completely secure.</div></div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2>Take Control of Your Finances Today</h2>
+  <p>Join 2,400+ users who ditched overpriced apps. One payment, yours forever.</p>
+  <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="btn-white">⬇️ Get BudgetFlow — Only </a>
+  <p style="margin-top:1.5rem;color:#64748b;font-size:.8rem">🛡️ 30-Day Money Back Guarantee &nbsp;|&nbsp; ⚡ Instant Download &nbsp;|&nbsp; 🔒 Your Data Stays Private</p>
+</section>
+
+<footer>
+  <p>© 2025 BudgetFlow. Your data stays in your Google Drive — always.</p>
+</footer>
+
+<script>
+  let currency = 'IDR';
+  const currencyRates = {
+    IDR: { symbol: 'Rp ', rate: 1 },
+    USD: { symbol: '$ ', rate: 0.000065 },
+    EUR: { symbol: '€ ', rate: 0.000060 }
+  };
+
+  let transactions = [
+    { id: 1, desc: 'Gaji Bulanan / Monthly Salary', cat: 'Salary', type: 'income', amount: 15000000 },
+    { id: 2, desc: 'Belanja Bulanan Supermarket', cat: 'Food & Dining', type: 'expense', amount: 2500000 },
+    { id: 3, desc: 'Bensin & Service Mobil', cat: 'Transport', type: 'expense', amount: 1200000 },
+    { id: 4, desc: 'Beli Sepatu Sport / Fashion', cat: 'Shopping', type: 'expense', amount: 1550000 }
+  ];
+
+  let budgets = [
+    { category: 'Food & Dining', limit: 4000000, spent: 2500000, color: '#6366f1' },
+    { category: 'Transport', limit: 2000000, spent: 1200000, color: '#10b981' },
+    { category: 'Shopping', limit: 2000000, spent: 1550000, color: '#f43f5e' }
+  ];
+
+  let savings = [
+    { id: 's1', name: 'Dana Darurat', current: 8000000, target: 10000000, color: '#06b6d4' },
+    { id: 's2', name: 'Liburan Japan', current: 4800000, target: 12000000, color: '#10b981' }
+  ];
+
+  function formatMoney(num) {
+    const config = currencyRates[currency];
+    const converted = num * config.rate;
+    if (currency === 'IDR') return config.symbol + Math.round(converted).toLocaleString('id-ID');
+    return config.symbol + converted.toFixed(2);
+  }
+
+  function changeCurrency(newCurr) {
+    currency = newCurr;
+    renderAll();
+  }
+
+  function loadPreset(presetKey) {
+    if (presetKey === 'freelance') {
+      transactions = [
+        { id: 101, desc: 'Client Web Design Project', cat: 'Salary', type: 'income', amount: 28000000 },
+        { id: 102, desc: 'Figma & Cloud Hosting Sub', cat: 'Shopping', type: 'expense', amount: 1400000 },
+        { id: 103, desc: 'Co-working Space Pass', cat: 'Transport', type: 'expense', amount: 2200000 }
+      ];
+      budgets = [
+        { category: 'Food & Dining', limit: 5000000, spent: 1800000, color: '#6366f1' },
+        { category: 'Transport', limit: 3000000, spent: 2200000, color: '#10b981' },
+        { category: 'Shopping', limit: 4000000, spent: 1400000, color: '#f43f5e' }
+      ];
+    } else if (presetKey === 'student') {
+      transactions = [
+        { id: 201, desc: 'Uang Saku / Allowance', cat: 'Salary', type: 'income', amount: 3500000 },
+        { id: 202, desc: 'Kantin & Makan Malam', cat: 'Food & Dining', type: 'expense', amount: 1200000 }
+      ];
+      budgets = [
+        { category: 'Food & Dining', limit: 1800000, spent: 1200000, color: '#6366f1' },
+        { category: 'Transport', limit: 500000, spent: 200000, color: '#10b981' }
+      ];
+    } else {
+      transactions = [
+        { id: 1, desc: 'Gaji Bulanan / Monthly Salary', cat: 'Salary', type: 'income', amount: 15000000 },
+        { id: 2, desc: 'Belanja Bulanan Supermarket', cat: 'Food & Dining', type: 'expense', amount: 2500000 },
+        { id: 3, desc: 'Bensin & Service Mobil', cat: 'Transport', type: 'expense', amount: 1200000 },
+        { id: 4, desc: 'Beli Sepatu Sport / Fashion', cat: 'Shopping', type: 'expense', amount: 1550000 }
+      ];
+    }
+    renderAll();
+  }
+
+  function renderAll() {
+    renderStats(); renderTable(); renderBudgets(); renderSavings(); initChart();
+  }
+
+  function renderStats() {
+    let inc = transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0);
+    let exp = transactions.filter(t => t.type === 'expense').reduce((acc, t) => acc + t.amount, 0);
+    let savTotal = savings.reduce((acc, s) => acc + s.current, 0);
+    let networth = 35000000 + inc - exp + savTotal;
+
+    document.getElementById('val-income').textContent = formatMoney(inc);
+    document.getElementById('val-expense').textContent = formatMoney(exp);
+    document.getElementById('val-savings').textContent = formatMoney(savTotal);
+    document.getElementById('val-networth').textContent = formatMoney(networth);
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('tx-rows');
+    tbody.innerHTML = transactions.map(t => '<tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="font-weight:600; padding:8px 10px;">' + t.desc + '</td><td style="color:#9ca3af; padding:8px 10px;">' + t.cat + '</td><td style="padding:8px 10px;"><span class="badge ' + (t.type === 'income' ? 'badge-income' : 'badge-expense') + '">' + t.type.toUpperCase() + '</span></td><td style="text-align:right; font-weight:700; padding:8px 10px; color:' + (t.type==='income'?'#10b981':'#f9fafb') + '">' + (t.type==='income'?'+':'-') + ' ' + formatMoney(t.amount) + '</td><td style="text-align:center; padding:8px 10px;"><button class="demo-btn" style="padding:2px 6px; font-size:10px;" onclick="deleteTx(' + t.id + ')">🗑️</button></td></tr>').join('');
+  }
+
+  function renderBudgets() {
+    budgets.forEach(b => {
+      b.spent = transactions.filter(t => t.cat === b.category && t.type === 'expense').reduce((acc, t) => acc + t.amount, 0);
+    });
+
+    const container = document.getElementById('budget-list');
+    container.innerHTML = budgets.map(b => {
+      const pct = Math.min(100, Math.round((b.spent / b.limit) * 100));
+      return '<div class="budget-item"><div class="budget-info"><span style="font-weight:600;">' + b.category + '</span><span>' + formatMoney(b.spent) + ' / <strong style="color:#9ca3af;">' + formatMoney(b.limit) + '</strong></span></div><div class="progress-bg"><div class="progress-bar" style="width: ' + pct + '%; background: ' + (pct > 90 ? '#f43f5e' : b.color) + ';"></div></div></div>';
+    }).join('');
+  }
+
+  function renderSavings() {
+    const container = document.getElementById('savings-list');
+    container.innerHTML = savings.map(s => {
+      const pct = Math.min(100, Math.round((s.current / s.target) * 100));
+      const circumference = 2 * Math.PI * 30;
+      const strokeDashoffset = circumference - (pct / 100) * circumference;
+
+      return '<div class="savings-card"><div class="ring-box"><svg class="ring-svg" viewBox="0 0 76 76"><circle class="ring-circle-bg" cx="38" cy="38" r="30"/><circle class="ring-circle" cx="38" cy="38" r="30" style="stroke:' + s.color + '; stroke-dasharray:' + circumference + '; stroke-dashoffset:' + strokeDashoffset + ';"/></svg><div class="ring-text">' + pct + '%</div></div><div style="font-weight:700; font-size:12px; margin-bottom:2px;">' + s.name + '</div><div style="font-size:10px; color:#9ca3af; margin-bottom:8px;">' + formatMoney(s.current) + '</div><button class="demo-btn demo-btn-emerald" style="width:100%; justify-content:center; padding:4px 0; font-size:10px;" onclick="topUpSavings(\'' + s.id + '\')">+ Top Up</button></div>';
+    }).join('');
+  }
+
+  function handleAddTx(e) {
+    e.preventDefault();
+    const desc = document.getElementById('in-desc').value;
+    const cat = document.getElementById('in-cat').value;
+    const type = document.getElementById('in-type').value;
+    const amount = Number(document.getElementById('in-amount').value);
+
+    if (!desc || !amount) return;
+
+    transactions.unshift({ id: Date.now(), desc, cat, type, amount });
+    document.getElementById('in-desc').value = '';
+    document.getElementById('in-amount').value = '';
+
+    renderAll();
+    triggerSheetsSyncAnimation('Added "' + desc + '" → Syncing row to Google Sheet...');
+  }
+
+  function deleteTx(id) {
+    transactions = transactions.filter(t => t.id !== id);
+    renderAll();
+    triggerSheetsSyncAnimation('Deleted item → Updating Google Sheet...');
+  }
+
+  function topUpSavings(id) {
+    const item = savings.find(s => s.id === id);
+    if (item) {
+      item.current += 500000;
+      renderAll();
+      triggerSheetsSyncAnimation('Top-up ' + item.name + ' → Updated Savings sheet...');
+    }
+  }
+
+  function triggerSheetsSyncAnimation(msg) {
+    const pill = document.getElementById('sync-pill');
+    const desc = document.getElementById('sync-desc');
+
+    pill.textContent = '⚡ SYNCING...';
+    pill.style.background = 'rgba(99, 102, 241, 0.3)';
+    pill.style.color = '#a5b4fc';
+    desc.textContent = msg;
+
+    setTimeout(() => {
+      pill.textContent = '● SYNCED';
+      pill.style.background = 'rgba(16, 185, 129, 0.2)';
+      pill.style.color = '#10b981';
+      desc.textContent = 'Connected to Google Apps Script backend';
+    }, 1200);
+  }
+
+  let myChart = null;
+  function initChart() {
+    const ctx = document.getElementById('demoChart').getContext('2d');
+    if (myChart) myChart.destroy();
+
+    const config = currencyRates[currency];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    const incData = [12000000, 14000000, 15000000, 13500000, 16000000, 15000000].map(v => Math.round(v * config.rate));
+    const expData = [5000000, 6200000, 5800000, 7100000, 6000000, 6250000].map(v => Math.round(v * config.rate));
+
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [
+          { label: 'Income', data: incData, backgroundColor: 'rgba(16, 185, 129, 0.7)', borderRadius: 4 },
+          { label: 'Expenses', data: expData, backgroundColor: 'rgba(244, 63, 94, 0.7)', borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#9ca3af', font: { family: 'Inter', size: 11 } } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 10 } } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af', font: { size: 10 } } }
+        }
+      }
+    });
+  }
+
+  let currentTourStep = 0;
+  const tourSteps = [
+    { title: "STEP 1 / 4", msg: "✨ Welcome! Try clicking currency switchers (USD/IDR/EUR) or presets top right.", highlight: "step-card-balance" },
+    { title: "STEP 2 / 4", msg: "⚡ Real-time Calculation: Add a dummy transaction in the input form below to test live calculations!", highlight: "step-panel-add" },
+    { title: "STEP 3 / 4", msg: "🎯 Spending Caps: Watch progress bars automatically adjust when you add new expenses.", highlight: "step-panel-budgets" },
+    { title: "STEP 4 / 4", msg: "🏆 Savings Top-Up: Click '+ Top Up' on any goal to watch the progress ring fill up instantly!", highlight: "step-panel-savings" }
+  ];
+
+  function startTour() { currentTourStep = 0; showTourStep(); }
+  function nextTourStep() { currentTourStep = (currentTourStep + 1) % tourSteps.length; showTourStep(); }
+  function prevTourStep() { currentTourStep = (currentTourStep - 1 + tourSteps.length) % tourSteps.length; showTourStep(); }
+
+  function showTourStep() {
+    const step = tourSteps[currentTourStep];
+    document.getElementById('tour-step-tag').textContent = step.title;
+    document.getElementById('tour-step-msg').textContent = step.msg;
+
+    document.querySelectorAll('.panel, .stat-card').forEach(el => el.style.boxShadow = 'none');
+    const target = document.getElementById(step.highlight);
+    if (target) {
+      target.style.boxShadow = '0 0 25px rgba(99, 102, 241, 0.6)';
+      target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  // FAQ Toggle
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const a = q.nextElementSibling;
+      const isOpen = a.style.display === 'block';
+      document.querySelectorAll('.faq-a').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.faq-q span').forEach(el => el.textContent = '+');
+      a.style.display = isOpen ? 'none' : 'block';
+      q.querySelector('span').textContent = isOpen ? '+' : '−';
+    });
+    q.nextElementSibling.style.display = 'none';
+  });
+
+  window.onload = () => { renderAll(); };
+</script>
+</body>
+</html>
