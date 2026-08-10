@@ -302,6 +302,47 @@ footer a{color:#94a3b8;margin:0 .75rem}
   .hero{padding:3rem 1.25rem}
 }
 </style>
+
+<style>
+.demo-tab-btn {
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.demo-tab-btn:hover {
+  color: #f1f5f9;
+  background: rgba(255,255,255,0.05);
+}
+.demo-tab-btn.active {
+  background: #10b981;
+  color: #ffffff;
+}
+.demo-input-dark {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #f1f5f9;
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+.demo-input-dark:focus {
+  outline: none;
+  border-color: #10b981;
+}
+.demo-input-dark option {
+  background: #1a1d2e;
+  color: #f1f5f9;
+}
+</style>
+
 </head>
 <body>
 
@@ -326,171 +367,221 @@ footer a{color:#94a3b8;margin:0 .75rem}
   <p class="hero-note">✅ Works on Mac & Windows &nbsp;·&nbsp; ✅ Data stays in Google Drive &nbsp;·&nbsp; ✅ No subscription ever</p>
 
   <!-- INTERACTIVE DEMO CONTAINER IN HERO -->
-  <div class="demo-section" id="interactive-demo">
-    <div class="demo-title-box">
-      <div class="demo-pill">🎮 Live Sandbox Demo</div>
-      <h2 style="font-size:1.5rem; font-weight:800; color:var(--dark);">Try BudgetFlow Live Below!</h2>
-      <p style="font-size:0.9rem; color:var(--muted);">Add entries, switch currencies, or top-up savings to test the live calculator.</p>
-    </div>
-
-    <div class="demo-wrapper">
-      <div class="demo-header">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div class="window-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <div class="demo-badge">
-            <span class="live-pulse"></span>
-            BudgetFlow Interactive Demo
-          </div>
-        </div>
-
-        <div class="controls-bar">
-          <select id="currency-select" class="demo-btn" onchange="changeCurrency(this.value)">
-            <option value="USD">💵 USD ($)</option>
-            <option value="IDR" selected>🇮🇩 IDR (Rp)</option>
-            <option value="EUR">💶 EUR (€)</option>
-          </select>
-
-          <select id="preset-select" class="demo-btn" onchange="loadPreset(this.value)">
-            <option value="standard">📊 Preset: Monthly Personal</option>
-            <option value="freelance">💻 Preset: Tech Freelancer</option>
-            <option value="student">🎓 Preset: College Student</option>
-          </select>
-
-          <button class="demo-btn demo-btn-primary" onclick="startTour()">🚀 Guided Tour</button>
-        </div>
-      </div>
-
-      <div id="tour-banner" class="tour-banner">
-        <div>
-          <span class="tour-step-badge" id="tour-step-tag">STEP 1 / 4</span>
-          <span id="tour-step-msg" style="margin-left:6px;">✨ Welcome! Click buttons or add transactions below to see real-time chart updates.</span>
-        </div>
-        <div style="display: flex; gap: 6px;">
-          <button class="demo-btn" onclick="prevTourStep()" style="padding: 3px 8px; font-size: 11px;">Prev</button>
-          <button class="demo-btn demo-btn-primary" onclick="nextTourStep()" style="padding: 3px 8px; font-size: 11px;">Next Step →</button>
-        </div>
-      </div>
-
-      <div class="demo-content">
-        <div class="stats-grid">
-          <div class="stat-card" style="--card-accent: #6366f1;" id="step-card-balance">
-            <div class="stat-label">Total Net Worth</div>
-            <div class="stat-val" id="val-networth">Rp 45.500.000</div>
-            <div class="stat-sub">▲ +12.4% vs last month</div>
-          </div>
-
-          <div class="stat-card" style="--card-accent: #10b981;" id="step-card-income">
-            <div class="stat-label">Monthly Income</div>
-            <div class="stat-val" id="val-income">Rp 15.000.000</div>
-            <div class="stat-sub">↑ 2 transactions</div>
-          </div>
-
-          <div class="stat-card" style="--card-accent: #f43f5e;" id="step-card-expense">
-            <div class="stat-label">Monthly Expenses</div>
-            <div class="stat-val" id="val-expense">Rp 6.250.000</div>
-            <div class="stat-sub" style="color: #f43f5e;">↓ 42% of monthly cap</div>
-          </div>
-
-          <div class="stat-card" style="--card-accent: #06b6d4;" id="step-card-savings">
-            <div class="stat-label">Total Savings Saved</div>
-            <div class="stat-val" id="val-savings">Rp 12.800.000</div>
-            <div class="stat-sub" style="color: #06b6d4;">🎯 68% towards target</div>
-          </div>
-        </div>
-
-        <div class="dash-main">
-          <div style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="panel" id="step-panel-add">
-              <div class="panel-head">
-                <div class="panel-title">⚡ Add Live Entry</div>
-                <span style="font-size: 11px; color: #9ca3af;">Try adding a transaction!</span>
-              </div>
-
-              <form class="add-form" onsubmit="handleAddTx(event)">
-                <input type="text" id="in-desc" class="form-input" placeholder="Description (e.g. Coffee)" required>
-                <select id="in-cat" class="form-input">
-                  <option value="Food & Dining">🍔 Food & Dining</option>
-                  <option value="Transport">🚗 Transport</option>
-                  <option value="Shopping">🛍️ Shopping</option>
-                  <option value="Salary">💰 Salary</option>
-                </select>
-                <select id="in-type" class="form-input">
-                  <option value="expense">Expense</option>
-                  <option value="income">Income</option>
-                </select>
-                <input type="number" id="in-amount" class="form-input" placeholder="Amount" required>
-                <button type="submit" class="demo-btn demo-btn-primary">+ Add</button>
-              </form>
-
-              <table class="tx-table">
-                <thead>
-                  <tr>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Type</th>
-                    <th style="text-align: right;">Amount</th>
-                    <th style="text-align: center;">Action</th>
-                  </tr>
-                </thead>
-                <tbody id="tx-rows"></tbody>
-              </table>
-            </div>
-
-            <div class="panel">
-              <div class="panel-head">
-                <div class="panel-title">📈 Cash Flow Trend</div>
-              </div>
-              <div style="height: 200px; position: relative;">
-                <canvas id="demoChart"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="panel" id="step-panel-budgets">
-              <div class="panel-head">
-                <div class="panel-title">🎯 Spending Budget Caps</div>
-              </div>
-              <div class="budget-list" id="budget-list"></div>
-            </div>
-
-            <div class="panel" id="step-panel-savings">
-              <div class="panel-head">
-                <div class="panel-title">🏆 Savings Goals Top-Up</div>
-              </div>
-              <div class="savings-grid" id="savings-list"></div>
-            </div>
-
-            <div class="sheets-sync-box">
-              <div class="sheets-icon">📊</div>
-              <div class="sheets-info">
-                <div class="sheets-title">Google Sheets Live Sync</div>
-                <div class="sheets-desc" id="sync-desc">Connected to Apps Script backend</div>
-              </div>
-              <div class="sync-status-pill" id="sync-pill">● SYNCED</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  
+<div class="demo-section" id="interactive-demo">
+  <div class="demo-title-box">
+    <div class="demo-pill">🎮 Live Sandbox Demo (Product Version)</div>
+    <h2 style="font-size:1.6rem; font-weight:800; color:var(--dark); margin-top:8px;">Coba Aplikasi BudgetFlow Langsung!</h2>
+    <p style="font-size:0.95rem; color:var(--muted);">Simulasi interaktif 100% sama seperti template Google Sheets asli dengan UI App modern & data contoh.</p>
   </div>
-</section>
 
-<!-- TRUST BAR -->
-<div class="trust">
-  <div class="trust-inner">
-    <div class="trust-item"><span class="icon">🔒</span> Data stays in YOUR Google Drive</div>
-    <div class="trust-item"><span class="icon">💵</span> One-time  — No subscription</div>
-    <div class="trust-item"><span class="icon">⚡</span> Setup in under 5 minutes</div>
-    <div class="trust-item"><span class="icon">🛡️</span> 30-Day Money Back Guarantee</div>
+  <div class="demo-wrapper" style="background:#0f1117; border-radius:18px; border:1px solid rgba(255,255,255,0.1); color:#f1f5f9; padding:0; overflow:hidden; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);">
+    
+    <!-- APP HEADER / NAV -->
+    <div style="background:#1a1d2e; border-bottom:1px solid rgba(255,255,255,0.08); padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:1.2rem; font-weight:800; background:linear-gradient(135deg,#10b981,#3b82f6); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">BudgetFlow</span>
+        <span style="font-size:10px; background:rgba(16,185,129,0.15); color:#6ee7b7; padding:2px 8px; border-radius:99px; border:1px solid rgba(16,185,129,0.3); font-weight:700;">PROD v2.4</span>
+      </div>
+
+      <!-- TABS NAV -->
+      <div style="display:flex; gap:6px; background:rgba(0,0,0,0.3); padding:4px; border-radius:10px; flex-wrap:wrap;">
+        <button class="demo-tab-btn active" onclick="switchDemoTab('dash')" id="tab-btn-dash">📊 Dashboard</button>
+        <button class="demo-tab-btn" onclick="switchDemoTab('txs')" id="tab-btn-txs">💸 Transactions</button>
+        <button class="demo-tab-btn" onclick="switchDemoTab('budgets')" id="tab-btn-budgets">🎯 Budgets</button>
+        <button class="demo-tab-btn" onclick="switchDemoTab('savings')" id="tab-btn-savings">🏦 Savings</button>
+        <button class="demo-tab-btn" onclick="switchDemoTab('debts')" id="tab-btn-debts">📋 Debts</button>
+        <button class="demo-tab-btn" onclick="switchDemoTab('assets')" id="tab-btn-assets">🏠 Assets</button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:11px; color:#94a3b8; display:flex; align-items:center; gap:4px;">
+          <span style="width:7px; height:7px; background:#10b981; border-radius:50%; display:inline-block;"></span>
+          Google Sheets Synced
+        </span>
+      </div>
+    </div>
+
+    <!-- MAIN BODY -->
+    <div style="padding:24px;">
+
+      <!-- TAB 1: DASHBOARD -->
+      <div id="demo-tab-dash" class="demo-tab-content">
+        <!-- STAT CARDS -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom:24px;">
+          <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:0; left:0; right:0; height:3px; background:#10b981;"></div>
+            <div style="font-size:12px; color:#94a3b8; font-weight:600; margin-bottom:6px;">📈 Monthly Income</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#f1f5f9;" id="ui-income">Rp 19.000.000</div>
+            <div style="font-size:11px; color:#10b981; margin-top:4px;">+24% from last month</div>
+          </div>
+          <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:0; left:0; right:0; height:3px; background:#f43f5e;"></div>
+            <div style="font-size:12px; color:#94a3b8; font-weight:600; margin-bottom:6px;">📉 Monthly Expense</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#f1f5f9;" id="ui-expense">Rp 4.170.000</div>
+            <div style="font-size:11px; color:#64748b; margin-top:4px;">7 categories tracked</div>
+          </div>
+          <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:0; left:0; right:0; height:3px; background:#3b82f6;"></div>
+            <div style="font-size:12px; color:#94a3b8; font-weight:600; margin-bottom:6px;">💰 Net Savings</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#10b981;" id="ui-balance">Rp 14.830.000</div>
+            <div style="font-size:11px; color:#3b82f6; margin-top:4px;" id="ui-savings-rate">78% Savings Rate</div>
+          </div>
+          <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:0; left:0; right:0; height:3px; background:#8b5cf6;"></div>
+            <div style="font-size:12px; color:#94a3b8; font-weight:600; margin-bottom:6px;">🏦 Net Worth</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#6ee7b7;" id="ui-networth">Rp 520.000.000</div>
+            <div style="font-size:11px; color:#94a3b8; margin-top:4px;">Assets - Liabilities</div>
+          </div>
+        </div>
+
+        <!-- CHARTS & QUICK ACTION -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;">
+          <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px;">
+            <div style="font-size:0.95rem; font-weight:700; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+              <span>Arus Kas Bulanan</span>
+              <span style="font-size:11px; color:#94a3b8;">Maret 2026</span>
+            </div>
+            <div style="height:200px; position:relative;">
+              <canvas id="prodDemoChart"></canvas>
+            </div>
+          </div>
+
+          <!-- QUICK ADD FORM -->
+          <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px;">
+            <div style="font-size:0.95rem; font-weight:700; margin-bottom:14px;">⚡ Quick Add Transaction</div>
+            <form onsubmit="handleQuickAdd(event)">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+                <div>
+                  <label style="font-size:11px; color:#94a3b8; font-weight:600;">JENIS</label>
+                  <select id="qa-type" class="demo-input-dark">
+                    <option value="expense">📉 Expense</option>
+                    <option value="income">📈 Income</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size:11px; color:#94a3b8; font-weight:600;">JUMLAH (RP)</label>
+                  <input type="number" id="qa-amount" class="demo-input-dark" placeholder="500000" required>
+                </div>
+              </div>
+              <div style="margin-bottom:10px;">
+                <label style="font-size:11px; color:#94a3b8; font-weight:600;">KETERANGAN</label>
+                <input type="text" id="qa-desc" class="demo-input-dark" placeholder="Contoh: Belanja Bulanan / Bonus" required>
+              </div>
+              <div style="margin-bottom:14px;">
+                <label style="font-size:11px; color:#94a3b8; font-weight:600;">KATEGORI</label>
+                <select id="qa-cat" class="demo-input-dark">
+                  <option>Food & Drink</option>
+                  <option>Transport</option>
+                  <option>Shopping</option>
+                  <option>Entertainment</option>
+                  <option>Bills & Utilities</option>
+                  <option>Salary</option>
+                  <option>Business</option>
+                </select>
+              </div>
+              <button type="submit" style="width:100%; background:#10b981; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:700; font-size:0.9rem; cursor:pointer; transition:0.2s;">
+                + SIMPAN KE GOOGLE SHEETS (DEMO)
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- RECENT TRANSACTIONS PREVIEW -->
+        <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <span style="font-size:0.95rem; font-weight:700;">Transaksi Terbaru</span>
+            <button onclick="switchDemoTab('txs')" style="background:transparent; border:none; color:#6ee7b7; font-size:12px; font-weight:600; cursor:pointer;">Lihat Semua →</button>
+          </div>
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.08); text-align:left; color:#94a3b8;">
+                <th style="padding:8px;">Tanggal</th>
+                <th style="padding:8px;">Keterangan</th>
+                <th style="padding:8px;">Kategori</th>
+                <th style="padding:8px; text-align:right;">Jumlah</th>
+              </tr>
+            </thead>
+            <tbody id="ui-recent-tx-rows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2: TRANSACTIONS -->
+      <div id="demo-tab-txs" class="demo-tab-content" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h3 style="font-size:1.1rem; font-weight:700;">Daftar Transaksi Lengkap</h3>
+          <span style="font-size:12px; color:#94a3b8;" id="ui-tx-count">7 transaksi</span>
+        </div>
+        <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.08); text-align:left; color:#94a3b8;">
+                <th style="padding:10px;">Tanggal</th>
+                <th style="padding:10px;">Deskripsi</th>
+                <th style="padding:10px;">Kategori</th>
+                <th style="padding:10px;">Jenis</th>
+                <th style="padding:10px; text-align:right;">Jumlah</th>
+              </tr>
+            </thead>
+            <tbody id="ui-all-tx-rows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: BUDGETS -->
+      <div id="demo-tab-budgets" class="demo-tab-content" style="display:none;">
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:16px;">Target Budget Bulanan</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;" id="ui-budget-grid"></div>
+      </div>
+
+      <!-- TAB 4: SAVINGS -->
+      <div id="demo-tab-savings" class="demo-tab-content" style="display:none;">
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:16px;">Target Tabungan & Impian</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;" id="ui-savings-grid"></div>
+      </div>
+
+      <!-- TAB 5: DEBTS -->
+      <div id="demo-tab-debts" class="demo-tab-content" style="display:none;">
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:16px;">Daftar Hutang & Cicilan</h3>
+        <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.08); text-align:left; color:#94a3b8;">
+                <th style="padding:10px;">Nama Pinjaman</th>
+                <th style="padding:10px;">Total Pinjaman</th>
+                <th style="padding:10px;">Sisa Hutang</th>
+                <th style="padding:10px;">Bunga p.a</th>
+                <th style="padding:10px;">Progress Pelunasan</th>
+              </tr>
+            </thead>
+            <tbody id="ui-debts-rows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 6: ASSETS -->
+      <div id="demo-tab-assets" class="demo-tab-content" style="display:none;">
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:16px;">Daftar Aset & Kekayaan</h3>
+        <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.08); text-align:left; color:#94a3b8;">
+                <th style="padding:10px;">Nama Aset</th>
+                <th style="padding:10px;">Kategori</th>
+                <th style="padding:10px; text-align:right;">Nilai Estimasi</th>
+                <th style="padding:10px;">Porsi Portofolio</th>
+              </tr>
+            </thead>
+            <tbody id="ui-assets-rows"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
-<!-- PAIN POINTS -->
 <section class="pain">
   <div class="section-label">Sound Familiar?</div>
   <h2 class="section-title">Tired of Finance Apps That Cost an Arm and a Leg?</h2>
@@ -634,238 +725,257 @@ footer a{color:#94a3b8;margin:0 .75rem}
   <p>© 2025 BudgetFlow. Your data stays in your Google Drive — always.</p>
 </footer>
 
+
 <script>
-  let currency = 'IDR';
-  const currencyRates = {
-    IDR: { symbol: 'Rp ', rate: 1 },
-    USD: { symbol: '$ ', rate: 0.000065 },
-    EUR: { symbol: '€ ', rate: 0.000060 }
+let prodState = {
+  transactions: [
+    { id: 1, date: "2026-03-01", description: "Gaji Bulanan Utama", category: "Salary", amount: 15000000, type: "income" },
+    { id: 2, date: "2026-03-02", description: "Belanja Bulanan Supermarket", category: "Shopping", amount: 2500000, type: "expense" },
+    { id: 3, date: "2026-03-03", description: "Makan Malam Restoran", category: "Food & Drink", amount: 350000, type: "expense" },
+    { id: 4, date: "2026-03-04", description: "Bensin & E-Toll", category: "Transport", amount: 450000, type: "expense" },
+    { id: 5, date: "2026-03-05", description: "Tagihan Listrik & Wifi", category: "Bills & Utilities", amount: 870000, type: "expense" },
+    { id: 6, date: "2026-03-06", description: "Bonus Project Freelance", category: "Business", amount: 4000000, type: "income" },
+    { id: 7, date: "2026-03-07", description: "Langganan Netflix & Spotify", category: "Entertainment", amount: 220000, type: "expense" }
+  ],
+  budgets: [
+    { id: 1, category: "Food & Drink", amount: 3500000, spent: 1850000 },
+    { id: 2, category: "Transport", amount: 1500000, spent: 850000 },
+    { id: 3, category: "Shopping", amount: 3000000, spent: 2500000 },
+    { id: 4, category: "Bills & Utilities", amount: 2000000, spent: 1450000 },
+    { id: 5, category: "Entertainment", amount: 1000000, spent: 620000 }
+  ],
+  savings: [
+    { id: 1, name: "Dana Darurat (6 Bulan)", target: 50000000, current: 35000000, deadline: "2026-12-31" },
+    { id: 2, name: "Tabungan Umroh", target: 35000000, current: 22500000, deadline: "2027-04-15" },
+    { id: 3, name: "DP Rumah Pilihan", target: 120000000, current: 48000000, deadline: "2027-10-01" }
+  ],
+  debts: [
+    { id: 1, name: "KPR Bank Syariah", total: 350000000, remaining: 280000000, rate: 5.5, dueDate: "2035-08-10" },
+    { id: 2, name: "Cicilan Mobil", total: 180000000, remaining: 45000000, rate: 4.2, dueDate: "2026-11-20" }
+  ],
+  assets: [
+    { id: 1, name: "Rumah Tinggal (Nilai Pasar)", value: 650000000, type: "Property" },
+    { id: 2, name: "Portofolio Saham & Reksadana", value: 85000000, type: "Investment" },
+    { id: 3, name: "Tabungan & Kas", value: 45000000, type: "Cash" },
+    { id: 4, name: "Emas Logam Mulia (50 gram)", value: 65000000, type: "Investment" }
+  ]
+};
+
+function fmtRupiah(n) {
+  return "Rp " + Number(n || 0).toLocaleString("id-ID");
+}
+
+let prodChartInstance = null;
+
+function switchDemoTab(tab) {
+  document.querySelectorAll(".demo-tab-content").forEach(el => el.style.display = "none");
+  document.querySelectorAll(".demo-tab-btn").forEach(el => el.classList.remove("active"));
+  
+  const targetContent = document.getElementById("demo-tab-" + tab);
+  const targetBtn = document.getElementById("tab-btn-" + tab);
+  if (targetContent) targetContent.style.display = "block";
+  if (targetBtn) targetBtn.classList.add("active");
+
+  if (tab === "dash") renderProdChart();
+}
+
+function renderProdDemo() {
+  const income = prodState.transactions.filter(t => t.type === "income").reduce((a, b) => a + b.amount, 0);
+  const expense = prodState.transactions.filter(t => t.type === "expense").reduce((a, b) => a + b.amount, 0);
+  const balance = income - expense;
+  const totalAssets = prodState.assets.reduce((a, b) => a + b.value, 0);
+  const totalDebts = prodState.debts.reduce((a, b) => a + b.remaining, 0);
+  const netWorth = totalAssets - totalDebts;
+  const rate = income > 0 ? Math.round((balance / income) * 100) : 0;
+
+  document.getElementById("ui-income").textContent = fmtRupiah(income);
+  document.getElementById("ui-expense").textContent = fmtRupiah(expense);
+  document.getElementById("ui-balance").textContent = fmtRupiah(balance);
+  document.getElementById("ui-savings-rate").textContent = rate + "% Savings Rate";
+  document.getElementById("ui-networth").textContent = fmtRupiah(netWorth);
+
+  // Recent transactions
+  const recent = prodState.transactions.slice(0, 5);
+  document.getElementById("ui-recent-tx-rows").innerHTML = recent.map(t => `
+    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+      <td style="padding:8px; color:#94a3b8;">${t.date}</td>
+      <td style="padding:8px; font-weight:600;">${t.description}</td>
+      <td style="padding:8px;"><span style="background:rgba(255,255,255,0.06); padding:2px 7px; border-radius:4px; font-size:11px;">${t.category}</span></td>
+      <td style="padding:8px; text-align:right; font-weight:700; color:${t.type === 'income' ? '#10b981' : '#f43f5e'};">
+        ${t.type === 'income' ? '+' : '-'}${fmtRupiah(t.amount)}
+      </td>
+    </tr>
+  `).join("");
+
+  // All transactions
+  document.getElementById("ui-tx-count").textContent = prodState.transactions.length + " transaksi";
+  document.getElementById("ui-all-tx-rows").innerHTML = prodState.transactions.map(t => `
+    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+      <td style="padding:10px; color:#94a3b8;">${t.date}</td>
+      <td style="padding:10px; font-weight:600;">${t.description}</td>
+      <td style="padding:10px;">${t.category}</td>
+      <td style="padding:10px;"><span style="background:${t.type === 'income' ? 'rgba(16,185,129,0.15)' : 'rgba(244,63,94,0.15)'}; color:${t.type === 'income' ? '#10b981' : '#f43f5e'}; padding:2px 8px; border-radius:99px; font-size:11px; font-weight:700;">${t.type.toUpperCase()}</span></td>
+      <td style="padding:10px; text-align:right; font-weight:700; color:${t.type === 'income' ? '#10b981' : '#f43f5e'};">
+        ${t.type === 'income' ? '+' : '-'}${fmtRupiah(t.amount)}
+      </td>
+    </tr>
+  `).join("");
+
+  // Budgets
+  document.getElementById("ui-budget-grid").innerHTML = prodState.budgets.map(b => {
+    const pct = Math.min(100, Math.round((b.spent / b.amount) * 100));
+    const col = pct > 90 ? '#f43f5e' : pct > 70 ? '#f59e0b' : '#10b981';
+    return `
+      <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="font-weight:700;">${b.category}</span>
+          <span style="font-weight:800; color:${col};">${pct}%</span>
+        </div>
+        <div style="height:6px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden; margin-bottom:10px;">
+          <div style="height:100%; width:${pct}%; background:${col}; border-radius:99px;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:#94a3b8;">
+          <span>Terpakai: <strong style="color:#f1f5f9;">${fmtRupiah(b.spent)}</strong></span>
+          <span>Limit: <strong style="color:#f1f5f9;">${fmtRupiah(b.amount)}</strong></span>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Savings
+  document.getElementById("ui-savings-grid").innerHTML = prodState.savings.map(s => {
+    const pct = Math.min(100, Math.round((s.current / s.target) * 100));
+    return `
+      <div style="background:#1a1d2e; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="font-weight:700;">${s.name}</span>
+          <span style="font-weight:800; color:#10b981;">${pct}%</span>
+        </div>
+        <div style="font-size:11px; color:#94a3b8; margin-bottom:10px;">Target: ${s.deadline}</div>
+        <div style="height:8px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden; margin-bottom:10px;">
+          <div style="height:100%; width:${pct}%; background:linear-gradient(90deg,#10b981,#3b82f6); border-radius:99px;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:#94a3b8;">
+          <span>Terkumpul: <strong style="color:#6ee7b7;">${fmtRupiah(s.current)}</strong></span>
+          <span>Goal: <strong style="color:#f1f5f9;">${fmtRupiah(s.target)}</strong></span>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Debts
+  document.getElementById("ui-debts-rows").innerHTML = prodState.debts.map(d => {
+    const pct = Math.round(((d.total - d.remaining) / d.total) * 100);
+    return `
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+        <td style="padding:10px; font-weight:600;">${d.name}</td>
+        <td style="padding:10px;">${fmtRupiah(d.total)}</td>
+        <td style="padding:10px; color:#f43f5e; font-weight:700;">${fmtRupiah(d.remaining)}</td>
+        <td style="padding:10px; color:#94a3b8;">${d.rate}%</td>
+        <td style="padding:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="flex:1; height:6px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden;">
+              <div style="height:100%; width:${pct}%; background:#10b981; border-radius:99px;"></div>
+            </div>
+            <span style="font-size:11px; color:#94a3b8;">${pct}%</span>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join("");
+
+  // Assets
+  const totalAssetsVal = prodState.assets.reduce((a, b) => a + b.value, 0);
+  document.getElementById("ui-assets-rows").innerHTML = prodState.assets.map(a => {
+    const pct = Math.round((a.value / totalAssetsVal) * 100);
+    return `
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+        <td style="padding:10px; font-weight:600;">${a.name}</td>
+        <td style="padding:10px;"><span style="background:rgba(59,130,246,0.15); color:#3b82f6; padding:2px 8px; border-radius:99px; font-size:11px; font-weight:600;">${a.type}</span></td>
+        <td style="padding:10px; text-align:right; font-weight:700; color:#6ee7b7;">${fmtRupiah(a.value)}</td>
+        <td style="padding:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="flex:1; height:6px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden;">
+              <div style="height:100%; width:${pct}%; background:#3b82f6; border-radius:99px;"></div>
+            </div>
+            <span style="font-size:11px; color:#94a3b8;">${pct}%</span>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join("");
+
+  renderProdChart();
+}
+
+function renderProdChart() {
+  const canvas = document.getElementById("prodDemoChart");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (prodChartInstance) prodChartInstance.destroy();
+
+  const income = prodState.transactions.filter(t => t.type === "income").reduce((a, b) => a + b.amount, 0);
+  const expense = prodState.transactions.filter(t => t.type === "expense").reduce((a, b) => a + b.amount, 0);
+  const balance = income - expense;
+
+  prodChartInstance = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Income", "Expense", "Balance"],
+      datasets: [{
+        data: [income, expense, Math.max(0, balance)],
+        backgroundColor: ["rgba(16,185,129,0.8)", "rgba(244,63,94,0.8)", "rgba(59,130,246,0.8)"],
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#94a3b8" } },
+        y: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#94a3b8", callback: v => "Rp " + (v/1000000) + "jt" } }
+      }
+    }
+  });
+}
+
+function handleQuickAdd(e) {
+  e.preventDefault();
+  const type = document.getElementById("qa-type").value;
+  const amount = parseFloat(document.getElementById("qa-amount").value);
+  const desc = document.getElementById("qa-desc").value;
+  const cat = document.getElementById("qa-cat").value;
+
+  if (!amount || !desc) return;
+
+  const newTx = {
+    id: Date.now(),
+    date: new Date().toISOString().slice(0, 10),
+    description: desc,
+    category: cat,
+    amount: amount,
+    type: type
   };
 
-  let transactions = [
-    { id: 1, desc: 'Gaji Bulanan / Monthly Salary', cat: 'Salary', type: 'income', amount: 15000000 },
-    { id: 2, desc: 'Belanja Bulanan Supermarket', cat: 'Food & Dining', type: 'expense', amount: 2500000 },
-    { id: 3, desc: 'Bensin & Service Mobil', cat: 'Transport', type: 'expense', amount: 1200000 },
-    { id: 4, desc: 'Beli Sepatu Sport / Fashion', cat: 'Shopping', type: 'expense', amount: 1550000 }
-  ];
-
-  let budgets = [
-    { category: 'Food & Dining', limit: 4000000, spent: 2500000, color: '#6366f1' },
-    { category: 'Transport', limit: 2000000, spent: 1200000, color: '#10b981' },
-    { category: 'Shopping', limit: 2000000, spent: 1550000, color: '#f43f5e' }
-  ];
-
-  let savings = [
-    { id: 's1', name: 'Dana Darurat', current: 8000000, target: 10000000, color: '#06b6d4' },
-    { id: 's2', name: 'Liburan Japan', current: 4800000, target: 12000000, color: '#10b981' }
-  ];
-
-  function formatMoney(num) {
-    const config = currencyRates[currency];
-    const converted = num * config.rate;
-    if (currency === 'IDR') return config.symbol + Math.round(converted).toLocaleString('id-ID');
-    return config.symbol + converted.toFixed(2);
+  prodState.transactions.unshift(newTx);
+  
+  if (type === "expense") {
+    const b = prodState.budgets.find(x => x.category === cat);
+    if (b) b.spent += amount;
   }
 
-  function changeCurrency(newCurr) {
-    currency = newCurr;
-    renderAll();
-  }
+  document.getElementById("qa-amount").value = "";
+  document.getElementById("qa-desc").value = "";
 
-  function loadPreset(presetKey) {
-    if (presetKey === 'freelance') {
-      transactions = [
-        { id: 101, desc: 'Client Web Design Project', cat: 'Salary', type: 'income', amount: 28000000 },
-        { id: 102, desc: 'Figma & Cloud Hosting Sub', cat: 'Shopping', type: 'expense', amount: 1400000 },
-        { id: 103, desc: 'Co-working Space Pass', cat: 'Transport', type: 'expense', amount: 2200000 }
-      ];
-      budgets = [
-        { category: 'Food & Dining', limit: 5000000, spent: 1800000, color: '#6366f1' },
-        { category: 'Transport', limit: 3000000, spent: 2200000, color: '#10b981' },
-        { category: 'Shopping', limit: 4000000, spent: 1400000, color: '#f43f5e' }
-      ];
-    } else if (presetKey === 'student') {
-      transactions = [
-        { id: 201, desc: 'Uang Saku / Allowance', cat: 'Salary', type: 'income', amount: 3500000 },
-        { id: 202, desc: 'Kantin & Makan Malam', cat: 'Food & Dining', type: 'expense', amount: 1200000 }
-      ];
-      budgets = [
-        { category: 'Food & Dining', limit: 1800000, spent: 1200000, color: '#6366f1' },
-        { category: 'Transport', limit: 500000, spent: 200000, color: '#10b981' }
-      ];
-    } else {
-      transactions = [
-        { id: 1, desc: 'Gaji Bulanan / Monthly Salary', cat: 'Salary', type: 'income', amount: 15000000 },
-        { id: 2, desc: 'Belanja Bulanan Supermarket', cat: 'Food & Dining', type: 'expense', amount: 2500000 },
-        { id: 3, desc: 'Bensin & Service Mobil', cat: 'Transport', type: 'expense', amount: 1200000 },
-        { id: 4, desc: 'Beli Sepatu Sport / Fashion', cat: 'Shopping', type: 'expense', amount: 1550000 }
-      ];
-    }
-    renderAll();
-  }
+  renderProdDemo();
+  alert("✨ Transaksi berhasil ditambahkan! Data diperbarui secara real-time di demo.");
+}
 
-  function renderAll() {
-    renderStats(); renderTable(); renderBudgets(); renderSavings(); initChart();
-  }
-
-  function renderStats() {
-    let inc = transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0);
-    let exp = transactions.filter(t => t.type === 'expense').reduce((acc, t) => acc + t.amount, 0);
-    let savTotal = savings.reduce((acc, s) => acc + s.current, 0);
-    let networth = 35000000 + inc - exp + savTotal;
-
-    document.getElementById('val-income').textContent = formatMoney(inc);
-    document.getElementById('val-expense').textContent = formatMoney(exp);
-    document.getElementById('val-savings').textContent = formatMoney(savTotal);
-    document.getElementById('val-networth').textContent = formatMoney(networth);
-  }
-
-  function renderTable() {
-    const tbody = document.getElementById('tx-rows');
-    tbody.innerHTML = transactions.map(t => '<tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="font-weight:600; padding:8px 10px;">' + t.desc + '</td><td style="color:#9ca3af; padding:8px 10px;">' + t.cat + '</td><td style="padding:8px 10px;"><span class="badge ' + (t.type === 'income' ? 'badge-income' : 'badge-expense') + '">' + t.type.toUpperCase() + '</span></td><td style="text-align:right; font-weight:700; padding:8px 10px; color:' + (t.type==='income'?'#10b981':'#f9fafb') + '">' + (t.type==='income'?'+':'-') + ' ' + formatMoney(t.amount) + '</td><td style="text-align:center; padding:8px 10px;"><button class="demo-btn" style="padding:2px 6px; font-size:10px;" onclick="deleteTx(' + t.id + ')">🗑️</button></td></tr>').join('');
-  }
-
-  function renderBudgets() {
-    budgets.forEach(b => {
-      b.spent = transactions.filter(t => t.cat === b.category && t.type === 'expense').reduce((acc, t) => acc + t.amount, 0);
-    });
-
-    const container = document.getElementById('budget-list');
-    container.innerHTML = budgets.map(b => {
-      const pct = Math.min(100, Math.round((b.spent / b.limit) * 100));
-      return '<div class="budget-item"><div class="budget-info"><span style="font-weight:600;">' + b.category + '</span><span>' + formatMoney(b.spent) + ' / <strong style="color:#9ca3af;">' + formatMoney(b.limit) + '</strong></span></div><div class="progress-bg"><div class="progress-bar" style="width: ' + pct + '%; background: ' + (pct > 90 ? '#f43f5e' : b.color) + ';"></div></div></div>';
-    }).join('');
-  }
-
-  function renderSavings() {
-    const container = document.getElementById('savings-list');
-    container.innerHTML = savings.map(s => {
-      const pct = Math.min(100, Math.round((s.current / s.target) * 100));
-      const circumference = 2 * Math.PI * 30;
-      const strokeDashoffset = circumference - (pct / 100) * circumference;
-
-      return '<div class="savings-card"><div class="ring-box"><svg class="ring-svg" viewBox="0 0 76 76"><circle class="ring-circle-bg" cx="38" cy="38" r="30"/><circle class="ring-circle" cx="38" cy="38" r="30" style="stroke:' + s.color + '; stroke-dasharray:' + circumference + '; stroke-dashoffset:' + strokeDashoffset + ';"/></svg><div class="ring-text">' + pct + '%</div></div><div style="font-weight:700; font-size:12px; margin-bottom:2px;">' + s.name + '</div><div style="font-size:10px; color:#9ca3af; margin-bottom:8px;">' + formatMoney(s.current) + '</div><button class="demo-btn demo-btn-emerald" style="width:100%; justify-content:center; padding:4px 0; font-size:10px;" onclick="topUpSavings(\'' + s.id + '\')">+ Top Up</button></div>';
-    }).join('');
-  }
-
-  function handleAddTx(e) {
-    e.preventDefault();
-    const desc = document.getElementById('in-desc').value;
-    const cat = document.getElementById('in-cat').value;
-    const type = document.getElementById('in-type').value;
-    const amount = Number(document.getElementById('in-amount').value);
-
-    if (!desc || !amount) return;
-
-    transactions.unshift({ id: Date.now(), desc, cat, type, amount });
-    document.getElementById('in-desc').value = '';
-    document.getElementById('in-amount').value = '';
-
-    renderAll();
-    triggerSheetsSyncAnimation('Added "' + desc + '" → Syncing row to Google Sheet...');
-  }
-
-  function deleteTx(id) {
-    transactions = transactions.filter(t => t.id !== id);
-    renderAll();
-    triggerSheetsSyncAnimation('Deleted item → Updating Google Sheet...');
-  }
-
-  function topUpSavings(id) {
-    const item = savings.find(s => s.id === id);
-    if (item) {
-      item.current += 500000;
-      renderAll();
-      triggerSheetsSyncAnimation('Top-up ' + item.name + ' → Updated Savings sheet...');
-    }
-  }
-
-  function triggerSheetsSyncAnimation(msg) {
-    const pill = document.getElementById('sync-pill');
-    const desc = document.getElementById('sync-desc');
-
-    pill.textContent = '⚡ SYNCING...';
-    pill.style.background = 'rgba(99, 102, 241, 0.3)';
-    pill.style.color = '#a5b4fc';
-    desc.textContent = msg;
-
-    setTimeout(() => {
-      pill.textContent = '● SYNCED';
-      pill.style.background = 'rgba(16, 185, 129, 0.2)';
-      pill.style.color = '#10b981';
-      desc.textContent = 'Connected to Google Apps Script backend';
-    }, 1200);
-  }
-
-  let myChart = null;
-  function initChart() {
-    const ctx = document.getElementById('demoChart').getContext('2d');
-    if (myChart) myChart.destroy();
-
-    const config = currencyRates[currency];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-    const incData = [12000000, 14000000, 15000000, 13500000, 16000000, 15000000].map(v => Math.round(v * config.rate));
-    const expData = [5000000, 6200000, 5800000, 7100000, 6000000, 6250000].map(v => Math.round(v * config.rate));
-
-    myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: months,
-        datasets: [
-          { label: 'Income', data: incData, backgroundColor: 'rgba(16, 185, 129, 0.7)', borderRadius: 4 },
-          { label: 'Expenses', data: expData, backgroundColor: 'rgba(244, 63, 94, 0.7)', borderRadius: 4 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { labels: { color: '#9ca3af', font: { family: 'Inter', size: 11 } } } },
-        scales: {
-          x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 10 } } },
-          y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af', font: { size: 10 } } }
-        }
-      }
-    });
-  }
-
-  let currentTourStep = 0;
-  const tourSteps = [
-    { title: "STEP 1 / 4", msg: "✨ Welcome! Try clicking currency switchers (USD/IDR/EUR) or presets top right.", highlight: "step-card-balance" },
-    { title: "STEP 2 / 4", msg: "⚡ Real-time Calculation: Add a dummy transaction in the input form below to test live calculations!", highlight: "step-panel-add" },
-    { title: "STEP 3 / 4", msg: "🎯 Spending Caps: Watch progress bars automatically adjust when you add new expenses.", highlight: "step-panel-budgets" },
-    { title: "STEP 4 / 4", msg: "🏆 Savings Top-Up: Click '+ Top Up' on any goal to watch the progress ring fill up instantly!", highlight: "step-panel-savings" }
-  ];
-
-  function startTour() { currentTourStep = 0; showTourStep(); }
-  function nextTourStep() { currentTourStep = (currentTourStep + 1) % tourSteps.length; showTourStep(); }
-  function prevTourStep() { currentTourStep = (currentTourStep - 1 + tourSteps.length) % tourSteps.length; showTourStep(); }
-
-  function showTourStep() {
-    const step = tourSteps[currentTourStep];
-    document.getElementById('tour-step-tag').textContent = step.title;
-    document.getElementById('tour-step-msg').textContent = step.msg;
-
-    document.querySelectorAll('.panel, .stat-card').forEach(el => el.style.boxShadow = 'none');
-    const target = document.getElementById(step.highlight);
-    if (target) {
-      target.style.boxShadow = '0 0 25px rgba(99, 102, 241, 0.6)';
-      target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-
-  // FAQ Toggle
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const a = q.nextElementSibling;
-      const isOpen = a.style.display === 'block';
-      document.querySelectorAll('.faq-a').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('.faq-q span').forEach(el => el.textContent = '+');
-      a.style.display = isOpen ? 'none' : 'block';
-      q.querySelector('span').textContent = isOpen ? '+' : '−';
-    });
-    q.nextElementSibling.style.display = 'none';
-  });
-
-  window.onload = () => { renderAll(); };
+document.addEventListener("DOMContentLoaded", () => {
+  renderProdDemo();
+});
 </script>
+
 </body>
 </html>
