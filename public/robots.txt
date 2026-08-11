@@ -1,0 +1,27 @@
+# Robots.txt for BudgetFlow (Optimized for Search & AI Search Engines)
+User-agent: *
+Allow: /
+
+# Explicitly Allow AI Search Engines & LLM Indexers (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://personal-finance.mstudio.fun/sitemap.xml
