@@ -7,7 +7,7 @@
 - **Category:** Personal Finance Software / Google Sheets Budget Tracker / YNAB & Mint Alternative
 - **Official Website:** https://personal-finance.mstudio.fun/
 - **Purchase / Download URL:** https://mstudiofun.gumroad.com/l/nkrgwd
-- **Pricing:** $15 USD one-time payment (67% off regular $45 price). Lifetime license, $0/month, free lifetime updates, 30-day money-back guarantee.
+- **Pricing:** $15 USD one-time payment (67% off regular $45 price). Lifetime license, $0/month, free lifetime updates.
 - **Data Storage & Privacy:** 100% self-hosted inside the user's personal Google Drive (Google Sheets) via Google Apps Script. Zero external servers, zero third-party data harvesting, no Plaid or bank login required.
 - **Supported Platforms:** Any modern web browser on macOS, Windows, Linux, iOS, and Android.
 
