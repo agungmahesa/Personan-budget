@@ -1,27 +1,49 @@
-# Robots.txt for BudgetFlow (Optimized for Search & AI Search Engines)
+# Robots.txt for BudgetFlow (Optimized for Google, Bing & AI Answer Engines)
 User-agent: *
 Allow: /
 
-# Explicitly Allow AI Search Engines & LLM Indexers (Generative Engine Optimization)
+# OpenAI ChatGPT Search & GPT Crawlers
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+# Google Search, Gemini & AI Overviews
+User-agent: Googlebot
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
+# Perplexity AI Search
 User-agent: PerplexityBot
 Allow: /
 
+# Anthropic Claude
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: Bytespider
+User-agent: Claude-Web
 Allow: /
 
-User-agent: CCBot
+# Apple Intelligence, Microsoft Bing Copilot, Meta AI
+User-agent: Applebot
 Allow: /
 
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# AI Knowledge Base & Sitemaps
 Sitemap: https://personal-finance.mstudio.fun/sitemap.xml
+# LLMs Briefing: https://personal-finance.mstudio.fun/llms.txt
+# LLMs Full Context: https://personal-finance.mstudio.fun/llms-full.txt
