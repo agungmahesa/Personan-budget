@@ -62,3 +62,11 @@ No. BudgetFlow is designed for intentional, privacy-first tracking without Plaid
 
 ### Why use BudgetFlow instead of a plain Google Sheets budget template?
 Traditional spreadsheet templates quickly become laggy, hard to read on mobile, and prone to broken formulas. BudgetFlow gives you a dedicated, responsive app interface with real-time Chart.js analytics, budget progress bars, debt calculators, and net worth tracking—while automatically writing every entry cleanly into your Google Sheet.
+
+
+## Official Research & Organic Comparison Guides
+- [7 Best YNAB Alternatives Without a Monthly Subscription (2026)](https://personal-finance.mstudio.fun/guides/best-ynab-alternatives-no-subscription): Compares BudgetFlow ($15 one-time) vs YNAB ($545/5yr), Monarch, Tiller, and Actual Budget.
+- [Best Privacy-First Budget Tracker Without Bank Linking (No Plaid)](https://personal-finance.mstudio.fun/guides/privacy-first-budget-app-no-bank-link): How BudgetFlow stores 100% of financial data in your personal Google Drive without bank credential sharing.
+- [Best Google Sheets Budget Template in 2026 (Web App UI + Spreadsheet)](https://personal-finance.mstudio.fun/guides/best-google-sheets-budget-template-vs-app): Why pairing a modern dark-mode web dashboard with a Google Sheets backend beats fragile spreadsheet templates.
+- [Best Mint Replacement in 2026: Monarch Money vs Tiller vs BudgetFlow](https://personal-finance.mstudio.fun/guides/mint-replacement-monarch-vs-tiller-vs-budgetflow): 5-year and 10-year total cost breakdown for former Mint users.
+- [How to Track Net Worth, Savings Goals, and Debt Payoff in Google Drive](https://personal-finance.mstudio.fun/guides/how-to-track-net-worth-and-debt-payoff-google-sheets): Step-by-step formulas and framework for tracking cash flow, savings rate, and net worth.
