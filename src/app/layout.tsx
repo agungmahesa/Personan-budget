@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -45,7 +46,59 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* Meta Pixel Code */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1806486647139872');
+            fbq('track', 'PageView');
+
+            // Auto-track Checkout Clicks & Interactive Demo Engagement
+            document.addEventListener('click', function(e) {
+              var target = e.target.closest('a, button');
+              if (!target) return;
+              var href = target.getAttribute('href') || '';
+              if (href.indexOf('gumroad.com') !== -1) {
+                if (typeof window.fbq === 'function') {
+                  window.fbq('track', 'InitiateCheckout', {
+                    content_name: 'BudgetFlow Lifetime License',
+                    currency: 'USD',
+                    value: 15.00
+                  });
+                }
+              } else if (href.indexOf('#interactive-demo') !== -1 || target.classList.contains('demo-tab-btn')) {
+                if (typeof window.fbq === 'function') {
+                  window.fbq('track', 'ViewContent', {
+                    content_name: 'BudgetFlow Live Interactive Demo',
+                    currency: 'USD',
+                    value: 15.00
+                  });
+                }
+              }
+            });
+          `}
+        </Script>
+      </head>
+      <body className={inter.className}>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1806486647139872&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }
