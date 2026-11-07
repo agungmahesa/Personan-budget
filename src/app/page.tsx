@@ -172,7 +172,7 @@ export default function HomePage() {
 <title>BudgetFlow — Free Personal Finance Tracker Powered by Google Sheets</title>
 <meta name="description" content="Track income, expenses, budgets & net worth — all stored in YOUR Google Drive. No subscription. No data sharing. Free forever.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -526,6 +526,529 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1806486647139872&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+
+<style id="awwwards-elite-system">
+/* ==========================================================================
+   /awwwards — ELITE CREATIVE DIRECTION SYSTEM (DARK IMMERSIVE FINTECH)
+   Archetype: Dark Immersive + Emerald Precision (Mercury / Linear / Stripe)
+   ========================================================================== */
+:root {
+  /* Perceptual oklch() Dark Immersive Palette — Never Pure #000 or #fff */
+  --bg-primary: oklch(0.12 0.012 260);
+  --bg-surface: oklch(0.155 0.014 260);
+  --bg-elevated: oklch(0.19 0.016 260);
+  --bg-glass: oklch(0.15 0.015 260 / 0.78);
+
+  /* 4+ Text Gray Hierarchy Levels */
+  --text-primary: oklch(0.96 0.005 260);
+  --text-secondary: oklch(0.72 0.012 260);
+  --text-tertiary: oklch(0.54 0.012 260);
+  --text-disabled: oklch(0.38 0.01 260);
+
+  /* Accent System (Max 2 Accents: Electric Emerald + Cyan-Blue) */
+  --accent: oklch(0.74 0.18 155);
+  --accent-strong: oklch(0.65 0.19 155);
+  --accent-muted: oklch(0.74 0.18 155 / 0.14);
+  --accent-secondary: oklch(0.68 0.16 245);
+  --status-danger: oklch(0.65 0.22 20);
+
+  /* Borders & Hairlines */
+  --border-subtle: oklch(0.96 0 0 / 0.07);
+  --border-hover: oklch(0.74 0.18 155 / 0.38);
+
+  /* Typography Families */
+  --font-display: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Fluid Clamp() Typography Scale */
+  --text-display: clamp(2.65rem, 5.5vw + 1rem, 5.25rem);
+  --text-h1: clamp(2.1rem, 4vw + 0.75rem, 3.75rem);
+  --text-h2: clamp(1.75rem, 2.8vw + 0.5rem, 2.85rem);
+  --text-h3: clamp(1.15rem, 1.2vw + 0.5rem, 1.45rem);
+  --text-body-lg: clamp(1.05rem, 0.5vw + 0.85rem, 1.25rem);
+
+  /* Motion Easing Curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.011em;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle Film Noise Overlay for Tactile Craft */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Display Headings & Balance */
+h1, h2, h3, .section-title, .logo {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Monospace Tabular Numbers for All Financial Metrics */
+#ui-income, #ui-expense, #ui-balance, #ui-networth,
+.price-now, .price-orig, .step-num, .scarcity-bar span,
+#ui-recent-tx-rows td:last-child, #ui-all-tx-rows td:last-child,
+#ui-debts-rows td:nth-child(2), #ui-debts-rows td:nth-child(3),
+#ui-assets-rows td:nth-child(3) {
+  font-family: var(--font-mono) !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Top Announcement Bar — Sleek Emerald/Dark Glass instead of Generic Red */
+.scarcity-bar {
+  background: linear-gradient(90deg, oklch(0.16 0.03 160), oklch(0.14 0.02 250)) !important;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase;
+  padding: 0.65rem 1rem !important;
+}
+.scarcity-bar span {
+  background: var(--accent-muted) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--border-hover);
+  font-weight: 800;
+  padding: 0.15rem 0.55rem !important;
+  border-radius: 6px !important;
+}
+
+/* Floating Glassmorphic Navigation */
+nav {
+  background: var(--bg-glass) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  padding: 1rem clamp(1.25rem, 5vw, 4rem) !important;
+  isolation: isolate;
+}
+.logo {
+  font-size: 1.35rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.04em !important;
+}
+.nav-links .btn-secondary {
+  background: oklch(0.2 0.015 260 / 0.7) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  backdrop-filter: blur(8px);
+}
+.nav-links .btn-secondary:hover {
+  border-color: var(--border-hover) !important;
+  color: var(--accent) !important;
+  transform: translateY(-1px);
+}
+.nav-cta {
+  background: var(--accent) !important;
+  color: oklch(0.12 0.02 160) !important;
+  font-weight: 800 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 25px oklch(0.74 0.18 155 / 0.3);
+  transition: transform 0.25s var(--ease-out-expo), box-shadow 0.25s var(--ease-out-expo) !important;
+}
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px oklch(0.74 0.18 155 / 0.5);
+}
+
+/* Hero Section — Atmospheric Radial Mesh + Architectural Grid */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.74 0.18 155 / 0.16), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 20%, oklch(0.68 0.16 245 / 0.12), transparent 55%),
+    var(--bg-primary) !important;
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 4vw, 3rem) clamp(4rem, 7vw, 6rem) !important;
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, oklch(0.96 0 0 / 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.96 0 0 / 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 25%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 25%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+.hero-badge {
+  background: var(--accent-muted) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--border-hover);
+  font-family: var(--font-mono);
+  font-size: 0.72rem !important;
+  letter-spacing: 0.1em !important;
+  padding: 0.45rem 1.1rem !important;
+  box-shadow: 0 0 30px oklch(0.74 0.18 155 / 0.15);
+}
+.hero h1 {
+  font-size: var(--text-display) !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.035em !important;
+  max-width: 18ch !important;
+  color: var(--text-primary) !important;
+  margin-bottom: 1.5rem !important;
+}
+.hero p {
+  font-size: var(--text-body-lg) !important;
+  color: var(--text-secondary) !important;
+  max-width: 58ch !important;
+  line-height: 1.6 !important;
+}
+.btn-primary {
+  background: var(--accent) !important;
+  color: oklch(0.11 0.02 160) !important;
+  font-weight: 800 !important;
+  padding: 1rem 2.2rem !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 35px -8px oklch(0.74 0.18 155 / 0.55);
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo) !important;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.01) !important;
+  box-shadow: 0 18px 45px -8px oklch(0.74 0.18 155 / 0.75) !important;
+}
+.hero .btn-secondary {
+  background: var(--bg-surface) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  padding: 1rem 2.2rem !important;
+  border-radius: 12px !important;
+  transition: all 0.3s var(--ease-out-expo) !important;
+}
+.hero .btn-secondary:hover {
+  border-color: var(--border-hover) !important;
+  background: var(--bg-elevated) !important;
+  color: var(--accent) !important;
+  transform: translateY(-3px);
+}
+.hero-note {
+  font-family: var(--font-mono);
+  font-size: 0.76rem !important;
+  color: var(--text-tertiary) !important;
+  letter-spacing: 0.02em;
+  margin-top: 0.75rem;
+}
+
+/* Interactive Demo Showcase — Ambient Aura & Studio Craft */
+.demo-section {
+  margin-top: clamp(3.5rem, 6vw, 5.5rem) !important;
+}
+.demo-title-box h2 {
+  color: var(--text-primary) !important;
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem) !important;
+  letter-spacing: -0.025em;
+}
+.demo-title-box p {
+  color: var(--text-secondary) !important;
+}
+.demo-wrapper {
+  border: 1px solid oklch(0.96 0 0 / 0.12) !important;
+  box-shadow:
+    0 30px 90px -20px oklch(0 0 0 / 0.85),
+    0 0 60px -15px oklch(0.74 0.18 155 / 0.18) !important;
+  transition: border-color 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
+}
+.demo-wrapper:hover {
+  border-color: oklch(0.74 0.18 155 / 0.28) !important;
+}
+
+/* Section Rhythm & Editorial Hierarchy */
+.section-label {
+  font-family: var(--font-mono) !important;
+  font-size: 0.74rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase;
+  color: var(--accent) !important;
+  margin-bottom: 0.85rem !important;
+}
+.section-title {
+  font-size: var(--text-h2) !important;
+  color: var(--text-primary) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.03em !important;
+}
+.section-sub {
+  color: var(--text-secondary) !important;
+  font-size: 1.05rem !important;
+  max-width: 60ch !important;
+}
+
+/* Varied Section Backgrounds & Paddings (Anti-Template Rhythm) */
+.pain {
+  background: var(--bg-primary) !important;
+  padding: clamp(5rem, 9vw, 8.5rem) 2rem !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.how {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, oklch(0.68 0.16 245 / 0.07), transparent 70%),
+    var(--bg-surface) !important;
+  padding: clamp(5.5rem, 10vw, 9rem) 2rem !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.features {
+  background: var(--bg-primary) !important;
+  padding: clamp(6rem, 11vw, 10rem) 2rem !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.compare {
+  background: var(--bg-surface) !important;
+  padding: clamp(5.5rem, 10vw, 9rem) 2rem !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.pricing {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, oklch(0.74 0.18 155 / 0.12), transparent 65%),
+    var(--bg-primary) !important;
+  padding: clamp(6rem, 11vw, 10rem) 2rem !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.testi {
+  background: var(--bg-surface) !important;
+  padding: clamp(5rem, 9vw, 8.5rem) 2rem !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.faq {
+  background: var(--bg-primary) !important;
+  padding: clamp(5rem, 9vw, 8.5rem) 2rem !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Bento Grid & Asymmetric Feature Cards */
+.pain-card, .feat-card, .testi-card, .step {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 18px !important;
+  padding: 2rem !important;
+  transition: transform 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo) !important;
+  position: relative;
+  overflow: hidden;
+}
+.how .step, .testi .testi-card {
+  background: var(--bg-elevated) !important;
+}
+.pain-card:hover, .feat-card:hover, .testi-card:hover, .step:hover {
+  transform: translateY(-6px) !important;
+  border-color: var(--border-hover) !important;
+  box-shadow: 0 20px 45px -15px oklch(0 0 0 / 0.7), 0 0 30px -10px oklch(0.74 0.18 155 / 0.15) !important;
+}
+.pain-card h3, .feat-card h3, .step h3, .testi-name {
+  color: var(--text-primary) !important;
+  font-size: var(--text-h3) !important;
+  letter-spacing: -0.02em;
+}
+.pain-card p, .feat-card p, .step p, .testi-card p, .testi-role {
+  color: var(--text-secondary) !important;
+}
+
+/* Asymmetric Bento Span on Desktop for Features */
+@media (min-width: 900px) {
+  .feat-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    max-width: 1080px !important;
+  }
+  .feat-card:nth-child(1),
+  .feat-card:nth-child(4),
+  .feat-card:nth-child(5),
+  .feat-card:nth-child(8) {
+    grid-column: span 2;
+  }
+}
+
+.feat-icon.green { background: oklch(0.74 0.18 155 / 0.15) !important; border: 1px solid oklch(0.74 0.18 155 / 0.3); }
+.feat-icon.blue { background: oklch(0.68 0.16 245 / 0.15) !important; border: 1px solid oklch(0.68 0.16 245 / 0.3); }
+.feat-icon.purple { background: oklch(0.68 0.18 300 / 0.15) !important; border: 1px solid oklch(0.68 0.18 300 / 0.3); }
+.feat-icon.orange { background: oklch(0.75 0.16 70 / 0.15) !important; border: 1px solid oklch(0.75 0.16 70 / 0.3); }
+
+/* Comparison Matrix Table — Dark Glass & Precision Typography */
+.compare-table {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: 0 25px 60px -15px oklch(0 0 0 / 0.6);
+  overflow-x: auto !important;
+}
+.compare-table th {
+  background: var(--bg-elevated) !important;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-mono);
+  font-size: 0.75rem !important;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+.compare-table th.highlight {
+  background: var(--accent-muted) !important;
+  color: var(--accent) !important;
+}
+.compare-table td {
+  color: var(--text-secondary) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+.compare-table td.feature {
+  color: var(--text-primary) !important;
+}
+.compare-table .yes {
+  color: var(--accent) !important;
+  font-family: var(--font-mono);
+}
+.compare-table .no {
+  color: var(--status-danger) !important;
+  font-family: var(--font-mono);
+}
+
+/* Executive Summary GEO Box inside Dark Theme */
+#comparison > div:last-child {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+#comparison > div:last-child h3 {
+  color: var(--text-primary) !important;
+}
+#comparison > div:last-child p {
+  color: var(--text-secondary) !important;
+}
+#comparison > div:last-child > div:last-child > div {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-secondary) !important;
+}
+#comparison > div:last-child > div:last-child > div strong {
+  color: var(--text-primary) !important;
+}
+
+/* Pricing Card — Conic Glow Aura & High-Craft FinTech Card */
+.price-card {
+  background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-surface) 100%) !important;
+  border: 1px solid var(--border-hover) !important;
+  border-radius: 24px !important;
+  box-shadow:
+    0 30px 80px -15px oklch(0 0 0 / 0.8),
+    0 0 50px -10px oklch(0.74 0.18 155 / 0.25) !important;
+  position: relative;
+}
+.price-badge {
+  background: var(--accent-muted) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--border-hover);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+}
+.price-now {
+  color: var(--text-primary) !important;
+  font-size: clamp(3.5rem, 6vw, 4.75rem) !important;
+}
+.price-feat {
+  color: var(--text-secondary) !important;
+}
+.price-cta {
+  background: var(--accent) !important;
+  color: oklch(0.11 0.02 160) !important;
+  border-radius: 12px !important;
+  font-weight: 900 !important;
+  box-shadow: 0 12px 35px -8px oklch(0.74 0.18 155 / 0.55);
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo) !important;
+}
+.price-cta:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 18px 45px -8px oklch(0.74 0.18 155 / 0.8) !important;
+}
+
+/* FAQ Section */
+.faq-item {
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+.faq-q {
+  color: var(--text-primary) !important;
+  font-family: var(--font-display);
+  font-size: 1.08rem !important;
+  transition: color 0.2s ease;
+}
+.faq-q:hover {
+  color: var(--accent) !important;
+}
+.faq-q span {
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+.faq-a {
+  color: var(--text-secondary) !important;
+}
+
+/* Final CTA & Footer */
+.final-cta {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 100%, oklch(0.74 0.18 155 / 0.22), transparent 65%),
+    var(--bg-surface) !important;
+  border-top: 1px solid var(--border-subtle);
+}
+.btn-white {
+  background: var(--accent) !important;
+  color: oklch(0.11 0.02 160) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 15px 40px -8px oklch(0.74 0.18 155 / 0.55);
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo) !important;
+}
+.btn-white:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 20px 50px -8px oklch(0.74 0.18 155 / 0.8) !important;
+}
+footer {
+  background: var(--bg-primary) !important;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-tertiary) !important;
+}
+
+/* Scroll-Driven Stagger Reveal Animations (60fps GPU Accelerated) */
+@media (prefers-reduced-motion: no-preference) {
+  .aww-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s var(--ease-out-expo), transform 0.75s var(--ease-out-expo);
+    will-change: opacity, transform;
+  }
+  .aww-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1180,6 +1703,48 @@ function handleQuickAdd(e) {
 document.addEventListener("DOMContentLoaded", () => {
   renderProdDemo();
 });
+</script>
+
+
+<script id="awwwards-motion-engine">
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function initAwwwardsMotion() {
+    const selectors = [
+      '.hero-badge', '.hero h1', '.hero p', '.cta-group', '.demo-section',
+      '.section-label', '.section-title', '.section-sub',
+      '.pain-card', '.step', '.feat-card', '.compare-table',
+      '.price-card', '.testi-card', '.faq-item'
+    ];
+    const elements = document.querySelectorAll(selectors.join(','));
+    elements.forEach((el, index) => {
+      el.classList.add('aww-reveal');
+      // Subtle stagger within sibling groups
+      const siblingIndex = Array.from(el.parentNode ? el.parentNode.children : []).indexOf(el);
+      if (siblingIndex > 0 && siblingIndex < 10) {
+        el.style.transitionDelay = (siblingIndex * 65) + 'ms';
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAwwwardsMotion);
+  } else {
+    initAwwwardsMotion();
+  }
+})();
 </script>
 
 </body>
