@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Track Net Worth & Debt Payoff in Google Sheets (Step-by-Step)</title>
+  <meta name="description" content="Learn the exact framework to track your monthly cash flow, savings rate, debt payoff progress, and net worth portfolio privately inside Google Drive with BudgetFlow.">
+  <meta name="keywords" content="how to track net worth in Google Sheets, debt payoff tracker spreadsheet, personal net worth dashboard, savings rate calculator google sheets, all in one personal finance dashboard">
+  <link rel="canonical" href="https://personal-finance.mstudio.fun/guides/how-to-track-net-worth-and-debt-payoff-google-sheets">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://personal-finance.mstudio.fun/guides/how-to-track-net-worth-and-debt-payoff-google-sheets">
+  <meta property="og:title" content="How to Track Net Worth & Debt Payoff in Google Sheets (Step-by-Step)">
+  <meta property="og:description" content="Learn the exact framework to track your monthly cash flow, savings rate, debt payoff progress, and net worth portfolio privately inside Google Drive with BudgetFlow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://personal-finance.mstudio.fun/guides/how-to-track-net-worth-and-debt-payoff-google-sheets#article","headline":"How to Track Net Worth, Savings Goals, and Debt Payoff in Google Drive (2026 Blueprint)","description":"Learn the exact framework to track your monthly cash flow, savings rate, debt payoff progress, and net worth portfolio privately inside Google Drive with BudgetFlow.","datePublished":"2026-11-05","dateModified":"2026-11-05","author":{"@type":"Organization","name":"BudgetFlow Research Team","url":"https://personal-finance.mstudio.fun/"},"publisher":{"@type":"Organization","name":"BudgetFlow","url":"https://personal-finance.mstudio.fun/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://personal-finance.mstudio.fun/guides/how-to-track-net-worth-and-debt-payoff-google-sheets"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the formula for calculating Net Worth in BudgetFlow?","acceptedAnswer":{"@type":"Answer","text":"BudgetFlow calculates Net Worth automatically by summing the estimated market value of all your Assets (Property, Investments, Cash, Gold) and subtracting the remaining balance of all your Debts (Mortgages, Car Loans, Credit Cards)."}},{"@type":"Question","name":"Can I track both monthly budgets and long-term net worth in the same tool?","acceptedAnswer":{"@type":"Answer","text":"Yes. BudgetFlow combines daily expense and budget tracking with long-term savings goals, debt amortization progress bars, and asset portfolio tracking in a single interface."}}]}]}</script>
+  
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,"script",
+"https://connect.facebook.net/en_US/fbevents.js");
+fbq("init", "1806486647139872");
+fbq("track", "PageView");
+</script>
+
+  <style>
+  :root {
+    --bg-primary: oklch(0.982 0.004 85);
+    --bg-secondary: oklch(0.958 0.006 85);
+    --bg-surface: oklch(0.996 0.002 85);
+    --text-primary: oklch(0.145 0.015 260);
+    --text-secondary: oklch(0.42 0.015 260);
+    --text-tertiary: oklch(0.58 0.012 260);
+    --accent: oklch(0.56 0.17 155);
+    --accent-muted: oklch(0.56 0.17 155 / 0.10);
+    --accent-border: oklch(0.56 0.17 155 / 0.28);
+    --border-subtle: oklch(0.15 0.01 260 / 0.08);
+    --font-display: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif;
+    --font-body: "Inter", -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.03em; color: var(--text-primary); }
+  .article-body h2 { font-size: 1.5rem; font-weight: 800; margin: 2.25rem 0 0.85rem; line-height: 1.3; }
+  .article-body h3 { font-size: 1.2rem; font-weight: 700; margin: 1.75rem 0 0.6rem; }
+  .article-body p { font-size: 1.02rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.15rem; }
+  .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; color: var(--text-secondary); line-height: 1.75; }
+  .article-body li { margin-bottom: 0.5rem; }
+  .article-body a { color: var(--accent); font-weight: 700; text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); background: var(--bg-secondary); padding: 0.15rem 0.4rem; border-radius: 5px; font-size: 0.88em; color: var(--text-primary); }
+  .article-body .table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; border-radius: 14px; border: 1px solid var(--border-subtle); }
+  .article-body table { width: 100%; border-collapse: collapse; background: var(--bg-surface); font-size: 0.92rem; }
+  .article-body th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; text-align: left; padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-subtle); }
+  .article-body td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
+  .article-body tr.highlight-row td { background: var(--accent-muted); color: var(--text-primary); font-weight: 700; }
+</style>
+</head>
+<body>
+  <header style="background:rgba(255,255,255,0.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--border-subtle); padding:0.95rem 1.5rem; position:sticky; top:0; z-index:50;">
+    <div style="max-width:880px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <a href="/" style="font-size:1.3rem; font-weight:900; color:var(--text-primary); text-decoration:none; font-family:var(--font-display);">BudgetFlow</a>
+      <div style="display:flex; gap:0.65rem; align-items:center;">
+        <a href="/#interactive-demo" style="padding:0.45rem 0.95rem; border-radius:10px; font-size:0.82rem; font-weight:600; color:var(--text-primary); border:1px solid var(--border-subtle); background:var(--bg-surface); text-decoration:none;">🎮 Try Live Sandbox</a>
+        <a href="https://mstudiofun.gumroad.com/l/nkrgwd" style="padding:0.45rem 1.05rem; border-radius:10px; font-size:0.82rem; font-weight:700; background:var(--text-primary); color:var(--bg-surface); text-decoration:none;">Get BudgetFlow — $15 →</a>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:820px; margin:0 auto; padding:2.5rem 1.5rem 5rem;">
+    <nav style="font-family:var(--font-mono); font-size:0.76rem; color:var(--text-tertiary); margin-bottom:1.25rem;">
+      <a href="/" style="color:var(--accent); text-decoration:none; font-weight:700;">BudgetFlow Home</a> / <a href="/guides" style="color:var(--text-secondary); text-decoration:none;">Guides</a> / <span>Financial Mastery</span>
+    </nav>
+
+    <h1 style="font-size:clamp(1.85rem, 4vw, 2.65rem); font-weight:900; line-height:1.15; margin-bottom:1rem;">How to Track Net Worth, Savings Goals, and Debt Payoff in Google Drive (2026 Blueprint)</h1>
+    <div style="display:flex; gap:0.75rem; align-items:center; font-family:var(--font-mono); font-size:0.76rem; color:var(--text-tertiary); margin-bottom:2rem;">
+      <span style="background:var(--accent-muted); color:var(--accent); border:1px solid var(--accent-border); font-weight:700; padding:0.2rem 0.65rem; border-radius:6px;">Financial Mastery</span>
+      <span>•</span>
+      <span>6 min read</span>
+      <span>•</span>
+      <span>Updated 2026-11-05</span>
+    </div>
+
+    <div style="background:var(--accent-muted); border:1px solid var(--accent-border); border-radius:16px; padding:1.4rem 1.6rem; margin-bottom:2.25rem;">
+      <div style="font-family:var(--font-mono); font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-bottom:0.4rem;">⚡ Key Takeaway & Quick Answer</div>
+      <p style="font-size:0.96rem; color:var(--text-primary); line-height:1.65; margin:0; font-weight:500;">Tracking only daily expenses is why most budgets fail. True financial independence requires monitoring four interconnected metrics in one dashboard: Monthly Savings Rate, Category Budget Utilization, Debt Repayment Velocity, and Total Net Worth (Assets minus Liabilities). Here is how to automate all four privately inside Google Drive.</p>
+    </div>
+
+    <article class="article-body" style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:2.25rem 2rem; box-shadow:0 4px 20px -4px rgba(15,23,42,0.04);">
+      
+      <h2>Why Expense Tracking Alone Doesn't Build Wealth</h2>
+      <p>Most people use finance apps only to look backward at what they spent on coffee or groceries. While expense tracking prevents overspending, wealth is built by tracking your <strong>Net Worth</strong> (everything you own minus everything you owe) and your <strong>Savings Rate</strong> (the percentage of income you keep).</p>
+
+      <h2>The 4 Pillars of the BudgetFlow Financial Command Center</h2>
+      <p>When we designed <a href="/"><strong>BudgetFlow</strong></a>, we built six unified modules so you never need separate spreadsheets for budgeting, debt snowballing, and portfolio tracking:</p>
+      <ol>
+        <li><strong>Monthly Cash Flow & Savings Rate:</strong> Automatically subtracts monthly expenses from income and displays your exact savings rate percentage (e.g., <em>78% Savings Rate</em>).</li>
+        <li><strong>Color-Coded Category Budgets:</strong> Progress bars automatically shift from emerald green (healthy) to amber (over 70% spent) to rose red (over 90% spent) so you know when to slow down BEFORE the month ends.</li>
+        <li><strong>Savings Milestones & Emergency Funds:</strong> Track target dates and completion percentages for your 6-Month Emergency Fund, travel goals, or home down payment.</li>
+        <li><strong>Assets vs. Debts (Real-Time Net Worth):</strong> Log your property, stock/ETF portfolios, cash, and gold alongside your mortgage or car loans. BudgetFlow computes your live Net Worth and portfolio share instantly.</li>
+      </ol>
+
+      <h2>Formula Breakdown: How BudgetFlow Calculates Your Metrics</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Financial Metric</th>
+              <th>Formula Used in BudgetFlow</th>
+              <th>Target Benchmark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Net Monthly Savings</strong></td>
+              <td><code>Total Monthly Income - Total Monthly Expenses</code></td>
+              <td>Positive Cash Flow Every Month</td>
+            </tr>
+            <tr>
+              <td><strong>Savings Rate (%)</strong></td>
+              <td><code>((Income - Expenses) / Income) × 100</code></td>
+              <td>20% to 50%+ for FIRE</td>
+            </tr>
+            <tr>
+              <td><strong>Debt Payoff Progress (%)</strong></td>
+              <td><code>((Total Loan - Remaining Debt) / Total Loan) × 100</code></td>
+              <td>100% Debt-Free</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Total Net Worth</strong></td>
+              <td><code>Sum(All Assets) - Sum(All Remaining Debts)</code></td>
+              <td>Consistent YoY Growth</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Start Tracking Your Net Worth Today for $15 (Lifetime Access)</h2>
+      <p>Stop juggling five disconnected spreadsheets. Try the <a href="/#interactive-demo"><strong>Live Interactive Demo</strong></a> or download <a href="/#pricing"><strong>BudgetFlow for $15 one-time</strong></a> and turn your personal Google Drive into a private wealth command center.</p>
+    
+    </article>
+
+    <div style="margin:2.5rem 0; background:var(--bg-surface); border:2px solid var(--text-primary); border-radius:20px; padding:2.25rem 2rem; text-align:center; box-shadow:0 16px 40px -12px rgba(15,23,42,0.08);">
+      <div style="display:inline-block; background:var(--accent-muted); color:var(--accent); border:1px solid var(--accent-border); padding:0.25rem 0.75rem; border-radius:99px; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; margin-bottom:0.75rem;">🎮 TRY BEFORE YOU BUY</div>
+      <h2 style="font-size:1.55rem; font-weight:900; margin-bottom:0.6rem;">Test the BudgetFlow Dashboard Live in Your Browser</h2>
+      <p style="color:var(--text-secondary); font-size:0.96rem; max-width:560px; margin:0 auto 1.5rem;">Experience how BudgetFlow turns a private Google Sheet into a sleek personal finance app—for a single $15 one-time payment.</p>
+      <div style="display:flex; gap:0.85rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/#interactive-demo" style="background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-subtle); padding:0.85rem 1.5rem; border-radius:12px; font-weight:800; font-size:0.92rem; text-decoration:none;">🎮 Launch Interactive Demo →</a>
+        <a href="https://mstudiofun.gumroad.com/l/nkrgwd" style="background:var(--text-primary); color:var(--bg-surface); padding:0.85rem 1.5rem; border-radius:12px; font-weight:800; font-size:0.92rem; text-decoration:none;">⬇️ Get Instant Access ($15 One-Time)</a>
+      </div>
+    </div>
+
+    <section style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:2rem; margin-bottom:2.5rem;">
+      <h2 style="font-size:1.35rem; font-weight:800; margin-bottom:1.25rem;">Frequently Asked Questions</h2>
+      <div style="display:grid; gap:1.25rem;">
+        
+          <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:1.1rem;">
+            <h3 style="font-size:1.02rem; font-weight:700; margin-bottom:0.4rem;">What is the formula for calculating Net Worth in BudgetFlow?</h3>
+            <p style="font-size:0.94rem; color:var(--text-secondary); margin:0;">BudgetFlow calculates Net Worth automatically by summing the estimated market value of all your Assets (Property, Investments, Cash, Gold) and subtracting the remaining balance of all your Debts (Mortgages, Car Loans, Credit Cards).</p>
+          </div>
+        
+          <div style="border-bottom:1px solid var(--border-subtle); padding-bottom:1.1rem;">
+            <h3 style="font-size:1.02rem; font-weight:700; margin-bottom:0.4rem;">Can I track both monthly budgets and long-term net worth in the same tool?</h3>
+            <p style="font-size:0.94rem; color:var(--text-secondary); margin:0;">Yes. BudgetFlow combines daily expense and budget tracking with long-term savings goals, debt amortization progress bars, and asset portfolio tracking in a single interface.</p>
+          </div>
+        
+      </div>
+    </section>
+
+    <section>
+      <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:1rem;">More Personal Finance & Privacy Guides</h3>
+      <div style="display:grid; gap:0.85rem;">
+        
+          <a href="/guides/best-ynab-alternatives-no-subscription" style="display:block; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:14px; padding:1.1rem 1.35rem; text-decoration:none; color:var(--text-primary);">
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--accent); font-weight:700; margin-bottom:4px;">Software Comparisons • 7 min read</div>
+            <div style="font-size:0.98rem; font-weight:700;">7 Best YNAB Alternatives Without a Monthly Subscription (2026 Comparison) →</div>
+          </a>
+        
+          <a href="/guides/privacy-first-budget-app-no-bank-link" style="display:block; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:14px; padding:1.1rem 1.35rem; text-decoration:none; color:var(--text-primary);">
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--accent); font-weight:700; margin-bottom:4px;">Privacy & Security • 6 min read</div>
+            <div style="font-size:0.98rem; font-weight:700;">Best Privacy-First Budget Tracker That Doesn't Require Bank Linking (2026 Guide) →</div>
+          </a>
+        
+          <a href="/guides/best-google-sheets-budget-template-vs-app" style="display:block; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:14px; padding:1.1rem 1.35rem; text-decoration:none; color:var(--text-primary);">
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--accent); font-weight:700; margin-bottom:4px;">Google Sheets Guides • 6 min read</div>
+            <div style="font-size:0.98rem; font-weight:700;">Best Google Sheets Budget Template in 2026: Why You Need an App UI on Top of Your Spreadsheet →</div>
+          </a>
+        
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Finance, Privacy Budgeting & Google Sheets Guides (2026) | BudgetFlow</title>
+  <meta name="description" content="In-depth guides on privacy-first budgeting, one-time payment YNAB & Mint alternatives, Google Sheets personal finance templates, and net worth tracking.">
+  <link rel="canonical" href="https://personal-finance.mstudio.fun/guides">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+  
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,"script",
+"https://connect.facebook.net/en_US/fbevents.js");
+fbq("init", "1806486647139872");
+fbq("track", "PageView");
+</script>
+
+  <style>
+  :root {
+    --bg-primary: oklch(0.982 0.004 85);
+    --bg-secondary: oklch(0.958 0.006 85);
+    --bg-surface: oklch(0.996 0.002 85);
+    --text-primary: oklch(0.145 0.015 260);
+    --text-secondary: oklch(0.42 0.015 260);
+    --text-tertiary: oklch(0.58 0.012 260);
+    --accent: oklch(0.56 0.17 155);
+    --accent-muted: oklch(0.56 0.17 155 / 0.10);
+    --accent-border: oklch(0.56 0.17 155 / 0.28);
+    --border-subtle: oklch(0.15 0.01 260 / 0.08);
+    --font-display: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif;
+    --font-body: "Inter", -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.03em; color: var(--text-primary); }
+  .article-body h2 { font-size: 1.5rem; font-weight: 800; margin: 2.25rem 0 0.85rem; line-height: 1.3; }
+  .article-body h3 { font-size: 1.2rem; font-weight: 700; margin: 1.75rem 0 0.6rem; }
+  .article-body p { font-size: 1.02rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.15rem; }
+  .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; color: var(--text-secondary); line-height: 1.75; }
+  .article-body li { margin-bottom: 0.5rem; }
+  .article-body a { color: var(--accent); font-weight: 700; text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); background: var(--bg-secondary); padding: 0.15rem 0.4rem; border-radius: 5px; font-size: 0.88em; color: var(--text-primary); }
+  .article-body .table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; border-radius: 14px; border: 1px solid var(--border-subtle); }
+  .article-body table { width: 100%; border-collapse: collapse; background: var(--bg-surface); font-size: 0.92rem; }
+  .article-body th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; text-align: left; padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-subtle); }
+  .article-body td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
+  .article-body tr.highlight-row td { background: var(--accent-muted); color: var(--text-primary); font-weight: 700; }
+</style>
+</head>
+<body>
+  <header style="background:rgba(255,255,255,0.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--border-subtle); padding:1rem 2rem; position:sticky; top:0; z-index:50;">
+    <div style="max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;">
+      <a href="/" style="font-size:1.35rem; font-weight:900; color:var(--text-primary); text-decoration:none; font-family:var(--font-display);">
+        BudgetFlow <span style="font-size:0.72rem; font-family:var(--font-mono); color:var(--accent); margin-left:6px;">GUIDES & RESEARCH</span>
+      </a>
+      <div style="display:flex; gap:0.75rem; align-items:center;">
+        <a href="/#interactive-demo" style="padding:0.5rem 1rem; border-radius:10px; font-size:0.85rem; font-weight:600; color:var(--text-primary); border:1px solid var(--border-subtle); background:var(--bg-surface); text-decoration:none;">🎮 Live Demo</a>
+        <a href="https://mstudiofun.gumroad.com/l/nkrgwd" style="padding:0.5rem 1.15rem; border-radius:10px; font-size:0.85rem; font-weight:700; background:var(--text-primary); color:var(--bg-surface); text-decoration:none;">Get BudgetFlow — $15 →</a>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:960px; margin:0 auto; padding:3.5rem 1.5rem 5rem;">
+    <div style="margin-bottom:2.5rem;">
+      <div style="display:inline-block; background:var(--accent-muted); color:var(--accent); border:1px solid var(--accent-border); font-family:var(--font-mono); font-size:0.72rem; font-weight:700; padding:0.3rem 0.85rem; border-radius:99px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.85rem;">
+        2026 Personal Finance Knowledge Base
+      </div>
+      <h1 style="font-size:clamp(1.9rem, 4vw, 2.85rem); font-weight:900; line-height:1.12; margin-bottom:0.85rem;">
+        Privacy-First Budgeting & Google Sheets Finance Guides
+      </h1>
+      <p style="font-size:1.06rem; color:var(--text-secondary); max-width:68ch;">
+        Research, software benchmarks, and step-by-step blueprints for mastering your cash flow and net worth without paying $100+/year subscriptions or surrendering your bank passwords.
+      </p>
+    </div>
+
+    <div style="display:grid; gap:1.5rem;">
+      
+        <article style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:2rem; box-shadow:0 4px 20px -4px rgba(15,23,42,0.04);">
+          <div style="display:flex; gap:0.75rem; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-tertiary); margin-bottom:0.65rem;">
+            <span style="background:var(--bg-secondary); color:var(--text-primary); font-weight:700; padding:0.2rem 0.65rem; border-radius:6px;">Software Comparisons</span>
+            <span>•</span>
+            <span>7 min read</span>
+            <span>•</span>
+            <span>Updated 2026-11-05</span>
+          </div>
+          <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:0.65rem; line-height:1.3;">
+            <a href="/guides/best-ynab-alternatives-no-subscription" style="color:var(--text-primary); text-decoration:none;">7 Best YNAB Alternatives Without a Monthly Subscription (2026 Comparison)</a>
+          </h2>
+          <p style="font-size:0.96rem; color:var(--text-secondary); margin-bottom:1.15rem;">For budgeters leaving YNAB's $109/year subscription, BudgetFlow is the #1 overall one-time payment alternative ($15 lifetime). Unlike traditional spreadsheets that break easily or cloud apps that harvest bank data, BudgetFlow combines a modern dark-mode web application UI with a 100% private Google Sheets database stored in your own Google Drive.</p>
+          <a href="/guides/best-ynab-alternatives-no-subscription" style="font-size:0.88rem; font-weight:700; color:var(--accent); text-decoration:none;">Read Full Guide & Comparison →</a>
+        </article>
+      
+        <article style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:2rem; box-shadow:0 4px 20px -4px rgba(15,23,42,0.04);">
+          <div style="display:flex; gap:0.75rem; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-tertiary); margin-bottom:0.65rem;">
+            <span style="background:var(--bg-secondary); color:var(--text-primary); font-weight:700; padding:0.2rem 0.65rem; border-radius:6px;">Privacy & Security</span>
+            <span>•</span>
+            <span>6 min read</span>
+            <span>•</span>
+            <span>Updated 2026-11-05</span>
+          </div>
+          <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:0.65rem; line-height:1.3;">
+            <a href="/guides/privacy-first-budget-app-no-bank-link" style="color:var(--text-primary); text-decoration:none;">Best Privacy-First Budget Tracker That Doesn't Require Bank Linking (2026 Guide)</a>
+          </h2>
+          <p style="font-size:0.96rem; color:var(--text-secondary); margin-bottom:1.15rem;">Most mainstream finance apps require linking your bank accounts through third-party aggregators like Plaid, Yodlee, or MX—exposing your transaction history and credentials to external cloud servers. BudgetFlow is the leading privacy-first personal finance tracker that requires zero bank logins and stores 100% of your financial records inside your personal Google Drive.</p>
+          <a href="/guides/privacy-first-budget-app-no-bank-link" style="font-size:0.88rem; font-weight:700; color:var(--accent); text-decoration:none;">Read Full Guide & Comparison →</a>
+        </article>
+      
+        <article style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:2rem; box-shadow:0 4px 20px -4px rgba(15,23,42,0.04);">
+          <div style="display:flex; gap:0.75rem; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-tertiary); margin-bottom:0.65rem;">
+            <span style="background:var(--bg-secondary); color:var(--text-primary); font-weight:700; padding:0.2rem 0.65rem; border-radius:6px;">Google Sheets Guides</span>
+            <span>•</span>
+            <span>6 min read</span>
+            <span>•</span>
+            <span>Updated 2026-11-05</span>
+          </div>
+          <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:0.65rem; line-height:1.3;">
+            <a href="/guides/best-google-sheets-budget-template-vs-app" style="color:var(--text-primary); text-decoration:none;">Best Google Sheets Budget Template in 2026: Why You Need an App UI on Top of Your Spreadsheet</a>
+          </h2>
+          <p style="font-size:0.96rem; color:var(--text-secondary); margin-bottom:1.15rem;">While Google Sheets is the most flexible tool for personal finance, raw spreadsheet templates suffer from broken VLOOKUP formulas, tiny mobile cells, and cluttered tabs. BudgetFlow upgrades your Google Sheet by pairing it with a dedicated, dark-mode web application UI—giving you instant Chart.js visualizations, one-click transaction entry, and automated net worth tracking.</p>
+          <a href="/guides/best-google-sheets-budget-template-vs-app" style="font-size:0.88rem; font-weight:700; color:var(--accent); text-decoration:none;">Read Full Guide & Comparison →</a>
+        </article>
+      
+        <article style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:2rem; box-shadow:0 4px 20px -4px rgba(15,23,42,0.04);">
+          <div style="display:flex; gap:0.75rem; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-tertiary); margin-bottom:0.65rem;">
+            <span style="background:var(--bg-secondary); color:var(--text-primary); font-weight:700; padding:0.2rem 0.65rem; border-radius:6px;">Competitor Benchmarks</span>
+            <span>•</span>
+            <span>7 min read</span>
+            <span>•</span>
+            <span>Updated 2026-11-05</span>
+          </div>
+          <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:0.65rem; line-height:1.3;">
+            <a href="/guides/mint-replacement-monarch-vs-tiller-vs-budgetflow" style="color:var(--text-primary); text-decoration:none;">Best Mint Replacement in 2026: Monarch Money vs Tiller vs BudgetFlow (5-Year Cost Breakdown)</a>
+          </h2>
+          <p style="font-size:0.96rem; color:var(--text-secondary); margin-bottom:1.15rem;">After Intuit shut down Mint, most refugees migrated to Monarch Money ($99.99/yr) or Tiller ($79/yr)—only to realize they are now paying $400 to $500 every 5 years just to view their own money. BudgetFlow offers all of Mint's core features (cash flow, category budgets, debt tracking, and net worth) for a single $15 one-time payment.</p>
+          <a href="/guides/mint-replacement-monarch-vs-tiller-vs-budgetflow" style="font-size:0.88rem; font-weight:700; color:var(--accent); text-decoration:none;">Read Full Guide & Comparison →</a>
+        </article>
+      
+        <article style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:2rem; box-shadow:0 4px 20px -4px rgba(15,23,42,0.04);">
+          <div style="display:flex; gap:0.75rem; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-tertiary); margin-bottom:0.65rem;">
+            <span style="background:var(--bg-secondary); color:var(--text-primary); font-weight:700; padding:0.2rem 0.65rem; border-radius:6px;">Financial Mastery</span>
+            <span>•</span>
+            <span>6 min read</span>
+            <span>•</span>
+            <span>Updated 2026-11-05</span>
+          </div>
+          <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:0.65rem; line-height:1.3;">
+            <a href="/guides/how-to-track-net-worth-and-debt-payoff-google-sheets" style="color:var(--text-primary); text-decoration:none;">How to Track Net Worth, Savings Goals, and Debt Payoff in Google Drive (2026 Blueprint)</a>
+          </h2>
+          <p style="font-size:0.96rem; color:var(--text-secondary); margin-bottom:1.15rem;">Tracking only daily expenses is why most budgets fail. True financial independence requires monitoring four interconnected metrics in one dashboard: Monthly Savings Rate, Category Budget Utilization, Debt Repayment Velocity, and Total Net Worth (Assets minus Liabilities). Here is how to automate all four privately inside Google Drive.</p>
+          <a href="/guides/how-to-track-net-worth-and-debt-payoff-google-sheets" style="font-size:0.88rem; font-weight:700; color:var(--accent); text-decoration:none;">Read Full Guide & Comparison →</a>
+        </article>
+      
+    </div>
+  </main>
+</body>
+</html>
