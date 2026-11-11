@@ -1157,6 +1157,217 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   VISUAL SHOWCASE UPGRADE FOR PAIN, HOW IT WORKS, AND BENTO FEATURES
+   ========================================================================== */
+.pain-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: left;
+}
+@media (max-width: 820px) {
+  .pain-showcase-grid { grid-template-columns: 1fr; }
+}
+.pain-visual-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo);
+  overflow: hidden;
+  position: relative;
+}
+.pain-visual-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--accent-border);
+}
+.pain-illustration {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  position: relative;
+  overflow: hidden;
+}
+.pain-tag-bad {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: oklch(0.58 0.22 25 / 0.1);
+  color: var(--status-danger);
+  border: 1px solid oklch(0.58 0.22 25 / 0.25);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+/* HOW IT WORKS — ARCHITECTURAL PIPELINE CARDS WITH UI MOCKUPS */
+.how-pipeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: left;
+  position: relative;
+}
+@media (max-width: 920px) {
+  .how-pipeline { grid-template-columns: 1fr; }
+}
+.how-step-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  padding: 1.85rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.35rem;
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo);
+}
+.how-step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--accent-border);
+}
+.how-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.how-step-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--text-primary);
+  color: var(--bg-surface);
+  padding: 0.3rem 0.75rem;
+  border-radius: 8px;
+}
+.how-step-time {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 700;
+  background: var(--accent-muted);
+  border: 1px solid var(--accent-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+}
+.how-visual-window {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(15,23,42,0.03);
+}
+.how-window-bar {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.how-dots {
+  display: flex;
+  gap: 5px;
+}
+.how-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* BENTO SHOWCASE FOR "EVERYTHING YOU NEED TO MASTER YOUR MONEY" */
+.bento-master-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1.1rem, 2vw, 1.6rem);
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: left;
+}
+.bento-cell {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  padding: 1.85rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo);
+  overflow: hidden;
+  position: relative;
+}
+.bento-cell:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--accent-border);
+}
+.bento-span-7 { grid-column: span 7; }
+.bento-span-5 { grid-column: span 5; }
+.bento-span-4 { grid-column: span 4; }
+.bento-span-8 { grid-column: span 8; }
+.bento-span-6 { grid-column: span 6; }
+
+@media (max-width: 960px) {
+  .bento-span-7, .bento-span-5, .bento-span-4, .bento-span-8, .bento-span-6 {
+    grid-column: span 12;
+  }
+}
+
+.bento-ui-preview {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.15rem;
+  position: relative;
+  overflow: hidden;
+}
+.bento-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+.bento-cell h3 {
+  font-size: 1.3rem !important;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+.bento-cell p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 </style>
 
 </head>
@@ -1399,43 +1610,381 @@ footer {
 </div>
 
 <section class="pain">
-  <div class="section-label">Sound Familiar?</div>
+  <div class="section-label">The Subscription & Spreadsheet Trap</div>
   <h2 class="section-title">Tired of Finance Apps That Cost an Arm and a Leg?</h2>
-  <p class="section-sub">Most budgeting apps either charge $10–$15/month or quietly sell your financial data to advertisers.</p>
-  <div class="pain-grid">
-    <div class="pain-card"><div class="emoji">💳</div><h3>Paying for YNAB or Mint?</h3><p>Great apps, but they lock you into subscriptions and store your bank credentials on their servers.</p></div>
-    <div class="pain-card"><div class="emoji">📊</div><h3>Messy spreadsheets?</h3><p>You started a budget spreadsheet three years ago. It now has 47 columns and you haven't opened it in months.</p></div>
-    <div class="pain-card"><div class="emoji">🤔</div><h3>No clue where money goes?</h3><p>Every month you wonder where your paycheck went — and never have a clear answer.</p></div>
-    <div class="pain-card"><div class="emoji">🔓</div><h3>Privacy concerns?</h3><p>Connecting your bank account to a third-party app means trusting them completely. No thanks.</p></div>
+  <p class="section-sub" style="margin-bottom:3rem;">Most budgeting tools force an unfair choice: pay $109/year forever, surrender your bank passwords, or wrestle with fragile spreadsheet formulas.</p>
+
+  <div class="pain-showcase-grid">
+    <!-- PAIN 1: SUBSCRIPTION BLEED -->
+    <div class="pain-visual-card aww-reveal">
+      <div>
+        <div class="pain-tag-bad">💸 Subscription Fatigue</div>
+        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">Paying $109/Year Just to Budget?</h3>
+        <p style="font-size:0.94rem; color:var(--text-secondary);">YNAB and Monarch lock you into endless annual renewals. Over 5 years, you pay <strong>$545</strong> for a glorified ledger—while BudgetFlow is $15 once for life.</p>
+      </div>
+      <div class="pain-illustration">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed var(--border-strong); margin-bottom:8px;">
+          <span style="color:var(--text-secondary); font-weight:600;">YNAB Annual Renewal</span>
+          <span style="color:var(--status-danger); font-weight:800;">-$109.00 / yr</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed var(--border-strong); margin-bottom:10px;">
+          <span style="color:var(--text-secondary); font-weight:600;">5-Year Subscription Drain</span>
+          <span style="color:var(--status-danger); font-weight:800; text-decoration:line-through;">-$545.00</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--accent-muted); border:1px solid var(--accent-border); padding:8px 12px; border-radius:10px;">
+          <span style="color:var(--text-primary); font-weight:700;">✨ BudgetFlow Lifetime License</span>
+          <span style="color:var(--accent); font-weight:800;">$15.00 Once ($0/yr)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 2: BROKEN SPREADSHEETS -->
+    <div class="pain-visual-card aww-reveal">
+      <div>
+        <div class="pain-tag-bad">⚠️ Formula Fragility</div>
+        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">47 Columns of Broken Formulas?</h3>
+        <p style="font-size:0.94rem; color:var(--text-secondary);">Raw spreadsheets are impossible to use on your phone. Delete one cell by accident and your entire monthly summary explodes into <code>#REF!</code> errors.</p>
+      </div>
+      <div class="pain-illustration">
+        <div style="display:grid; grid-template-columns:42px 1fr 1fr; gap:1px; background:var(--border-strong); border:1px solid var(--border-strong); border-radius:8px; overflow:hidden; margin-bottom:10px;">
+          <div style="background:var(--bg-secondary); padding:5px 8px; color:var(--text-tertiary);">A42</div>
+          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--status-danger); font-weight:700;">#REF! (Broken VLOOKUP)</div>
+          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--status-danger); font-weight:700;">#VALUE!</div>
+          <div style="background:var(--bg-secondary); padding:5px 8px; color:var(--text-tertiary);">A43</div>
+          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--text-tertiary);">=SUMIFS(Tx!C:C...)</div>
+          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--status-danger); font-weight:700;">#N/A</div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-surface); border:1px solid var(--border-subtle); padding:8px 12px; border-radius:10px;">
+          <span style="color:var(--text-primary); font-weight:700;">✅ BudgetFlow App UI Layer</span>
+          <span style="color:var(--accent); font-weight:700;">Zero Broken Formulas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 3: PRIVACY & BANK CREDENTIALS -->
+    <div class="pain-visual-card aww-reveal">
+      <div>
+        <div class="pain-tag-bad">🔓 Third-Party Data Risk</div>
+        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">Uncomfortable Handing Over Bank Logins?</h3>
+        <p style="font-size:0.94rem; color:var(--text-secondary);">Connecting your bank via third-party aggregators exposes every transaction, salary deposit, and account balance to external cloud servers.</p>
+      </div>
+      <div class="pain-illustration">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
+          <div style="flex:1; background:oklch(0.58 0.22 25 / 0.08); border:1px solid oklch(0.58 0.22 25 / 0.22); border-radius:10px; padding:10px; text-align:center;">
+            <div style="font-size:0.68rem; color:var(--status-danger); font-weight:700;">CLOUD APPS</div>
+            <div style="font-size:0.76rem; color:var(--text-primary); font-weight:700; margin-top:2px;">Bank Login → 3rd-Party DB</div>
+          </div>
+          <div style="flex:1; background:var(--accent-muted); border:1px solid var(--accent-border); border-radius:10px; padding:10px; text-align:center;">
+            <div style="font-size:0.68rem; color:var(--accent); font-weight:700;">BUDGETFLOW</div>
+            <div style="font-size:0.76rem; color:var(--text-primary); font-weight:700; margin-top:2px;">Browser ↔ Your Google Drive</div>
+          </div>
+        </div>
+        <div style="font-size:0.72rem; color:var(--text-secondary); text-align:center;">🔒 100% Isolated · No Plaid Required · Zero External Servers</div>
+      </div>
+    </div>
+
+    <!-- PAIN 4: MYSTERY PAYCHECK DRAIN -->
+    <div class="pain-visual-card aww-reveal">
+      <div>
+        <div class="pain-tag-bad">📉 Cash-Flow Blindness</div>
+        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">Wondering Where Your Paycheck Went?</h3>
+        <p style="font-size:0.94rem; color:var(--text-secondary);">Passive bank syncing only shows you what you spent <em>after</em> the money is gone. Intentional 5-second logging stops overspending before it happens.</p>
+      </div>
+      <div class="pain-illustration">
+        <div style="margin-bottom:10px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.74rem; margin-bottom:4px;">
+            <span style="font-weight:700; color:var(--text-primary);">🍔 Dining Out Limit ($400/mo)</span>
+            <span style="font-weight:800; color:#d97706;">82% Used ($328)</span>
+          </div>
+          <div style="height:8px; background:#e2e8f0; border-radius:99px; overflow:hidden;">
+            <div style="width:82%; height:100%; background:linear-gradient(90deg, #10b981, #f59e0b); border-radius:99px;"></div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-surface); border:1px solid var(--border-subtle); padding:8px 12px; border-radius:10px;">
+          <span style="color:var(--text-secondary);">Visual Early Warning</span>
+          <span style="color:var(--accent); font-weight:800;">+$640 Saved / Mo</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- HOW IT WORKS — ARCHITECTURAL 3-STEP VISUAL PIPELINE -->
 <section class="how">
-  <div class="section-label">How It Works</div>
+  <div class="section-label">3-Minute Serverless Setup</div>
   <h2 class="section-title">Set Up in 3 Simple Steps</h2>
-  <p class="section-sub">No IT skills required. If you can open a website, you can use BudgetFlow.</p>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><h3>Create a Google Sheet</h3><p>Open Google Sheets, paste the free BudgetFlow backend code, and deploy it as a web app in 2 clicks.</p></div>
-    <div class="step"><div class="step-num">2</div><h3>Connect BudgetFlow</h3><p>Paste your unique App URL into BudgetFlow. That's it — your database is live and private.</p></div>
-    <div class="step"><div class="step-num">3</div><h3>Start Tracking</h3><p>Add transactions, set budgets, track savings goals, and watch your net worth grow over time.</p></div>
+  <p class="section-sub" style="margin-bottom:3rem;">No coding or server setup required. Your personal Google Sheet becomes a private, zero-cost database in under 3 minutes.</p>
+
+  <div class="how-pipeline">
+    <!-- STEP 1 -->
+    <div class="how-step-card aww-reveal">
+      <div>
+        <div class="how-step-header" style="margin-bottom:1.1rem;">
+          <span class="how-step-badge">STEP 01</span>
+          <span class="how-step-time">⏱ ~60 Seconds</span>
+        </div>
+        <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:0.5rem;">Deploy Your Google Sheet</h3>
+        <p style="font-size:0.92rem; color:var(--text-secondary);">Open a blank Google Sheet in your Google Drive, paste the included BudgetFlow Apps Script, and click <strong>Deploy → Web App</strong>.</p>
+      </div>
+
+      <!-- Visual Mockup: Google Sheets + Deploy Button -->
+      <div class="how-visual-window">
+        <div class="how-window-bar">
+          <div class="how-dots">
+            <span style="background:#f43f5e;"></span>
+            <span style="background:#f59e0b;"></span>
+            <span style="background:#10b981;"></span>
+          </div>
+          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--text-tertiary);">Apps Script · Code.gs</span>
+        </div>
+        <div style="padding:14px; font-family:var(--font-mono); font-size:0.73rem;">
+          <div style="color:var(--text-tertiary); margin-bottom:4px;">// Auto-creates 5 finance tabs</div>
+          <div style="color:var(--text-primary); margin-bottom:10px;"><span style="color:#2563eb; font-weight:700;">function</span> <span style="color:#059669; font-weight:700;">doGet</span>() { <span style="color:#7c3aed;">return</span> syncSheet(); }</div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:var(--accent-muted); border:1px solid var(--accent-border); padding:8px 10px; border-radius:8px;">
+            <span style="color:var(--text-primary); font-weight:700;">Who has access: Anyone</span>
+            <span style="background:var(--accent); color:#fff; padding:3px 9px; border-radius:6px; font-weight:800; font-size:0.68rem;">Deploy ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="how-step-card aww-reveal">
+      <div>
+        <div class="how-step-header" style="margin-bottom:1.1rem;">
+          <span class="how-step-badge">STEP 02</span>
+          <span class="how-step-time">⏱ ~30 Seconds</span>
+        </div>
+        <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:0.5rem;">Paste Your Private Web App URL</h3>
+        <p style="font-size:0.92rem; color:var(--text-secondary);">Copy the generated <code>script.google.com</code> URL and paste it once into BudgetFlow. Your browser now talks directly to your Google Drive.</p>
+      </div>
+
+      <!-- Visual Mockup: URL Connection Handshake -->
+      <div class="how-visual-window">
+        <div class="how-window-bar">
+          <div class="how-dots">
+            <span style="background:#f43f5e;"></span>
+            <span style="background:#f59e0b;"></span>
+            <span style="background:#10b981;"></span>
+          </div>
+          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--text-tertiary);">Direct TLS Connection</span>
+        </div>
+        <div style="padding:14px; font-family:var(--font-mono); font-size:0.73rem;">
+          <div style="font-size:0.66rem; color:var(--text-tertiary); margin-bottom:4px; text-transform:uppercase;">Your Private Endpoint URL</div>
+          <div style="background:var(--bg-surface); border:1px solid var(--accent-border); border-radius:8px; padding:7px 10px; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:10px;">
+            https://script.google.com/macros/s/AKfycbz...
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-surface); border:1px solid var(--border-subtle); padding:7px 10px; border-radius:8px;">
+            <span style="display:flex; align-items:center; gap:6px; color:var(--accent); font-weight:700;">
+              <span style="width:7px; height:7px; border-radius:50%; background:var(--accent); display:inline-block;"></span>
+              Google Drive Connected
+            </span>
+            <span style="color:var(--text-tertiary); font-size:0.68rem;">0ms Middleman</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="how-step-card aww-reveal">
+      <div>
+        <div class="how-step-header" style="margin-bottom:1.1rem;">
+          <span class="how-step-badge">STEP 03</span>
+          <span class="how-step-time">♾️ Yours Forever</span>
+        </div>
+        <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:0.5rem;">Master Your Cash Flow & Net Worth</h3>
+        <p style="font-size:0.92rem; color:var(--text-secondary);">Log expenses in 5 seconds, monitor monthly category limits, track debt payoff, and watch your real-time net worth compound.</p>
+      </div>
+
+      <!-- Visual Mockup: Mini Live Net Worth Widget -->
+      <div class="how-visual-window">
+        <div class="how-window-bar">
+          <div class="how-dots">
+            <span style="background:#f43f5e;"></span>
+            <span style="background:#f59e0b;"></span>
+            <span style="background:#10b981;"></span>
+          </div>
+          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--text-tertiary);">BudgetFlow Dashboard</span>
+        </div>
+        <div style="padding:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-tertiary); text-transform:uppercase;">Live Net Worth</div>
+              <div style="font-family:var(--font-mono); font-size:1.25rem; font-weight:800; color:var(--text-primary);">$559,500</div>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:0.72rem; font-weight:700; color:var(--accent); background:var(--accent-muted); padding:2px 8px; border-radius:99px;">+78% Savings Rate</span>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:5px; align-items:end; height:42px; padding-top:4px;">
+            <div style="height:40%; background:#cbd5e1; border-radius:3px;"></div>
+            <div style="height:55%; background:#cbd5e1; border-radius:3px;"></div>
+            <div style="height:50%; background:#cbd5e1; border-radius:3px;"></div>
+            <div style="height:70%; background:#6ee7b7; border-radius:3px;"></div>
+            <div style="height:85%; background:#34d399; border-radius:3px;"></div>
+            <div style="height:100%; background:#059669; border-radius:3px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- FEATURES — INTERACTIVE BENTO COMMAND CENTER WITH EMBEDDED UI PREVIEWS -->
 <section class="features" id="features">
-  <div class="section-label">What You Get</div>
+  <div class="section-label">6 Unified Financial Modules</div>
   <h2 class="section-title">Everything You Need to Master Your Money</h2>
-  <p class="section-sub">A complete financial command center — all in one place, for a one-time $15 payment.</p>
-  <div class="feat-grid">
-    <div class="feat-card"><div class="feat-icon green">📊</div><h3>Live Dashboard</h3><p>See your monthly income, expenses, balance, and savings rate at a glance with beautiful real-time charts.</p></div>
-    <div class="feat-card"><div class="feat-icon blue">💸</div><h3>Transaction Tracking</h3><p>Log every expense and income with categories, filters, and instant search across your full history.</p></div>
-    <div class="feat-card"><div class="feat-icon purple">🎯</div><h3>Budget Targets</h3><p>Set monthly spending limits per category. Watch the progress bar turn red before you overspend.</p></div>
-    <div class="feat-card"><div class="feat-icon orange">💍</div><h3>Savings Targets</h3><p>Create goals for vacation, emergency fund, or a new car. Visual ring progress keeps you motivated.</p></div>
-    <div class="feat-card"><div class="feat-icon green">📉</div><h3>Debt Tracker</h3><p>Track every loan and credit card balance. Log payments and watch that number drop to zero.</p></div>
-    <div class="feat-card"><div class="feat-icon blue">📈</div><h3>Net Worth Calculator</h3><p>A single number that shows your true financial health — assets minus liabilities, updated in real time.</p></div>
-    <div class="feat-card"><div class="feat-icon purple">📋</div><h3>Financial Reports</h3><p>Monthly summaries and yearly trend charts to see if you're improving month over month.</p></div>
-    <div class="feat-card"><div class="feat-icon orange">🔒</div><h3>100% Private</h3><p>Zero data leaves your Google Drive. No one — not even us — can see your financial information.</p></div>
+  <p class="section-sub" style="margin-bottom:3rem;">Instead of juggling disconnected templates, BudgetFlow unifies your daily cash flow, category budgets, savings goals, debts, and net worth into one visual command center.</p>
+
+  <div class="bento-master-grid">
+    <!-- BENTO 1 (SPAN 7): LIVE CASH FLOW & SAVINGS RATE -->
+    <div class="bento-cell bento-span-7 aww-reveal">
+      <div>
+        <div class="bento-kicker">01 · Executive Cash Flow</div>
+        <h3>Real-Time Income, Expense & Savings Rate Analytics</h3>
+        <p>See your exact monthly net savings and category distribution the moment you add a transaction—powered by interactive Chart.js visualizations.</p>
+      </div>
+      <div class="bento-ui-preview">
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:12px;">
+          <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; padding:10px;">
+            <div style="font-size:0.68rem; color:var(--text-tertiary); font-family:var(--font-mono);">INCOME</div>
+            <div style="font-size:1.05rem; font-weight:800; font-family:var(--font-mono); color:#059669;">+$9,500</div>
+          </div>
+          <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:10px; padding:10px;">
+            <div style="font-size:0.68rem; color:var(--text-tertiary); font-family:var(--font-mono);">EXPENSES</div>
+            <div style="font-size:1.05rem; font-weight:800; font-family:var(--font-mono); color:#e11d48;">-$2,030</div>
+          </div>
+          <div style="background:var(--accent-muted); border:1px solid var(--accent-border); border-radius:10px; padding:10px;">
+            <div style="font-size:0.68rem; color:var(--accent); font-family:var(--font-mono); font-weight:700;">SAVINGS RATE</div>
+            <div style="font-size:1.05rem; font-weight:800; font-family:var(--font-mono); color:var(--accent);">78.6%</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.72rem; color:var(--text-secondary);">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--accent);"></span>
+          Auto-calculated from your Google Sheet rows in real time
+        </div>
+      </div>
+    </div>
+
+    <!-- BENTO 2 (SPAN 5): COLOR-CODED CATEGORY BUDGETS -->
+    <div class="bento-cell bento-span-5 aww-reveal">
+      <div>
+        <div class="bento-kicker">02 · Smart Guardrails</div>
+        <h3>Color-Shifting Budget Targets</h3>
+        <p>Set monthly category limits. Progress bars automatically shift from emerald to amber (70%) to crimson (90%) before you overspend.</p>
+      </div>
+      <div class="bento-ui-preview" style="display:grid; gap:10px; font-family:var(--font-mono); font-size:0.74rem;">
+        <div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span style="font-weight:700; color:var(--text-primary);">🍔 Food & Drink</span>
+            <span style="color:#059669; font-weight:700;">$950 / $1,800 (52%)</span>
+          </div>
+          <div style="height:7px; background:#e2e8f0; border-radius:99px; overflow:hidden;"><div style="width:52%; height:100%; background:#10b981; border-radius:99px;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span style="font-weight:700; color:var(--text-primary);">🛍️ Shopping</span>
+            <span style="color:#d97706; font-weight:700;">$1,200 / $1,500 (80%)</span>
+          </div>
+          <div style="height:7px; background:#e2e8f0; border-radius:99px; overflow:hidden;"><div style="width:80%; height:100%; background:#f59e0b; border-radius:99px;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span style="font-weight:700; color:var(--text-primary);">💡 Bills & Utilities</span>
+            <span style="color:#e11d48; font-weight:700;">$960 / $1,000 (96%)</span>
+          </div>
+          <div style="height:7px; background:#e2e8f0; border-radius:99px; overflow:hidden;"><div style="width:96%; height:100%; background:#f43f5e; border-radius:99px;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENTO 3 (SPAN 4): 5-SECOND QUICK-ADD TRANSACTIONS -->
+    <div class="bento-cell bento-span-4 aww-reveal">
+      <div>
+        <div class="bento-kicker">03 · Frictionless Logging</div>
+        <h3>5-Second Transaction Search & Filter</h3>
+        <p>Log income or expenses in one click and filter thousands of rows instantly by category or keyword.</p>
+      </div>
+      <div class="bento-ui-preview" style="font-family:var(--font-mono); font-size:0.73rem;">
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:8px; padding:7px 10px; margin-bottom:8px; display:flex; justify-content:space-between;">
+          <span style="color:var(--text-primary); font-weight:700;">💼 Primary Salary</span>
+          <span style="color:#059669; font-weight:800;">+$7,500</span>
+        </div>
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:8px; padding:7px 10px; display:flex; justify-content:space-between;">
+          <span style="color:var(--text-primary); font-weight:700;">🛒 Groceries</span>
+          <span style="color:#e11d48; font-weight:800;">-$1,200</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENTO 4 (SPAN 4): SAVINGS GOALS & MILESTONES -->
+    <div class="bento-cell bento-span-4 aww-reveal">
+      <div>
+        <div class="bento-kicker">04 · Goal Milestones</div>
+        <h3>Savings & Emergency Fund Tracker</h3>
+        <p>Track target dates and completion percentages for your 6-Month Emergency Fund, travel, or home down payment.</p>
+      </div>
+      <div class="bento-ui-preview" style="font-family:var(--font-mono); font-size:0.73rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <span style="font-weight:700; color:var(--text-primary);">🏦 Emergency Fund</span>
+          <span style="background:var(--accent-muted); color:var(--accent); padding:2px 7px; border-radius:99px; font-weight:800;">72%</span>
+        </div>
+        <div style="height:8px; background:#e2e8f0; border-radius:99px; overflow:hidden; margin-bottom:8px;">
+          <div style="width:72%; height:100%; background:linear-gradient(90deg, #10b981, #3b82f6); border-radius:99px;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; color:var(--text-tertiary); font-size:0.68rem;">
+          <span>Saved: $18,000</span>
+          <span>Target: $25,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENTO 5 (SPAN 4): DEBT SNOWBALL & PAYOFF TRACKER -->
+    <div class="bento-cell bento-span-4 aww-reveal">
+      <div>
+        <div class="bento-kicker">05 · Liability Payoff</div>
+        <h3>Debt & Mortgage Payoff Calculator</h3>
+        <p>Monitor loans, interest rates (p.a.), and remaining balances as you crush your debt to zero.</p>
+      </div>
+      <div class="bento-ui-preview" style="font-family:var(--font-mono); font-size:0.73rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+          <span style="font-weight:700; color:var(--text-primary);">🚗 Car Financing (4.2%)</span>
+          <span style="color:#059669; font-weight:800;">76% Paid</span>
+        </div>
+        <div style="height:8px; background:#e2e8f0; border-radius:99px; overflow:hidden; margin-bottom:8px;">
+          <div style="width:76%; height:100%; background:#10b981; border-radius:99px;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; color:var(--text-tertiary); font-size:0.68rem;">
+          <span>Remaining: $22,000</span>
+          <span>Total: $90,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENTO 6 (SPAN 12): NET WORTH PORTFOLIO + 100% GOOGLE DRIVE SOVEREIGNTY -->
+    <div class="bento-cell" style="grid-column: span 12;" >
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:2rem; align-items:center;">
+        <div>
+          <div class="bento-kicker">06 · Total Wealth & Sovereignty</div>
+          <h3 style="font-size:1.5rem !important; margin-bottom:0.6rem;">Automated Net Worth Portfolio — 100% Inside Your Personal Google Drive</h3>
+          <p style="font-size:0.96rem; margin-bottom:1rem;">Track your real estate, stock/ETF investments, cash reserves, and gold bullion alongside your liabilities. BudgetFlow computes your true Net Worth and portfolio allocation percentages while keeping every row strictly inside your own Google account.</p>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap; font-family:var(--font-mono); font-size:0.74rem;">
+            <span style="background:var(--accent-muted); color:var(--accent); border:1px solid var(--accent-border); padding:4px 10px; border-radius:8px; font-weight:700;">🔒 Zero External Servers</span>
+            <span style="background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-subtle); padding:4px 10px; border-radius:8px; font-weight:700;">📊 Instant Sheet Export</span>
+            <span style="background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-subtle); padding:4px 10px; border-radius:8px; font-weight:700;">♾️ $15 One-Time License</span>
+          </div>
+        </div>
+        <div class="bento-ui-preview" style="font-family:var(--font-mono); font-size:0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:10px; border-bottom:1px solid var(--border-subtle); margin-bottom:10px;">
+            <span style="color:var(--text-secondary); font-weight:700;">TOTAL NET WORTH (ASSETS - DEBTS)</span>
+            <span style="font-size:1.2rem; font-weight:800; color:var(--accent);">$559,500</span>
+          </div>
+          <div style="display:grid; gap:7px;">
+            <div style="display:flex; justify-content:space-between;"><span>🏠 Primary Residence (Property)</span><span style="font-weight:700; color:var(--text-primary);">$625,000 (86%)</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>📈 Stock & ETF Portfolio</span><span style="font-weight:700; color:var(--text-primary);">$42,000 (6%)</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>🪙 Gold Bullion & Cash Reserves</span><span style="font-weight:700; color:var(--text-primary);">$54,500 (8%)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1824,7 +2373,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectors = [
       '.hero-badge', '.hero h1', '.hero p', '.cta-group', '.demo-section',
       '.section-label', '.section-title', '.section-sub',
-      '.pain-card', '.step', '.feat-card', '.compare-table',
+      '.pain-visual-card', '.how-step-card', '.bento-cell', '.compare-table',
       '.price-card', '.testi-card', '.faq-item'
     ];
     const elements = document.querySelectorAll(selectors.join(','));
