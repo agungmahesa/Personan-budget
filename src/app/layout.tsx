@@ -70,14 +70,19 @@ export default function RootLayout({
                 if (typeof window.fbq === 'function') {
                   window.fbq('track', 'InitiateCheckout', {
                     content_name: 'BudgetFlow Lifetime License',
+                    content_ids: ['budgetflow-v2'],
+                    content_type: 'product',
                     currency: 'USD',
-                    value: 15.00
+                    value: 15.00,
+                    num_items: 1
                   });
                 }
               } else if (href.indexOf('#interactive-demo') !== -1 || target.classList.contains('demo-tab-btn')) {
                 if (typeof window.fbq === 'function') {
                   window.fbq('track', 'ViewContent', {
                     content_name: 'BudgetFlow Live Interactive Demo',
+                    content_ids: ['budgetflow-v2'],
+                    content_type: 'product',
                     currency: 'USD',
                     value: 15.00
                   });

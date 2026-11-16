@@ -518,6 +518,31 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1806486647139872');
 fbq('track', 'PageView');
+
+// Automatic Funnel Event Listeners for Meta Ads Optimization
+document.addEventListener('click', function(e) {
+  var target = e.target && e.target.closest ? e.target.closest('a, button') : null;
+  if (!target || typeof window.fbq !== 'function') return;
+  var href = target.getAttribute('href') || '';
+  if (href.indexOf('gumroad.com') !== -1) {
+    window.fbq('track', 'InitiateCheckout', {
+      content_name: 'BudgetFlow Lifetime License',
+      content_ids: ['budgetflow-v2'],
+      content_type: 'product',
+      value: 15.00,
+      currency: 'USD',
+      num_items: 1
+    });
+  } else if (href.indexOf('#interactive-demo') !== -1 || target.classList.contains('demo-tab-btn')) {
+    window.fbq('track', 'ViewContent', {
+      content_name: 'BudgetFlow Live Interactive Demo',
+      content_ids: ['budgetflow-v2'],
+      content_type: 'product',
+      value: 15.00,
+      currency: 'USD'
+    });
+  }
+});
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1806486647139872&ev=PageView&noscript=1"
@@ -1385,7 +1410,7 @@ footer {
   <h1>Finally, a Finance Tracker That <span>Doesn't Sell Your Data</span></h1>
   <p>BudgetFlow lives inside your own Google Sheets. No monthly fees, no data harvesting, no logins to another company's server. Just clean, beautiful budgeting.</p>
   <div class="cta-group">
-    <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="btn-primary">⬇️ Download Free — Instant Access</a>
+    <a href="https://mstudiofun.gumroad.com/l/nkrgwd" class="btn-primary">⚡ Get Instant Access — $15</a>
     <a href="#interactive-demo" class="btn-secondary">🎮 Test Live Sandbox</a>
   </div>
   <p class="hero-note">✅ Works on Mac & Windows &nbsp;·&nbsp; ✅ Data stays in Google Drive &nbsp;·&nbsp; ✅ No subscription ever</p>
@@ -2352,7 +2377,7 @@ function handleQuickAdd(e) {
   document.getElementById("qa-desc").value = "";
 
   renderProdDemo();
-  if (typeof window.fbq === "function") { window.fbq("track", "Lead", { content_name: "Interactive Demo Quick Add" }); }
+  if (typeof window.fbq === "function") { window.fbq("track", "Lead", { content_name: "Interactive Demo Quick Add", content_ids: ["budgetflow-v2"], content_type: "product", value: 15.00, currency: "USD" }); }
   alert("✨ Transaction added! Live demo data updated in real-time.");
 }
 

@@ -21,6 +21,21 @@ s.parentNode.insertBefore(t,s)}(window, document,"script",
 "https://connect.facebook.net/en_US/fbevents.js");
 fbq("init", "1806486647139872");
 fbq("track", "PageView");
+document.addEventListener("click", function(e) {
+  var t = e.target && e.target.closest ? e.target.closest("a, button") : null;
+  if (!t || typeof window.fbq !== "function") return;
+  var href = t.getAttribute("href") || "";
+  if (href.indexOf("gumroad.com") !== -1) {
+    window.fbq("track", "InitiateCheckout", {
+      content_name: "BudgetFlow Lifetime License",
+      content_ids: ["budgetflow-v2"],
+      content_type: "product",
+      value: 15.00,
+      currency: "USD",
+      num_items: 1
+    });
+  }
+});
 </script>
 
   <style>
