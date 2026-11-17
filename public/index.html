@@ -1223,6 +1223,171 @@ footer {
   position: relative;
   overflow: hidden;
 }
+
+/* ==========================================================================
+   THE ESCAPE HATCH & TRAP UPGRADE (SIMPLIFIED & VISUAL-FIRST)
+   ========================================================================== */
+.pain-escape-card {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--bg-surface) 0%, oklch(0.97 0.02 155 / 0.5) 100%);
+  border: 1.5px solid var(--accent-border);
+  border-radius: 24px;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  box-shadow: 0 16px 40px -12px oklch(0.56 0.17 155 / 0.15);
+  display: grid;
+  grid-template-columns: 1.2fr 0.95fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: center;
+  text-align: left;
+}
+@media (max-width: 900px) {
+  .pain-escape-card {
+    grid-template-columns: 1fr;
+  }
+}
+.escape-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-muted);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+.escape-title {
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+.escape-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.escape-pills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.escape-pill-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 10px 14px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.escape-pill-item:hover {
+  border-color: var(--accent-border);
+  transform: translateX(3px);
+}
+.escape-pill-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  padding-top: 2px;
+}
+.escape-pill-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.escape-pill-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.escape-visual-bridge {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 1.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.bridge-box {
+  flex: 1;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1rem 0.75rem;
+  text-align: center;
+}
+.bridge-device-icon {
+  font-size: 1.75rem;
+  margin-bottom: 4px;
+}
+.bridge-box-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.bridge-box-sub {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+.bridge-arrow-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+.bridge-tag {
+  background: var(--accent-muted);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  font-size: 0.68rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 4px 8px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.bridge-pulse-line {
+  width: 44px;
+  height: 2px;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  border-radius: 99px;
+  position: relative;
+}
+.bridge-pulse-line::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulseBridge 2s infinite ease-in-out;
+}
+@keyframes pulseBridge {
+  0% { left: 0; opacity: 0.2; }
+  50% { left: 36px; opacity: 1; }
+  100% { left: 36px; opacity: 0; }
+}
+
 .pain-tag-bad {
   display: inline-flex;
   align-items: center;
@@ -1633,99 +1798,135 @@ footer {
 
 <section class="pain">
   <div class="section-label">The Subscription & Spreadsheet Trap</div>
-  <h2 class="section-title">Tired of Finance Apps That Cost an Arm and a Leg?</h2>
-  <p class="section-sub" style="margin-bottom:3rem;">Most budgeting tools force an unfair choice: pay $109/year forever, surrender your bank passwords, or wrestle with fragile spreadsheet formulas.</p>
+  <h2 class="section-title">Tired of the Unfair Choice in Finance Apps?</h2>
+  <p class="section-sub" style="margin-bottom:2.5rem; max-width:680px; margin-left:auto; margin-right:auto;">Most personal finance tools force an unfair extreme: rent your own financial data for $109/year, or suffer through fragile, broken spreadsheets.</p>
 
-  <div class="pain-showcase-grid">
-    <!-- PAIN 1: SUBSCRIPTION BLEED -->
-    <div class="pain-visual-card aww-reveal">
+  <div class="pain-showcase-grid" style="margin-bottom:1.75rem;">
+    <!-- TRAP 1: THE SUBSCRIPTION TRAP -->
+    <div class="pain-visual-card aww-reveal" style="border-color: rgba(239, 68, 68, 0.22); background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(254, 242, 242, 0.45) 100%);">
       <div>
-        <div class="pain-tag-bad">💸 Subscription Fatigue</div>
-        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">Paying $109/Year Just to Budget?</h3>
-        <p style="font-size:0.94rem; color:var(--text-secondary);">YNAB and Monarch lock you into endless annual renewals. Over 5 years, you pay <strong>$545</strong> for a glorified ledger—while BudgetFlow is $15 once for life.</p>
+        <div class="pain-tag-bad">❌ TRAP 01 · SUBSCRIPTION DRAIN</div>
+        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.75rem; color:var(--text-primary);">Paying $109/Year Forever</h3>
+        
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:1.25rem;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text-secondary);">
+            <span style="color:var(--status-danger); font-weight:700;">✗</span>
+            <span><strong>$545+ wasted</strong> over 5 years on simple budgeting</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text-secondary);">
+            <span style="color:var(--status-danger); font-weight:700;">✗</span>
+            <span>Forces you to hand over <strong>bank passwords & logins</strong></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text-secondary);">
+            <span style="color:var(--status-danger); font-weight:700;">✗</span>
+            <span>Data locked on a third-party startup server</span>
+          </div>
+        </div>
       </div>
-      <div class="pain-illustration">
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed var(--border-strong); margin-bottom:8px;">
-          <span style="color:var(--text-secondary); font-weight:600;">YNAB Annual Renewal</span>
-          <span style="color:var(--status-danger); font-weight:800;">-$109.00 / yr</span>
+
+      <div class="pain-illustration" style="background:#ffffff; border-color:rgba(239, 68, 68, 0.18);">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #fecaca; margin-bottom:8px;">
+          <span style="color:var(--text-secondary); font-weight:600;">Annual Renewal (YNAB/Monarch)</span>
+          <span style="color:var(--status-danger); font-weight:800; font-family:var(--font-mono);">-$109.00 / yr</span>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed var(--border-strong); margin-bottom:10px;">
-          <span style="color:var(--text-secondary); font-weight:600;">5-Year Subscription Drain</span>
-          <span style="color:var(--status-danger); font-weight:800; text-decoration:line-through;">-$545.00</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #fecaca; margin-bottom:10px;">
+          <span style="color:var(--text-secondary); font-weight:600;">5-Year Subscription Bleed</span>
+          <span style="color:var(--status-danger); font-weight:800; font-family:var(--font-mono); text-decoration:line-through;">-$545.00</span>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--accent-muted); border:1px solid var(--accent-border); padding:8px 12px; border-radius:10px;">
-          <span style="color:var(--text-primary); font-weight:700;">✨ BudgetFlow Lifetime License</span>
-          <span style="color:var(--accent); font-weight:800;">$15.00 Once ($0/yr)</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; background:#fef2f2; border:1px solid #fecaca; padding:8px 12px; border-radius:10px;">
+          <span style="color:#991b1b; font-weight:700;">Yearly Cost to Rent Your Data</span>
+          <span style="color:#dc2626; font-weight:800; font-family:var(--font-mono);">$109 / Every Year</span>
         </div>
       </div>
     </div>
 
-    <!-- PAIN 2: BROKEN SPREADSHEETS -->
-    <div class="pain-visual-card aww-reveal">
+    <!-- TRAP 2: THE SPREADSHEET TRAP -->
+    <div class="pain-visual-card aww-reveal" style="border-color: rgba(245, 158, 11, 0.25); background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(254, 243, 199, 0.35) 100%);">
       <div>
-        <div class="pain-tag-bad">⚠️ Formula Fragility</div>
-        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">47 Columns of Broken Formulas?</h3>
-        <p style="font-size:0.94rem; color:var(--text-secondary);">Raw spreadsheets are impossible to use on your phone. Delete one cell by accident and your entire monthly summary explodes into <code>#REF!</code> errors.</p>
-      </div>
-      <div class="pain-illustration">
-        <div style="display:grid; grid-template-columns:42px 1fr 1fr; gap:1px; background:var(--border-strong); border:1px solid var(--border-strong); border-radius:8px; overflow:hidden; margin-bottom:10px;">
-          <div style="background:var(--bg-secondary); padding:5px 8px; color:var(--text-tertiary);">A42</div>
-          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--status-danger); font-weight:700;">#REF! (Broken VLOOKUP)</div>
-          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--status-danger); font-weight:700;">#VALUE!</div>
-          <div style="background:var(--bg-secondary); padding:5px 8px; color:var(--text-tertiary);">A43</div>
-          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--text-tertiary);">=SUMIFS(Tx!C:C...)</div>
-          <div style="background:var(--bg-surface); padding:5px 8px; color:var(--status-danger); font-weight:700;">#N/A</div>
+        <div class="pain-tag-bad" style="color:#d97706; background:rgba(245, 158, 11, 0.1); border-color:rgba(245, 158, 11, 0.25);">⚠️ TRAP 02 · FORMULA FRAGILITY</div>
+        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.75rem; color:var(--text-primary);">47 Columns of Broken Formulas</h3>
+        
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:1.25rem;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text-secondary);">
+            <span style="color:#d97706; font-weight:700;">✗</span>
+            <span>Delete one cell by mistake and calculations show <strong>#REF!</strong></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text-secondary);">
+            <span style="color:#d97706; font-weight:700;">✗</span>
+            <span>Clunky and nearly <strong>impossible to use on your phone</strong></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text-secondary);">
+            <span style="color:#d97706; font-weight:700;">✗</span>
+            <span>Overwhelming raw grid that feels like a stressful tax audit</span>
+          </div>
         </div>
-        <div style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-surface); border:1px solid var(--border-subtle); padding:8px 12px; border-radius:10px;">
-          <span style="color:var(--text-primary); font-weight:700;">✅ BudgetFlow App UI Layer</span>
-          <span style="color:var(--accent); font-weight:700;">Zero Broken Formulas</span>
+      </div>
+
+      <div class="pain-illustration" style="background:#ffffff; border-color:rgba(245, 158, 11, 0.2);">
+        <div style="display:grid; grid-template-columns:42px 1fr 1fr; gap:1px; background:#e2e8f0; border:1px solid #cbd5e1; border-radius:8px; overflow:hidden; margin-bottom:10px;">
+          <div style="background:#f8fafc; padding:5px 8px; color:#94a3b8; font-family:var(--font-mono);">A42</div>
+          <div style="background:#ffffff; padding:5px 8px; color:var(--status-danger); font-weight:700; font-family:var(--font-mono);">#REF! (Formula Error)</div>
+          <div style="background:#ffffff; padding:5px 8px; color:var(--status-danger); font-weight:700; font-family:var(--font-mono);">#VALUE!</div>
+          <div style="background:#f8fafc; padding:5px 8px; color:#94a3b8; font-family:var(--font-mono);">A43</div>
+          <div style="background:#ffffff; padding:5px 8px; color:#64748b; font-family:var(--font-mono);">=SUMIFS(Tx!C:C...)</div>
+          <div style="background:#ffffff; padding:5px 8px; color:var(--status-danger); font-weight:700; font-family:var(--font-mono);">#N/A</div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; background:#fffbeb; border:1px solid #fde68a; padding:8px 12px; border-radius:10px;">
+          <span style="color:#92400e; font-weight:700;">Raw Spreadsheet User Experience</span>
+          <span style="color:#b45309; font-weight:800;">Stressful & Fragile</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE ESCAPE HATCH: BUDGETFLOW HERO CARD -->
+  <div class="pain-escape-card aww-reveal">
+    <div class="escape-content">
+      <div class="escape-badge">✨ THE ESCAPE HATCH · THE SWEET SPOT</div>
+      <h3 class="escape-title">The Sleek Feel of an App.<br>The Freedom of Google Sheets.</h3>
+      <p class="escape-sub">BudgetFlow bridges the gap: a polished, responsive web app interface running on your laptop or phone, saving 100% of your data directly into your own private Google Drive.</p>
+
+      <div class="escape-pills-grid">
+        <div class="escape-pill-item">
+          <div class="escape-pill-icon">⚡</div>
+          <div>
+            <div class="escape-pill-title">$15 One-Time Payment</div>
+            <div class="escape-pill-desc">Save $530+ over 5 years · Zero subscriptions forever</div>
+          </div>
+        </div>
+        <div class="escape-pill-item">
+          <div class="escape-pill-icon">🔒</div>
+          <div>
+            <div class="escape-pill-title">100% Private in Google Drive</div>
+            <div class="escape-pill-desc">Zero bank passwords · No third-party database</div>
+          </div>
+        </div>
+        <div class="escape-pill-item">
+          <div class="escape-pill-icon">🎯</div>
+          <div>
+            <div class="escape-pill-title">Zero Broken Formulas</div>
+            <div class="escape-pill-desc">Quick-add transactions in 5 seconds · Automated calculations</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- PAIN 3: PRIVACY & BANK CREDENTIALS -->
-    <div class="pain-visual-card aww-reveal">
-      <div>
-        <div class="pain-tag-bad">🔓 Third-Party Data Risk</div>
-        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">Uncomfortable Handing Over Bank Logins?</h3>
-        <p style="font-size:0.94rem; color:var(--text-secondary);">Connecting your bank via third-party aggregators exposes every transaction, salary deposit, and account balance to external cloud servers.</p>
+    <div class="escape-visual-bridge">
+      <div class="bridge-box bridge-left">
+        <div class="bridge-device-icon">💻</div>
+        <div class="bridge-box-title">BudgetFlow App</div>
+        <div class="bridge-box-sub">Local Web Interface</div>
       </div>
-      <div class="pain-illustration">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
-          <div style="flex:1; background:oklch(0.58 0.22 25 / 0.08); border:1px solid oklch(0.58 0.22 25 / 0.22); border-radius:10px; padding:10px; text-align:center;">
-            <div style="font-size:0.68rem; color:var(--status-danger); font-weight:700;">CLOUD APPS</div>
-            <div style="font-size:0.76rem; color:var(--text-primary); font-weight:700; margin-top:2px;">Bank Login → 3rd-Party DB</div>
-          </div>
-          <div style="flex:1; background:var(--accent-muted); border:1px solid var(--accent-border); border-radius:10px; padding:10px; text-align:center;">
-            <div style="font-size:0.68rem; color:var(--accent); font-weight:700;">BUDGETFLOW</div>
-            <div style="font-size:0.76rem; color:var(--text-primary); font-weight:700; margin-top:2px;">Browser ↔ Your Google Drive</div>
-          </div>
-        </div>
-        <div style="font-size:0.72rem; color:var(--text-secondary); text-align:center;">🔒 100% Isolated · No Plaid Required · Zero External Servers</div>
+      
+      <div class="bridge-arrow-connector">
+        <div class="bridge-pulse-line"></div>
+        <div class="bridge-tag">⚡ 2-Way Live Sync</div>
       </div>
-    </div>
 
-    <!-- PAIN 4: MYSTERY PAYCHECK DRAIN -->
-    <div class="pain-visual-card aww-reveal">
-      <div>
-        <div class="pain-tag-bad">📉 Cash-Flow Blindness</div>
-        <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.5rem;">Wondering Where Your Paycheck Went?</h3>
-        <p style="font-size:0.94rem; color:var(--text-secondary);">Passive bank syncing only shows you what you spent <em>after</em> the money is gone. Intentional 5-second logging stops overspending before it happens.</p>
-      </div>
-      <div class="pain-illustration">
-        <div style="margin-bottom:10px;">
-          <div style="display:flex; justify-content:space-between; font-size:0.74rem; margin-bottom:4px;">
-            <span style="font-weight:700; color:var(--text-primary);">🍔 Dining Out Limit ($400/mo)</span>
-            <span style="font-weight:800; color:#d97706;">82% Used ($328)</span>
-          </div>
-          <div style="height:8px; background:#e2e8f0; border-radius:99px; overflow:hidden;">
-            <div style="width:82%; height:100%; background:linear-gradient(90deg, #10b981, #f59e0b); border-radius:99px;"></div>
-          </div>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-surface); border:1px solid var(--border-subtle); padding:8px 12px; border-radius:10px;">
-          <span style="color:var(--text-secondary);">Visual Early Warning</span>
-          <span style="color:var(--accent); font-weight:800;">+$640 Saved / Mo</span>
-        </div>
+      <div class="bridge-box bridge-right">
+        <div class="bridge-device-icon">📊</div>
+        <div class="bridge-box-title">Google Sheets</div>
+        <div class="bridge-box-sub">Your Private Drive</div>
       </div>
     </div>
   </div>
@@ -2395,7 +2596,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectors = [
       '.hero-badge', '.hero h1', '.hero p', '.cta-group', '.demo-section',
       '.section-label', '.section-title', '.section-sub',
-      '.pain-visual-card', '.how-step-card', '.bento-cell', '.compare-table',
+      '.pain-visual-card', '.pain-escape-card', '.how-step-card', '.bento-cell', '.compare-table',
       '.price-card', '.testi-card', '.faq-item'
     ];
     const elements = document.querySelectorAll(selectors.join(','));
