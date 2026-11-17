@@ -1557,6 +1557,304 @@ footer {
 
 </style>
 
+<style id="mobile-master-overhaul">
+
+/* ==========================================================================
+   MASTER MOBILE RESPONSIVENESS OVERHAUL (iOS / Android / 320px - 768px)
+   ========================================================================== */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (max-width: 768px) {
+  /* Navigation Bar */
+  nav {
+    padding: 0.75rem 1rem !important;
+  }
+  .nav-links {
+    gap: 0.5rem !important;
+  }
+  .nav-links a[href="#interactive-demo"] {
+    display: none !important;
+  }
+  .nav-cta {
+    padding: 0.45rem 1rem !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 2.75rem 1rem 2rem !important;
+  }
+  .hero-badge {
+    font-size: 0.7rem !important;
+    padding: 0.3rem 0.75rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 7.5vw, 2.45rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 1rem !important;
+  }
+  .hero p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.75rem !important;
+  }
+  .cta-group {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+  }
+  .cta-group .btn-primary,
+  .cta-group .btn-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0.85rem 1.25rem !important;
+    font-size: 0.95rem !important;
+  }
+  .hero-note {
+    font-size: 0.74rem !important;
+    line-height: 1.5 !important;
+    margin-top: 0.75rem !important;
+  }
+
+  /* Interactive Demo Container */
+  .demo-section {
+    margin: 2rem auto 0 !important;
+  }
+  .demo-title-box h2 {
+    font-size: 1.35rem !important;
+  }
+  .demo-title-box p {
+    font-size: 0.85rem !important;
+  }
+  .demo-wrapper {
+    border-radius: 16px !important;
+  }
+
+  /* Demo Header & Tabs: Smooth Swipe on Mobile */
+  .demo-header, .demo-wrapper > div:first-child {
+    padding: 10px 12px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  .demo-tabs-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    display: flex !important;
+    gap: 6px !important;
+    padding: 4px 2px !important;
+    flex-wrap: nowrap !important;
+  }
+  .demo-tabs-container::-webkit-scrollbar {
+    display: none !important;
+  }
+  .demo-tab-btn {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    padding: 6px 12px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* Demo Body */
+  .demo-body-inner {
+    padding: 12px 10px !important;
+  }
+
+  /* Stat Cards in Demo: Clean 2x2 Grid */
+  .demo-stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+  .demo-stats-grid > div {
+    padding: 12px 10px !important;
+    border-radius: 12px !important;
+  }
+  .demo-stats-grid > div > div:nth-child(2) {
+    font-size: 10px !important;
+  }
+  .demo-stats-grid > div > div:nth-child(3) {
+    font-size: 1.12rem !important;
+  }
+  .demo-stats-grid > div > div:nth-child(4) {
+    font-size: 9.5px !important;
+  }
+
+  /* Charts & Quick Action: Stack Cleanly */
+  .demo-charts-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 16px !important;
+  }
+  .demo-charts-grid > div {
+    padding: 14px 12px !important;
+    border-radius: 12px !important;
+  }
+
+  /* All Demo Tables */
+  .demo-table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 10px !important;
+  }
+  .demo-table-wrapper table {
+    min-width: 520px !important;
+    font-size: 12px !important;
+  }
+
+  /* Pain & Traps Section */
+  .pain {
+    padding: 3.5rem 1rem !important;
+  }
+  .pain .section-title {
+    font-size: 1.5rem !important;
+  }
+  .pain-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .pain-visual-card {
+    padding: 1.35rem 1.1rem !important;
+    border-radius: 18px !important;
+  }
+  .pain-escape-card {
+    grid-template-columns: 1fr !important;
+    padding: 1.35rem 1.1rem !important;
+    border-radius: 18px !important;
+    gap: 1.25rem !important;
+  }
+  .escape-visual-bridge {
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 1.25rem 1rem !important;
+  }
+  .bridge-box {
+    width: 100% !important;
+  }
+  .bridge-pulse-line {
+    display: none !important;
+  }
+  .bridge-arrow-connector::before {
+    content: "⬇";
+    color: var(--accent);
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+
+  /* How It Works Pipeline */
+  .how {
+    padding: 3.5rem 1rem !important;
+  }
+  .how .section-title {
+    font-size: 1.5rem !important;
+  }
+  .how-pipeline {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .how-step-card {
+    padding: 1.35rem 1.1rem !important;
+    border-radius: 18px !important;
+  }
+
+  /* Bento Grid */
+  .features {
+    padding: 3.5rem 1rem !important;
+  }
+  .features .section-title {
+    font-size: 1.5rem !important;
+  }
+  .bento-master-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.1rem !important;
+  }
+  .bento-cell {
+    grid-column: span 12 !important;
+    padding: 1.35rem 1.1rem !important;
+    border-radius: 18px !important;
+  }
+
+  /* Comparison Table */
+  .compare {
+    padding: 3.5rem 1rem !important;
+  }
+  .compare .section-title {
+    font-size: 1.5rem !important;
+  }
+  .compare-table {
+    border-radius: 14px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: block !important;
+    width: 100% !important;
+  }
+  .compare-table table {
+    min-width: 560px !important;
+  }
+  .compare-table th, .compare-table td {
+    padding: 0.7rem 0.8rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Pricing Section */
+  .pricing {
+    padding: 3.5rem 1rem !important;
+  }
+  .price-card {
+    padding: 1.75rem 1.25rem !important;
+    border-radius: 18px !important;
+  }
+  .price-now {
+    font-size: 3rem !important;
+  }
+
+  /* Testimonials & FAQ */
+  .testi {
+    padding: 3.5rem 1rem !important;
+  }
+  .testi-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .testi-card {
+    padding: 1.25rem !important;
+  }
+  .faq {
+    padding: 3.5rem 1rem !important;
+  }
+  .faq-q {
+    font-size: 0.95rem !important;
+  }
+
+  /* Final CTA & Footer */
+  .final-cta {
+    padding: 4rem 1.25rem !important;
+  }
+  .btn-white {
+    width: 100% !important;
+    padding: 0.9rem 1.5rem !important;
+    font-size: 0.95rem !important;
+  }
+  footer {
+    padding: 2rem 1rem !important;
+  }
+  .trust-inner {
+    gap: 1.25rem !important;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -1599,7 +1897,7 @@ footer {
       </div>
 
       <!-- TABS NAV -->
-      <div style="display:flex; gap:4px; background:#eef2f6; padding:4px; border-radius:10px; flex-wrap:wrap; border:1px solid #e2e8f0;">
+      <div class="demo-tabs-container" style="display:flex; gap:4px; background:#eef2f6; padding:4px; border-radius:10px; flex-wrap:wrap; border:1px solid #e2e8f0;">
         <button class="demo-tab-btn active" onclick="switchDemoTab('dash')" id="tab-btn-dash">📊 Dashboard</button>
         <button class="demo-tab-btn" onclick="switchDemoTab('txs')" id="tab-btn-txs">💸 Transactions</button>
         <button class="demo-tab-btn" onclick="switchDemoTab('budgets')" id="tab-btn-budgets">🎯 Budgets</button>
@@ -1617,12 +1915,12 @@ footer {
     </div>
 
     <!-- MAIN BODY -->
-    <div style="padding:24px;">
+    <div class="demo-body-inner" style="padding:24px;">
 
       <!-- TAB 1: DASHBOARD -->
       <div id="demo-tab-dash" class="demo-tab-content">
         <!-- STAT CARDS -->
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom:24px;">
+        <div class="demo-stats-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom:24px;">
           <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:18px; position:relative; overflow:hidden;">
             <div style="position:absolute; top:0; left:0; right:0; height:3px; background:#10b981;"></div>
             <div style="font-size:12px; color:#94a3b8; font-weight:600; margin-bottom:6px;">📈 Monthly Income</div>
@@ -1650,7 +1948,7 @@ footer {
         </div>
 
         <!-- CHARTS & QUICK ACTION -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;">
+        <div class="demo-charts-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;">
           <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:20px;">
             <div style="font-size:0.95rem; font-weight:700; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
               <span>Monthly Cash Flow</span>
@@ -1707,7 +2005,7 @@ footer {
             <span style="font-size:0.95rem; font-weight:700;">Recent Transactions</span>
             <button onclick="switchDemoTab('txs')" style="background:transparent; border:none; color:#059669; font-size:12px; font-weight:700; cursor:pointer;">View All →</button>
           </div>
-          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <div class="demo-table-wrapper" style="overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%;"><table style="width:100%; border-collapse:collapse; font-size:13px;">
             <thead>
               <tr style="border-bottom:1px solid #e2e8f0; text-align:left; color:#64748b; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.04em;">
                 <th style="padding:8px;">Date</th>
@@ -1717,7 +2015,7 @@ footer {
               </tr>
             </thead>
             <tbody id="ui-recent-tx-rows"></tbody>
-          </table>
+          </table></div>
         </div>
       </div>
 
@@ -1728,7 +2026,7 @@ footer {
           <span style="font-size:12px; color:#94a3b8;" id="ui-tx-count">7 transactions</span>
         </div>
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:20px;">
-          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <div class="demo-table-wrapper" style="overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%;"><table style="width:100%; border-collapse:collapse; font-size:13px;">
             <thead>
               <tr style="border-bottom:1px solid #e2e8f0; text-align:left; color:#64748b; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.04em;">
                 <th style="padding:10px;">Date</th>
@@ -1739,7 +2037,7 @@ footer {
               </tr>
             </thead>
             <tbody id="ui-all-tx-rows"></tbody>
-          </table>
+          </table></div>
         </div>
       </div>
 
@@ -1759,7 +2057,7 @@ footer {
       <div id="demo-tab-debts" class="demo-tab-content" style="display:none;">
         <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:16px;">Debts & Loans Tracker</h3>
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:20px;">
-          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <div class="demo-table-wrapper" style="overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%;"><table style="width:100%; border-collapse:collapse; font-size:13px;">
             <thead>
               <tr style="border-bottom:1px solid #e2e8f0; text-align:left; color:#64748b; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.04em;">
                 <th style="padding:10px;">Loan Name</th>
@@ -1770,7 +2068,7 @@ footer {
               </tr>
             </thead>
             <tbody id="ui-debts-rows"></tbody>
-          </table>
+          </table></div>
         </div>
       </div>
 
@@ -1778,7 +2076,7 @@ footer {
       <div id="demo-tab-assets" class="demo-tab-content" style="display:none;">
         <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:16px;">Assets & Net Worth Portfolio</h3>
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:20px;">
-          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <div class="demo-table-wrapper" style="overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%;"><table style="width:100%; border-collapse:collapse; font-size:13px;">
             <thead>
               <tr style="border-bottom:1px solid #e2e8f0; text-align:left; color:#64748b; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.04em;">
                 <th style="padding:10px;">Asset Name</th>
@@ -1788,7 +2086,7 @@ footer {
               </tr>
             </thead>
             <tbody id="ui-assets-rows"></tbody>
-          </table>
+          </table></div>
         </div>
       </div>
 

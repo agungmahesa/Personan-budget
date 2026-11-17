@@ -76,6 +76,63 @@ document.addEventListener("click", function(e) {
   .article-body td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
   .article-body tr.highlight-row td { background: var(--accent-muted); color: var(--text-primary); font-weight: 700; }
 </style>
+
+<style id="guides-mobile-overhaul">
+@media (max-width: 680px) {
+  header {
+    padding: 0.75rem 1rem !important;
+  }
+  header > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  header > div > div {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+  }
+  header a[href*="gumroad"] {
+    padding: 0.4rem 0.85rem !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+  }
+  header a[href*="demo"] {
+    padding: 0.4rem 0.75rem !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+  }
+  main {
+    padding: 2rem 1rem 4rem !important;
+  }
+  article {
+    padding: 1.25rem 1rem !important;
+    border-radius: 16px !important;
+  }
+  .article-body h2 {
+    font-size: 1.3rem !important;
+    margin: 1.75rem 0 0.65rem !important;
+  }
+  .article-body h3 {
+    font-size: 1.1rem !important;
+    margin: 1.35rem 0 0.5rem !important;
+  }
+  .article-body p, .article-body li {
+    font-size: 0.95rem !important;
+    line-height: 1.65 !important;
+  }
+  .article-body .table-wrap {
+    margin: 1.25rem 0 !important;
+    border-radius: 10px !important;
+  }
+  .article-body table th, .article-body table td {
+    padding: 0.65rem 0.75rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+</style>
+
 </head>
 <body>
   <header style="background:rgba(255,255,255,0.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--border-subtle); padding:1rem 2rem; position:sticky; top:0; z-index:50;">
