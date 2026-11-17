@@ -446,7 +446,7 @@ select.demo-btn {
 .faq-list{max-width:700px;margin:0 auto;text-align:left}
 .faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0}
 .faq-q{font-weight:700;margin-bottom:.75rem;font-size:1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.faq-a{font-size:.9rem;color:var(--muted);line-height:1.7}
+.faq-a{font-size:.9rem;color:var(--muted);line-height:1.7;display:none;padding-top:.5rem}
 
 .scarcity-bar{background:linear-gradient(90deg,#dc2626,#b91c1c);color:#fff;text-align:center;padding:.6rem 1rem;font-size:.85rem;font-weight:700;letter-spacing:.03em}
 .scarcity-bar span{background:rgba(255,255,255,0.2);padding:.15rem .5rem;border-radius:4px;margin-left:.4rem;font-size:.9rem}
@@ -1579,8 +1579,12 @@ html, body {
 section {
   width: 100% !important;
   max-width: 100% !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   box-sizing: border-box !important;
+}
+/* Only clip hero/how/pain sections not the compare which needs horizontal scroll */
+.hero, .scarcity, .how, .pain, .features, .pricing, .final-cta, footer, nav {
+  overflow-x: hidden !important;
 }
 
 @media (max-width: 768px) {
@@ -1674,15 +1678,30 @@ section {
     justify-content: space-between !important;
     align-items: center !important;
     gap: 6px !important;
+    flex-wrap: wrap !important;
   }
-  .how-step-badge, .how-step-time {
+  .how-step-badge {
     font-size: 0.68rem !important;
     white-space: nowrap !important;
+  }
+  .how-step-time {
+    font-size: 0.65rem !important;
+    white-space: nowrap !important;
+    padding: 0.2rem 0.5rem !important;
   }
   .how-visual-window {
     width: 100% !important;
     max-width: 100% !important;
     overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .how-visual-window > div {
+    max-width: 100% !important;
+    word-break: break-word !important;
+  }
+  /* Code font inside visual window */
+  .how-visual-window * {
+    font-size: clamp(0.6rem, 2.5vw, 0.73rem) !important;
   }
 
   /* Pain & Traps */
@@ -2821,5 +2840,42 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+
+<script id="faq-accordion">
+(function() {
+  function initFAQ() {
+    const items = document.querySelectorAll('.faq-item');
+    items.forEach(function(item) {
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      const icon = q ? q.querySelector('span') : null;
+      if (!q || !a) return;
+      // Set default closed
+      a.style.display = 'none';
+      if (icon) icon.textContent = '+';
+      q.addEventListener('click', function() {
+        const isOpen = a.style.display === 'block';
+        // Close all others
+        items.forEach(function(other) {
+          const otherA = other.querySelector('.faq-a');
+          const otherIcon = other.querySelector('.faq-q span');
+          if (otherA) otherA.style.display = 'none';
+          if (otherIcon) otherIcon.textContent = '+';
+        });
+        // Toggle clicked
+        if (!isOpen) {
+          a.style.display = 'block';
+          if (icon) icon.textContent = '−';
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFAQ);
+  } else {
+    initFAQ();
+  }
+})();
+</script>
 </body>
 </html>
